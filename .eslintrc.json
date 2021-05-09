@@ -14,6 +14,18 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-unused-vars": "off",
+    "arrow-body-style": "off",
+    "no-console": "off",
+    "no-param-reassign": "off",
+    "no-shadow": "off",
+    "no-return-assign": "off",
+    "no-return-await": "off",
+    "react/prop-types": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off",
+    "no-underscore-dangle": "off",
+    "dot-notation": "off"
   }
 }
