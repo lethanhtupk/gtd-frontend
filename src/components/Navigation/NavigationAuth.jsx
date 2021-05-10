@@ -11,6 +11,8 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
     ev.target.src = defaultAvatar;
   };
 
+  console.log(authUser);
+
   return (
     <div className="avatarDropdown flex justify-evenly items-center">
       <div className="text-white text-medium mr-4">
@@ -21,6 +23,7 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
           <button
             className="avatar h-10 w-10 rounded-full overflow-hidden border-2 border-gray-500 block focus:outline-none"
             type="button"
+            onMouseEnter={() => setIsShow(true)}
           >
             <img
               src={authUser.photo_url ? authUser.photo_url : defaultAvatar}
@@ -28,16 +31,6 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
               alt=""
               className="h-full w-full object-cover"
             />
-          </button>
-          <button
-            type="button"
-            onMouseEnter={() => setIsShow(true)}
-            // onMouseLeave={() =>
-            //   setTimeout(() => {
-            //     setIsShow(false);
-            //   }, 2000)
-            // }
-          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 block ml-4"
@@ -53,6 +46,7 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
               />
             </svg>
           </button>
+
           <Logout setAuthUser={setAuthUser} />
         </div>
       </div>
@@ -67,25 +61,25 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
             to="/popular"
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
           >
-            Sản phẩm phổ biển
+            Popular product
           </Link>
           <Link
             to="/most_drop"
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
           >
-            Sản phẩm giảm nhiều
+            Top drops
           </Link>
           <Link
             to="/watching"
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
           >
-            Sản phẩm theo dõi
+            Your Price Watches
           </Link>
           <Link
             to={ROUTES.ACCOUNT}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
           >
-            Tài khoản
+            Account
           </Link>
         </div>
       ) : null}

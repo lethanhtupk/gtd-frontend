@@ -12,7 +12,7 @@ const withAuthorization = (condition) => (Component) => {
           if (!condition(authUser[0])) {
             props.history.push(ROUTES.LOGIN);
           }
-          return <Component {...props} />;
+          return <Component {...props} authUser={authUser} />;
         }}
       </AuthUserContext.Consumer>
     );
