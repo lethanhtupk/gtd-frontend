@@ -22,7 +22,7 @@ const Header = () => {
         {(props) => {
           const { authUser } = props;
           return authUser[0] ? (
-            <NavigationAuth setAuthUser={authUser[1]} />
+            <NavigationAuth setAuthUser={authUser[1]} authUser={authUser[0]} />
           ) : (
             <NavigationNonAuth />
           );

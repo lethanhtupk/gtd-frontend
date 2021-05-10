@@ -9,7 +9,11 @@ const Logout = ({ setAuthUser }) => {
     setAuthUser(null);
   };
   return (
-    <button type="button" onClick={onLogoutHandler}>
+    <button
+      type="button"
+      onClick={onLogoutHandler}
+      className="focus:outline-none"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6 ml-4"
