@@ -26,6 +26,9 @@
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
     "no-underscore-dangle": "off",
-    "dot-notation": "off"
+    "dot-notation": "off",
+    "react/jsx-filename-extension": "off",
+    "react/no-array-index-key": "off",
+    "react/no-children-prop": "off"
   }
 }

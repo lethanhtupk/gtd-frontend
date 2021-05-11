@@ -11,8 +11,6 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
     ev.target.src = defaultAvatar;
   };
 
-  console.log(authUser);
-
   return (
     <div className="avatarDropdown flex justify-evenly items-center">
       <div className="text-white text-medium mr-4">
@@ -31,21 +29,23 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
               alt=""
               className="h-full w-full object-cover"
             />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 block ml-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="white"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
           </button>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 block ml-2 cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="white"
+            onMouseEnter={() => setIsShow(true)}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
 
           <Logout setAuthUser={setAuthUser} />
         </div>

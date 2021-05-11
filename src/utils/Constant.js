@@ -1,3 +1,6 @@
+import React from 'react';
+import { HomeIcon, PenIcon, LockIcon } from '../components/Icons';
+
 export const DEFAULT_LIMIT_DATA_IN_PAGE = 10;
 
 export const ROLES = {
@@ -41,6 +44,27 @@ export const ERROR_UNKNOWN = {
     message: 'Hệ thống đang có lỗi xảy ra. Vui lòng thử lại sau!',
   },
 };
+
+export const sideBarData = [
+  {
+    path: '/account/overview',
+    name: 'Account Overview',
+    title: 'Account Overview - GTD',
+    icon: <HomeIcon />,
+  },
+  {
+    path: '/account/edit/',
+    name: 'Edit Profile',
+    title: 'Edit Profile - GTD',
+    icon: <PenIcon />,
+  },
+  {
+    path: '/account/change-password',
+    name: 'Change password',
+    title: 'Change your password - GTD',
+    icon: <LockIcon />,
+  },
+];
 
 export const DEFAULT_MESSAGE_SUCCESS = 'Thao tác thành công!';
 export const DEFAULT_MESSAGE_FAILED = 'Có lỗi xảy ra!';
