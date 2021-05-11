@@ -1,5 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 import withAuthorization from '../../components/Session/withAuthorization';
 import AccountOverview from './AccountOverview';
 import SideBar from './SideBar';
@@ -21,7 +27,6 @@ const AccountPage = (props) => {
           <Router>
             <SideBar authUser={authUser} />
             <Switch>
-              <AccountOverview authUser={authUser} />
               <Route
                 path={ROUTES.ACCOUNT_OVERVIEW}
                 exact
@@ -37,6 +42,7 @@ const AccountPage = (props) => {
                 exact
                 component={() => <ChangePassword authUser={authUser} />}
               />
+              <AccountOverview authUser={authUser} />
             </Switch>
           </Router>
         </div>
