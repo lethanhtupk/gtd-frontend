@@ -4,3 +4,6 @@ export const LOGIN = '/login';
 export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
 export const PASSWORD_FORGET = '/pw-forget';
+export const ACCOUNT_OVERVIEW = '/account/overview';
+export const EDIT_PROFILE = '/account/edit';
+export const CHANGE_PASSWORD = '/account/change-password';
