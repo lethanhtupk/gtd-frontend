@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import NavigationNonAuth from './Navigation/NavigationNonAuth';
 import NavigationAuth from './Navigation/NavigationAuth';
+import * as ROUTES from '../constants/routes';
 
 import { AuthUserContext } from './Session';
 
@@ -9,7 +10,10 @@ const Header = () => {
   return (
     <div className="header h-16 w-screen bg-gray-600 relative top-0 left-0 flex flex-row justify-between px-4">
       {/* logo part */}
-      <Link to="/" className="logo flex flex-col justify-center text-white">
+      <Link
+        to={ROUTES.HOME}
+        className="logo flex flex-col justify-center text-white"
+      >
         <div style={{ fontFamily: 'Antonio' }}>
           <div className="brand-name text-3xl font-semibold">IO Saver</div>
           <div className="slogan text-xs font-medium">Save your money</div>

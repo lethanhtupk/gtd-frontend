@@ -21,6 +21,7 @@ const AccountPage = (props) => {
           <Router>
             <SideBar authUser={authUser} />
             <Switch>
+              <AccountOverview authUser={authUser} />
               <Route
                 path={ROUTES.ACCOUNT_OVERVIEW}
                 exact
