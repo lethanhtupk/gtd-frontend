@@ -35,4 +35,12 @@ export default class AccountServices {
   static async currentUser() {
     return await BaseService.get('api/v1/profiles/me');
   }
+
+  static async editProfile(id, payload) {
+    return await BaseService.put(`api/v1/profiles/${id}`, payload);
+  }
+
+  static async changePassword(data) {
+    return await BaseService.post('auth/users/set_password/', data);
+  }
 }

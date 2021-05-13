@@ -13,9 +13,6 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
 
   return (
     <div className="avatarDropdown flex justify-evenly items-center">
-      <div className="text-white text-medium mr-4">
-        Hello, {authUser.fullname}
-      </div>
       <div className="flex flex-col justify-center h-full">
         <div className="flex flex-row items-center">
           <button
@@ -77,6 +74,7 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
           </Link>
           <Link
             to={ROUTES.ACCOUNT}
+            onClick={() => window.location.reload()}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
           >
             Account

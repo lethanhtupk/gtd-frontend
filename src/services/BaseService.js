@@ -31,12 +31,18 @@ axios.interceptors.response.use(
   (error) => {
     const originalRequest = error.config;
 
-    if (error?.config?.url === 'auth/jwt/refresh/' && error?.response?.status) {
+    if (
+      error?.config?.url === 'auth/jwt/refresh/' &&
+      error?.response?.status === 400
+    ) {
       window.localStorage.removeItem(LOCAL_STORAGE.USER_INFO);
       window.localStorage.removeItem(LOCAL_STORAGE.REFRESH_TOKEN);
     }
 
     if (error.response.status === 401 && !originalRequest._retry) {
+      if (error?.config.url === 'auth/jwt/create/') {
+        return Promise.reject(error);
+      }
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
@@ -56,6 +62,9 @@ axios.interceptors.response.use(
       const refreshToken = window.localStorage.getItem(
         LOCAL_STORAGE.REFRESH_TOKEN
       );
+      if (!refreshToken) {
+        return Promise.reject(error);
+      }
       return new Promise((resolve, reject) => {
         axios
           .post('auth/jwt/refresh/', { refresh: refreshToken })
@@ -188,31 +197,32 @@ const BaseService = {
       axios
         .put(url, data, config)
         .then((res) => {
-          if (res.status !== 200 || res.data.success !== true) {
+          console.log('res in base service======', res);
+          if (res.status !== 200) {
             const { data } = res;
             // eslint-disable-next-line prefer-promise-reject-errors
             reject({
-              error_code: data.error_code,
-              errors: data.errors,
+              code: res.status,
+              errors: {
+                ...data,
+              },
             });
           } else {
             resolve({
-              data: res.data.data,
-              pagination: res.data.pagination,
+              code: res.status,
+              ...res.data,
             });
           }
         })
         .catch((errors) => {
+          console.log('errors in base service========,', errors.response);
           // TODO: Refactor
-          if (
-            errors?.response?.data?.errors &&
-            errors?.response?.data?.error_code < 4000
-          ) {
+          if (errors?.response?.data && errors?.response?.status < 4000) {
             // eslint-disable-next-line prefer-promise-reject-errors
             reject({
-              code: errors.response.data.error_code,
+              code: errors.response.status,
               errors: {
-                message: errors.response.data.errors,
+                ...errors.response.data,
               },
             });
           } else {

@@ -47,18 +47,21 @@ export const ERROR_UNKNOWN = {
 
 export const sideBarData = [
   {
+    key: 0,
     path: '/account/overview',
     name: 'Account Overview',
     title: 'Account Overview - GTD',
     icon: <HomeIcon />,
   },
   {
+    key: 1,
     path: '/account/edit/',
     name: 'Edit Profile',
     title: 'Edit Profile - GTD',
     icon: <PenIcon />,
   },
   {
+    key: 2,
     path: '/account/change-password',
     name: 'Change password',
     title: 'Change your password - GTD',
