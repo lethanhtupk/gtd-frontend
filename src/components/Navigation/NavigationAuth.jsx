@@ -72,13 +72,13 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
           >
             Your Price Watches
           </Link>
-          <Link
+          <a
             to={ROUTES.ACCOUNT}
-            onClick={() => window.location.reload()}
+            onClick={() => (window.location.href = ROUTES.ACCOUNT)}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
           >
             Account
-          </Link>
+          </a>
         </div>
       ) : null}
     </div>
