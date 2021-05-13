@@ -14,12 +14,12 @@ const SideBar = ({ authUser }) => {
     <div className="w-3/12 bg-gray-600 flex flex-col py-4 text-white">
       <div className="flex flex-col items-center">
         <img
-          src={authUser[0].photo_url}
+          src={authUser[0]?.photo_url}
           className="w-20 h-20 rounded-full object-cover"
           alt="avatar"
           onError={addDefaultSrc}
         />
-        <p className="mt-2 mb-2">{authUser[0].fullname}</p>
+        <p className="mt-2 mb-2">{authUser[0]?.fullname}</p>
       </div>
 
       {sideBarData.map((item, index) => {
