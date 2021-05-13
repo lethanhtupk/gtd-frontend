@@ -7,8 +7,6 @@ import defaultAvatar from '../../static/img/default-avatar.png';
 const NavigationAuth = ({ authUser, setAuthUser }) => {
   const [isShow, setIsShow] = useState(false);
 
-  console.log(authUser);
-
   const addDefaultSrc = (ev) => {
     ev.target.src = defaultAvatar;
   };

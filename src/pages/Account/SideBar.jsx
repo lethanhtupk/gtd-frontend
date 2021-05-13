@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import defaultAvatar from '../../static/img/default-avatar.png';
 import { sideBarData } from '../../utils/Constant';
 
 const SideBar = ({ authUser }) => {
+  const [active, setActive] = useState(0);
+
   const addDefaultSrc = (ev) => {
     ev.target.src = defaultAvatar;
   };
@@ -24,12 +26,25 @@ const SideBar = ({ authUser }) => {
         return (
           <div
             key={index}
-            className="navigation-element py-4 px-4 border-t border-gray-500 border-b items-center hover:bg-gray-700 cursor-pointer"
+            className={active === index ? 'border-l-8 border-green-400' : ''}
+            onClick={() => setActive(index)}
           >
-            <Link to={item.path} className="flex flex-row">
-              {item.icon}
-              <div className="ml-2">{item.name}</div>
-            </Link>
+            <div className="py-4 px-4 border-t border-gray-500 border-b items-center hover:bg-gray-700 cursor-pointer">
+              <Link to={item.path} className="flex flex-row">
+                <div
+                  className={active === index ? 'text-white' : 'text-gray-400'}
+                >
+                  {item.icon}
+                </div>
+                <div
+                  className={
+                    active === index ? 'ml-2 text-white' : 'ml-2 text-gray-400'
+                  }
+                >
+                  {item.name}
+                </div>
+              </Link>
+            </div>
           </div>
         );
       })}
