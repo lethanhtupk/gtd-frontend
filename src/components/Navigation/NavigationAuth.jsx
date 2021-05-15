@@ -55,13 +55,13 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
           onMouseLeave={() => setIsShow(false)}
         >
           <Link
-            to="/popular"
+            to={ROUTES.POPULAR_PRODUCTS}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
           >
             Popular product
           </Link>
           <Link
-            to="/most_drop"
+            to={ROUTES.TOP_DROPS_PRODUCT}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
           >
             Top drops

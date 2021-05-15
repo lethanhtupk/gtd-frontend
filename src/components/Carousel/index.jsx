@@ -14,6 +14,10 @@ const items = [
   <ItemCarousel />,
   <ItemCarousel />,
   <ItemCarousel />,
+  <ItemCarousel />,
+  <ItemCarousel />,
+  <ItemCarousel />,
+  <ItemCarousel />,
 ];
 
 const ProductCarousel = () => {

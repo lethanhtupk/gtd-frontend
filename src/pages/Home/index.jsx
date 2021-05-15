@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import * as ROUTES from '../../constants/routes';
 import ProductCarousel from '../../components/Carousel';
 import CreateWatch from '../../components/CreateWatch';
 
@@ -21,12 +23,14 @@ const HomePage = () => (
               Check out these recently popular deals on our site. See what our
               user recently watching
             </p>
-            <a
-              href="/popular-product"
-              className="text-blue-500 hover:text-blue-600 hover:underline"
-            >
-              View all
-            </a>
+            <Link to={ROUTES.POPULAR_PRODUCTS}>
+              <a
+                href="/popular-product"
+                className="text-blue-500 hover:text-blue-600 hover:underline"
+              >
+                View all
+              </a>
+            </Link>
           </div>
         </div>
         <div className=" mt-4">
@@ -44,15 +48,17 @@ const HomePage = () => (
               Check out these most product price drops down we are currently
               watching
             </p>
-            <a
-              href="/top-drop-down"
-              className="text-blue-500 hover:text-blue-600 hover:underline"
-            >
-              View all
-            </a>
+            <Link to={ROUTES.TOP_DROPS_PRODUCT}>
+              <a
+                href="/top-drop-down"
+                className="text-blue-500 hover:text-blue-600 hover:underline"
+              >
+                View all
+              </a>
+            </Link>
           </div>
         </div>
-        <div className="border border-gray-500 mt-4">
+        <div className="mt-4">
           <ProductCarousel />
         </div>
       </div>
