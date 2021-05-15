@@ -11,7 +11,7 @@ const CreateWatch = () => {
   const [loading, setLoading] = useState(true);
 
   return (
-    <div className="w-2/3">
+    <div className="w-4/5">
       <div className="py-2 bg-red-700 text-white px-2 font-bold text-lg flex flex-row items-center">
         <MailIcon />
         <p className="ml-2">Create Tiki Price Watches</p>
@@ -86,14 +86,17 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="flex flex-col px-4 py-4">
-      <label htmlFor="link_to_product" className="flex flex-col mb-4">
+    <form
+      onSubmit={formik.handleSubmit}
+      className="flex flex-row justify-between px-4 py-4 items-end"
+    >
+      <label htmlFor="link_to_product" className="flex flex-col w-3/5">
         Link to product
         <input
           id="link_to_product"
           type="text"
           {...formik.getFieldProps('link_to_product')}
-          className="py-2 border border-gray-300 px-4 rounded-lg mt-4"
+          className="py-2 border border-gray-300 px-4 rounded-lg"
         />
         {formik.touched.link_to_product && formik.errors.link_to_product ? (
           <div className="text-red-600 text-xs normal-case font-normal mt-1">
@@ -107,7 +110,7 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
           id="link_to_product"
           type="text"
           {...formik.getFieldProps('expected_price')}
-          className="py-2 border border-gray-300 px-4 rounded-lg mt-4"
+          className="py-2 border border-gray-300 px-4 rounded-lg"
         />
         {formik.touched.expected_price && formik.errors.expected_price ? (
           <div className="text-red-600 text-xs normal-case font-normal mt-1">
@@ -117,7 +120,7 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
       </label>
       <button
         type="submit"
-        className="uppercase text-white font-semibold bg-black py-4 rounded-sm mt-2 hover:bg-white hover:text-black hover:border-black hover:border-4"
+        className="uppercase text-white font-semibold bg-black px-4 py-3 rounded-lg hover:bg-white hover:text-black hover:border-black hover:border-4"
       >
         Start Tracking
       </button>
