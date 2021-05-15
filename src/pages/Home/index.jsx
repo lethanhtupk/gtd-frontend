@@ -7,8 +7,8 @@ const HomePage = () => (
     <header>
       <title>Home - GTD</title>
     </header>
-    <div className="h-full justify-center items-center flex flex-col">
-      <div className="flex flex-row justify-center w-full mt-24">
+    <div className="justify-center items-center flex flex-col">
+      <div className="flex flex-row justify-center w-full mt-12">
         <CreateWatch />
       </div>
       <div className="popular-product w-4/5 justify-center mt-12">
@@ -29,7 +29,7 @@ const HomePage = () => (
             </a>
           </div>
         </div>
-        <div className="border border-gray-500 mt-4">
+        <div className=" mt-4">
           <ProductCarousel />
         </div>
       </div>

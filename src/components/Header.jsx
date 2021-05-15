@@ -8,7 +8,7 @@ import { AuthUserContext } from './Session';
 
 const Header = () => {
   return (
-    <div className="header h-16 w-screen bg-gray-600 relative top-0 left-0 flex flex-row justify-between px-4">
+    <div className="header h-16 w-screen bg-gray-600 relative top-0 left-0 flex flex-row justify-between px-8">
       {/* logo part */}
       <Link
         to={ROUTES.HOME}

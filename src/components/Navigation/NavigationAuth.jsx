@@ -75,7 +75,7 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
           <a
             to={ROUTES.ACCOUNT}
             onClick={() => (window.location.href = ROUTES.ACCOUNT)}
-            className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
+            className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 cursor-pointer"
           >
             Account
           </a>

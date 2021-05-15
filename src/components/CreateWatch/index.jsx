@@ -120,7 +120,7 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
       </label>
       <button
         type="submit"
-        className="uppercase text-white font-semibold bg-black px-4 py-3 rounded-lg hover:bg-white hover:text-black hover:border-black hover:border-4"
+        className="uppercase text-white font-semibold bg-gray-700 px-4 py-3 rounded-lg hover:bg-gray-500 hover:border-4"
       >
         Start Tracking
       </button>

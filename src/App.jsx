@@ -14,12 +14,13 @@ import AccountPage from './pages/Account';
 import * as ROUTES from './constants/routes';
 import './styles/tailwind.css';
 import { withAuthentication } from './components/Session';
+import Footer from './components/Footer';
 
 dotenv.config();
 
 function App() {
   return (
-    <div className="App w-screen h-screen flex flex-col">
+    <div className="App w-screen h-screen flex flex-col overflow-x-hidden">
       <Router>
         <Header />
         <Switch>
@@ -28,6 +29,7 @@ function App() {
           <Route path={ROUTES.LOGIN} component={LoginPage} />
           <Route path={ROUTES.ACCOUNT} component={AccountPage} />
         </Switch>
+        <Footer />
       </Router>
     </div>
   );
