@@ -67,7 +67,7 @@ const NavigationAuth = ({ authUser, setAuthUser }) => {
             Top drops
           </Link>
           <Link
-            to="/watching"
+            to={ROUTES.WATCHES}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
           >
             Your Price Watches

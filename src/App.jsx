@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import PopularProduct from './pages/PopularProduct';
 import ProductDetail from './components/ProductDetail';
 import TopDrops from './pages/TopDropProduct';
+import WatchtList from './components/WatchList';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ function App() {
           <Route path={ROUTES.REGISTER} component={RegisterPage} />
           <Route path={ROUTES.LOGIN} component={LoginPage} />
           <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+          <Route path={ROUTES.WATCHES} component={WatchtList} />
           <Route path={ROUTES.POPULAR_PRODUCTS} component={PopularProduct} />
           <Route path={ROUTES.TOP_DROPS_PRODUCT} component={TopDrops} />
           <Route path={`${ROUTES.PRODUCTS}/:id`} component={ProductDetail} />
