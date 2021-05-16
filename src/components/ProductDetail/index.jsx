@@ -29,12 +29,12 @@ const ProductDetail = ({ match }) => {
           <div className="mt-12 w-4/5">
             <div className="product-overview grid grid-cols-3">
               <div className="image">
-                <img src={productData.images[0].base_url} alt="product" />
+                <img src={productData.images[0]?.base_url} alt="product" />
               </div>
               <div className="overview col-span-2 bg-white ml-2 px-4 py-4">
                 <p className="text-gray-600 text-sm flex">
                   Brand:{' '}
-                  <p className="text-blue-500 ml-1">{` ${productData.brand.name}`}</p>
+                  <p className="text-blue-500 ml-1">{` ${productData.brand?.name}`}</p>
                 </p>
                 <p className="font-light text-xl">{productData.name}</p>
                 <div className="rating-section mt-4 flex flex-row">
