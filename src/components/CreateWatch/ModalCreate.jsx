@@ -27,7 +27,7 @@ const ModalCreate = ({ showModal, setShowModal }) => {
           visible ? 'visible ' : 'invisible '
         }absolute border border-gray-500 rounded-lg bg-white text-black`}
       >
-        <div className="close-icon flex flex-row justify-end px-4 py-2">
+        <div className="close-icon flex flex-row justify-end px-2 py-2">
           <div
             onClick={() => {
               setVisible(false);

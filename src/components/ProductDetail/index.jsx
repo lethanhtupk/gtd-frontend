@@ -65,7 +65,7 @@ const ProductDetail = ({ match }) => {
                   </button>
                   <div
                     className="ml-4 text-red-500 cursor-pointer"
-                    onClick={() => setShowModal(!showModal)}
+                    onClick={() => setShowModal(true)}
                   >
                     <PlusIcon />
                     <ModalCreate
