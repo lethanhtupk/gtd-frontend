@@ -34,7 +34,7 @@ const HomePage = () => (
           </div>
         </div>
         <div className=" mt-4">
-          <ProductCarousel />
+          <ProductCarousel type="popular" />
         </div>
       </div>
 
@@ -59,7 +59,7 @@ const HomePage = () => (
           </div>
         </div>
         <div className="mt-4">
-          <ProductCarousel />
+          <ProductCarousel type="top-drops" />
         </div>
       </div>
     </div>

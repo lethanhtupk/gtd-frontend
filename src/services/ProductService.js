@@ -13,6 +13,14 @@ export default class ProductService {
     );
   }
 
+  static async getTopDropProduct(data) {
+    return await BaseService.get(
+      `${PRODUCT_RESOURCE}view`,
+      { params: { ordering: '-discount_rate' } },
+      {}
+    );
+  }
+
   static async getProductDetail(id) {
     return await BaseService.get(`${PRODUCT_RESOURCE}${id}`);
   }

@@ -10,7 +10,7 @@ const responsive = {
   1024: { items: 4 },
 };
 
-const ProductCarousel = () => {
+const ProductCarousel = ({ type }) => {
   const [productItems, setProductItems] = useState([]);
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
@@ -18,20 +18,39 @@ const ProductCarousel = () => {
   const items = [];
 
   useEffect(() => {
-    ProductService.getPopularProduct()
-      .then((res) => {
-        setProductItems(res.data);
-      })
-      .catch((error) => {
-        setError(true);
-        setLoading(false);
-        if (error.errors.code === 4000) {
-          setMessage(
-            'There is an error in the system. Please contact with the admin'
-          );
-        }
-        setMessage(error.errors.message);
-      });
+    if (type === 'popular') {
+      ProductService.getPopularProduct()
+        .then((res) => {
+          setError(false);
+          setLoading(false);
+          setProductItems(res.data);
+        })
+        .catch((error) => {
+          setError(true);
+          setLoading(false);
+          if (error.errors.code === 4000) {
+            setMessage(
+              'There is an error in the system. Please contact with the admin'
+            );
+          }
+          setMessage(error.errors.message);
+        });
+    } else if (type === 'top-drops') {
+      ProductService.getTopDropProduct()
+        .then((res) => {
+          setProductItems(res.data);
+        })
+        .catch((error) => {
+          setError(true);
+          setLoading(false);
+          if (error.errors.code === 4000) {
+            setMessage(
+              'There is an error in the system. Please contact with the admin'
+            );
+          }
+          setMessage(error.errors.message);
+        });
+    }
   }, []);
 
   productItems.forEach((item) => {
