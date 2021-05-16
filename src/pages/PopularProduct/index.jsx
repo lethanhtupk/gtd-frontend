@@ -1,6 +1,5 @@
 import React from 'react';
 import ItemCarousel from '../../components/Carousel/ItemCarousel';
-import ProductList from '../../components/ProductList';
 
 const PopularProduct = () => {
   return (

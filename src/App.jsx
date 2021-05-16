@@ -11,6 +11,8 @@ import './styles/tailwind.css';
 import { withAuthentication } from './components/Session';
 import Footer from './components/Footer';
 import PopularProduct from './pages/PopularProduct';
+import ProductDetail from './components/ProductDetail';
+import TopDrops from './pages/TopDropProduct';
 
 dotenv.config();
 
@@ -25,7 +27,8 @@ function App() {
           <Route path={ROUTES.LOGIN} component={LoginPage} />
           <Route path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route path={ROUTES.POPULAR_PRODUCTS} component={PopularProduct} />
-          <Route path={ROUTES.TOP_DROPS_PRODUCT} component={AccountPage} />
+          <Route path={ROUTES.TOP_DROPS_PRODUCT} component={TopDrops} />
+          <Route path={`${ROUTES.PRODUCTS}/:id`} component={ProductDetail} />
         </Switch>
         <Footer />
       </Router>

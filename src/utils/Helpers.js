@@ -1,5 +1,5 @@
-export const truncate = (str) => {
-  return str.length > 36 ? `${str.substring(0, 36)}...` : str;
+export const truncate = (str, number) => {
+  return str.length > number ? `${str.substring(0, number)}...` : str;
 };
 
 export const numberWithCommas = (number) => {
