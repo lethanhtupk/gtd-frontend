@@ -27,6 +27,11 @@ export const LOCAL_STORAGE = {
   CONFETTI_STATE: 'confetti_state',
 };
 
+export const WATCH_STATUS = {
+  1: 'Active',
+  2: 'Deactivate',
+};
+
 export const CONFETTI_TYPE = {
   FAVORITE: 'favorite',
   BORROW: 'borrow',

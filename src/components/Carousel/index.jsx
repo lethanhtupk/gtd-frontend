@@ -19,7 +19,7 @@ const ProductCarousel = ({ type }) => {
 
   useEffect(() => {
     if (type === 'popular') {
-      ProductService.getPopularProduct()
+      ProductService.getPopularProduct({ params: { ordering: '-watch_count' } })
         .then((res) => {
           setError(false);
           setLoading(false);
@@ -36,7 +36,9 @@ const ProductCarousel = ({ type }) => {
           setMessage(error.errors.message);
         });
     } else if (type === 'top-drops') {
-      ProductService.getTopDropProduct()
+      ProductService.getTopDropProduct({
+        params: { ordering: '-discount_rate' },
+      })
         .then((res) => {
           setProductItems(res.data);
         })

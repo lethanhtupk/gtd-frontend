@@ -1,16 +1,66 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import WatchService from '../../services/WatchService';
+import Pagination from '../Pagination';
+import { AuthUserContext } from '../Session';
+import withAuthorization from '../Session/withAuthorization';
+import ItemWatch from './ItemWatch';
 
 const WatchtList = () => {
+  const { authUser } = useContext(AuthUserContext);
+  const [watchList, setWatchList] = useState([]);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [paginationData, setPaginationData] = useState({});
+
+  useEffect(() => {
+    WatchService.getListWatches({ params: { owner: authUser[0]?.id } })
+      .then((res) => {
+        setWatchList(res.data);
+        setLoading(false);
+        setPaginationData(res.paging);
+      })
+      .catch((error) => {
+        setError(true);
+        setLoading(false);
+        setMessage('There is a system error, please try it later');
+      });
+  }, [authUser]);
+
   return (
     <>
+      {loading ? (
+        <div>Data is loading...</div>
+      ) : (
+        <>
+          <div className="flex flex-row justify-center mt-16">
+            <div className="w-4/5">
+              <div className="grid grid-cols-4">
+                {watchList.map((item, index) => (
+                  <div className="mr-2 mb-2" key={index}>
+                    <ItemWatch watchData={item} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-row justify-center">
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              totalPage={paginationData.last_page}
+            />
+          </div>
+        </>
+      )}
       <header>
         <title>Your watches - GTD</title>
       </header>
-      <div>
-        <p>Watch list page</p>
-      </div>
     </>
   );
 };
 
-export default WatchtList;
+const condition = (authUser) => !!authUser;
+
+export default withAuthorization(condition)(WatchtList);

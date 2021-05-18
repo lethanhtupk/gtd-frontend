@@ -7,4 +7,8 @@ export default class WatchService {
   static async createWatch(data) {
     return await BaseService.post(`${WATCH_RESOURCE}`, data);
   }
+
+  static async getListWatches(data) {
+    return await BaseService.get(`${WATCH_RESOURCE}`, data);
+  }
 }

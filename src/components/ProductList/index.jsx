@@ -107,15 +107,31 @@ const ProductList = ({ pageName }) => {
         <div className="flex flex-row justify-center mt-16">
           <div className="w-4/5">
             <div className="describe pb-4">
-              <p className="text-blue-600 font-bold text-2xl capitalize">
-                Popular Products
-              </p>
-              <div className="flex flex-row justify-between">
-                <p>
-                  Check out these recently popular deals on our site. See what
-                  our user recently watching
-                </p>
-              </div>
+              {pageName === 'popular' ? (
+                <>
+                  <p className="text-blue-600 font-bold text-2xl capitalize">
+                    Popular Products
+                  </p>
+                  <div className="flex flex-row justify-between">
+                    <p>
+                      Check out these recently popular deals on our site. See
+                      what our user recently watching
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="text-blue-600 font-bold text-2xl capitalize">
+                    Top drops products
+                  </p>
+                  <div className="flex flex-row justify-between">
+                    <p>
+                      Check out these most drops products on Tiki to get the
+                      biggest benefit
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
             {loading ? (
               <div>Loading data...</div>
