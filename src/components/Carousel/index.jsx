@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
+import ClipLoader from 'react-spinners/ClipLoader';
 import ProductService from '../../services/ProductService';
 import ItemCarousel from './ItemCarousel';
 
@@ -40,6 +41,7 @@ const ProductCarousel = ({ type }) => {
         params: { ordering: '-discount_rate' },
       })
         .then((res) => {
+          setLoading(false);
           setProductItems(res.data);
         })
         .catch((error) => {
@@ -61,15 +63,23 @@ const ProductCarousel = ({ type }) => {
 
   return (
     <>
-      {error ? (
-        <div>{message}</div>
+      {loading ? (
+        <div className="w-full h-full flex flex-row justify-center items-center">
+          <ClipLoader size={30} />
+        </div>
       ) : (
-        <AliceCarousel
-          mouseTracking
-          items={items}
-          responsive={responsive}
-          controlsStrategy="responsive"
-        />
+        <>
+          {error ? (
+            <div>{message}</div>
+          ) : (
+            <AliceCarousel
+              mouseTracking
+              items={items}
+              responsive={responsive}
+              controlsStrategy="responsive"
+            />
+          )}
+        </>
       )}
     </>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ClipLoader from 'react-spinners/ClipLoader';
 import ProductService from '../../services/ProductService';
 import { numberWithCommas, truncate } from '../../utils/Helpers';
 import ModalCreate from '../CreateWatch/ModalCreate';
@@ -23,7 +24,9 @@ const ProductDetail = ({ match }) => {
   return (
     <>
       {loading ? (
-        <div>product on the way</div>
+        <div className="w-full h-full flex flex-row justify-center items-center">
+          <ClipLoader size={50} />
+        </div>
       ) : (
         <div className="w-full flex flex-row justify-center">
           <div className="mt-12 w-4/5">
@@ -107,7 +110,7 @@ export const ShowDescription = ({ showAll, setShowAll, description }) => {
                 onClick={() => setShowAll(false)}
                 className="border border-blue-500 text-blue-500 rounded-lg px-8 py-2 hover:text-white hover:bg-blue-500 focus:outline-none"
               >
-                Compact content
+                Show less
               </button>
             </div>
           </>

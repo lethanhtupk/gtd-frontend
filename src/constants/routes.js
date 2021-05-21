@@ -11,3 +11,5 @@ export const POPULAR_PRODUCTS = '/popular';
 export const TOP_DROPS_PRODUCT = '/top-drops';
 export const PRODUCTS = '/products';
 export const WATCHES = '/watches';
+export const ACTIVATE = '/activate';
+export const RESEND_ACTIVATION = '/resend-activation';

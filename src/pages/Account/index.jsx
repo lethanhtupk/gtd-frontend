@@ -51,7 +51,7 @@ const AccountPage = (props) => {
                   <ChangePassword authUser={authUser} setActive={setActive} />
                 )}
               />
-              <AccountOverview authUser={authUser} />
+              <AccountOverview authUser={authUser} setActive={setActive} />
             </Switch>
           </Router>
         </div>

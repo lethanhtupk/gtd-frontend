@@ -44,9 +44,6 @@ const EditProfileForm = (props) => {
     },
     validationSchema: Yup.object({
       fullname: Yup.string().required('This field is required'),
-      email: Yup.string()
-        .email('Invalid email address')
-        .required('This field is required'),
     }),
     onSubmit: (values) => {
       AccountServices.editProfile(authUser[0].id, values)
@@ -88,13 +85,9 @@ const EditProfileForm = (props) => {
           id="email"
           type="text"
           className="py-2 border border-gray-300 px-4 rounded-lg"
-          {...formik.getFieldProps('email')}
+          disabled
+          value={formik.values.email}
         />
-        {formik.touched.email && formik.errors.email ? (
-          <div className="text-red-600 text-xs normal-case font-normal mt-1">
-            {formik.errors.email}
-          </div>
-        ) : null}
       </label>
 
       <hr className="text-gray-300 border-gray-300 h-full mt-8" />

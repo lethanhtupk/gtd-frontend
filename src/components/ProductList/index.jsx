@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ClipLoader from 'react-spinners/ClipLoader';
 import ProductService from '../../services/ProductService';
 import ItemCarousel from '../Carousel/ItemCarousel';
 import Pagination from '../Pagination';
@@ -13,7 +14,9 @@ const ProductList = ({ pageName }) => {
 
   useEffect(() => {
     if (pageName === 'popular') {
-      ProductService.getPopularProduct({ params: { ordering: '-watch_count' } })
+      ProductService.getPopularProduct({
+        params: { ordering: '-watch_count', page: currentPage },
+      })
         .then((res) => {
           setError(false);
           setLoading(false);
@@ -33,7 +36,7 @@ const ProductList = ({ pageName }) => {
         });
     } else if (pageName === 'drop') {
       ProductService.getTopDropProduct({
-        params: { ordering: '-discount_rate' },
+        params: { ordering: '-discount_rate', page: currentPage },
       })
         .then((res) => {
           setError(false);
@@ -53,51 +56,51 @@ const ProductList = ({ pageName }) => {
           setMessage(error.errors.message);
         });
     }
-  }, []);
-
-  useEffect(() => {
-    if (pageName === 'popular') {
-      ProductService.getPopularProduct({
-        params: { ordering: '-watch_count', page: currentPage },
-      })
-        .then((res) => {
-          setError(false);
-          setLoading(false);
-          setProductItems(res.data);
-          setPaginationData(res.paging);
-        })
-        .catch((error) => {
-          setError(true);
-          setLoading(false);
-          if (error.errors.code === 4000) {
-            setMessage(
-              'There is an error in the system. Please contact with the admin'
-            );
-          }
-          setMessage(error.errors.message);
-        });
-    } else if (pageName === 'drop') {
-      ProductService.getPopularProduct({
-        params: { ordering: '-discount_rate', page: currentPage },
-      })
-        .then((res) => {
-          setError(false);
-          setLoading(false);
-          setProductItems(res.data);
-          setPaginationData(res.paging);
-        })
-        .catch((error) => {
-          setError(true);
-          setLoading(false);
-          if (error.errors.code === 4000) {
-            setMessage(
-              'There is an error in the system. Please contact with the admin'
-            );
-          }
-          setMessage(error.errors.message);
-        });
-    }
   }, [currentPage]);
+
+  // useEffect(() => {
+  //   if (pageName === 'popular') {
+  //     ProductService.getPopularProduct({
+  //       params: { ordering: '-watch_count', page: currentPage },
+  //     })
+  //       .then((res) => {
+  //         setError(false);
+  //         setLoading(false);
+  //         setProductItems(res.data);
+  //         setPaginationData(res.paging);
+  //       })
+  //       .catch((error) => {
+  //         setError(true);
+  //         setLoading(false);
+  //         if (error.errors.code === 4000) {
+  //           setMessage(
+  //             'There is an error in the system. Please contact with the admin'
+  //           );
+  //         }
+  //         setMessage(error.errors.message);
+  //       });
+  //   } else if (pageName === 'drop') {
+  //     ProductService.getPopularProduct({
+  //       params: { ordering: '-discount_rate', page: currentPage },
+  //     })
+  //       .then((res) => {
+  //         setError(false);
+  //         setLoading(false);
+  //         setProductItems(res.data);
+  //         setPaginationData(res.paging);
+  //       })
+  //       .catch((error) => {
+  //         setError(true);
+  //         setLoading(false);
+  //         if (error.errors.code === 4000) {
+  //           setMessage(
+  //             'There is an error in the system. Please contact with the admin'
+  //           );
+  //         }
+  //         setMessage(error.errors.message);
+  //       });
+  //   }
+  // }, [currentPage]);
 
   return (
     <>
@@ -134,7 +137,9 @@ const ProductList = ({ pageName }) => {
               )}
             </div>
             {loading ? (
-              <div>Loading data...</div>
+              <div className="w-full h-full flex flex-row justify-center items-center">
+                <ClipLoader size={50} />
+              </div>
             ) : (
               <div className="grid grid-cols-4">
                 {productItems.map((item, index) => (

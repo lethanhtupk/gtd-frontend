@@ -12,7 +12,7 @@ const SideBar = ({ authUser, active, setActive }) => {
     <div className="w-3/12 bg-gray-600 flex flex-col py-4 text-white">
       <div className="flex flex-col items-center mb-8">
         <img
-          src={authUser[0]?.photo_url}
+          src={authUser[0]?.photo_url ? authUser[0]?.photo_url : defaultAvatar}
           className="w-20 h-20 rounded-full object-cover"
           alt="avatar"
           onError={addDefaultSrc}

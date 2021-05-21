@@ -10,12 +10,17 @@ const withAuthentication = (Component) => {
     );
 
     useEffect(() => {
-      AccountServices.currentUser()
-        .then((res) => {
-          setAuthUser(res);
-          localStorage.setItem(LOCAL_STORAGE.USER_INFO, res);
-        })
-        .catch((e) => console.log(e));
+      if (
+        localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN) ||
+        localStorage.getItem(LOCAL_STORAGE.REFRESH_TOKEN)
+      ) {
+        AccountServices.currentUser()
+          .then((res) => {
+            setAuthUser(res);
+            localStorage.setItem(LOCAL_STORAGE.USER_INFO, res);
+          })
+          .catch((e) => console.log(e));
+      }
     }, []);
 
     return (

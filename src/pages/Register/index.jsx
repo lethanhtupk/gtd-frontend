@@ -72,12 +72,11 @@ const RegisterFormBase = (props) => {
     onSubmit: (values) => {
       createAccount(values)
         .then((res) => {
-          setMessage('Create a new account successful');
+          setMessage(
+            'Create a new account successful, please activate your account'
+          );
           setError(false);
           setLoading(false);
-          setTimeout(() => {
-            props.history.push(ROUTES.LOGIN);
-          }, 500);
         })
         .catch((e) => {
           setError(true);
@@ -92,7 +91,7 @@ const RegisterFormBase = (props) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="flex flex-col w-2/6">
+    <form onSubmit={formik.handleSubmit} className="flex flex-col w-2/6 mt-2">
       <label htmlFor="email" className="flex flex-col uppercase font-semibold">
         Email*
         <input

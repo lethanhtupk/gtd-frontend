@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ClipLoader from 'react-spinners/ClipLoader';
 import ProductService from '../../services/ProductService';
 import {
   displayWatchStatus,
@@ -26,7 +27,9 @@ const ItemWatch = ({ watchData }) => {
   return (
     <>
       {loading ? (
-        <div>Data is loading...</div>
+        <div className="w-full h-full flex flex-row justify-center items-center">
+          <ClipLoader size={30} />
+        </div>
       ) : (
         <div className="item-carousel border border-gray-500 bg-white">
           <div className="image">
@@ -37,7 +40,7 @@ const ItemWatch = ({ watchData }) => {
             />
           </div>
           <div className="detail px-8 flex flex-col items-center bg-gray-100">
-            <Link to={`${ROUTES.PRODUCTS}/${productData.id}`}>
+            <Link to={`${ROUTES.WATCHES}/${watchData.id}`}>
               <p className="title text-blue-500 text-lg hover:text-blue-600 hover:underline h-16">
                 {truncate(productData.name, 36)}
               </p>
@@ -50,7 +53,7 @@ const ItemWatch = ({ watchData }) => {
               Expected price: {numberWithCommas(watchData.expected_price)}
             </p>
             <p className="text-gray-500 text-sm mb-2 flex flex-row">
-              Status:
+              Status:&nbsp;
               <p
                 className={
                   watchData.status === 1 ? 'text-green-500' : 'text-red-500'

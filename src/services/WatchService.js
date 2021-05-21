@@ -11,4 +11,8 @@ export default class WatchService {
   static async getListWatches(data) {
     return await BaseService.get(`${WATCH_RESOURCE}`, data);
   }
+
+  static async getDetailWatch(id) {
+    return await BaseService.get(`${WATCH_RESOURCE}${id}`);
+  }
 }

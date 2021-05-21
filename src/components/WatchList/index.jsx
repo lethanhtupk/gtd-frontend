@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import ClipLoader from 'react-spinners/ClipLoader';
 import WatchService from '../../services/WatchService';
 import Pagination from '../Pagination';
 import { AuthUserContext } from '../Session';
@@ -15,7 +16,9 @@ const WatchtList = () => {
   const [paginationData, setPaginationData] = useState({});
 
   useEffect(() => {
-    WatchService.getListWatches({ params: { owner: authUser[0]?.id } })
+    WatchService.getListWatches({
+      params: { owner: authUser[0]?.id, page: currentPage },
+    })
       .then((res) => {
         setWatchList(res.data);
         setLoading(false);
@@ -26,12 +29,14 @@ const WatchtList = () => {
         setLoading(false);
         setMessage('There is a system error, please try it later');
       });
-  }, [authUser]);
+  }, [authUser, currentPage]);
 
   return (
     <>
       {loading ? (
-        <div>Data is loading...</div>
+        <div className="w-full h-full flex flex-row items-center justify-center">
+          <ClipLoader size={50} />
+        </div>
       ) : (
         <>
           <div className="flex flex-row justify-center mt-16">
