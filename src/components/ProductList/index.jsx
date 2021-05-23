@@ -4,7 +4,7 @@ import ProductService from '../../services/ProductService';
 import ItemCarousel from '../Carousel/ItemCarousel';
 import Pagination from '../Pagination';
 
-const ProductList = ({ pageName }) => {
+const ProductList = ({ pageName, search }) => {
   const [productItems, setProductItems] = useState([]);
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
@@ -55,52 +55,29 @@ const ProductList = ({ pageName }) => {
           }
           setMessage(error.errors.message);
         });
+    } else if (pageName === 'search-result') {
+      ProductService.searchProduct({
+        params: { limit: 12, search, page: currentPage },
+      })
+        .then((res) => {
+          setError(false);
+          setLoading(false);
+          setProductItems(res.data);
+          setCurrentPage(res.paging.current_page);
+          setPaginationData(res.paging);
+        })
+        .catch((error) => {
+          setError(true);
+          setLoading(false);
+          if (error.errors.code === 4000) {
+            setMessage(
+              'There is an error in the system. Please contact with the admin'
+            );
+          }
+          setMessage(error.errors.message);
+        });
     }
-  }, [currentPage]);
-
-  // useEffect(() => {
-  //   if (pageName === 'popular') {
-  //     ProductService.getPopularProduct({
-  //       params: { ordering: '-watch_count', page: currentPage },
-  //     })
-  //       .then((res) => {
-  //         setError(false);
-  //         setLoading(false);
-  //         setProductItems(res.data);
-  //         setPaginationData(res.paging);
-  //       })
-  //       .catch((error) => {
-  //         setError(true);
-  //         setLoading(false);
-  //         if (error.errors.code === 4000) {
-  //           setMessage(
-  //             'There is an error in the system. Please contact with the admin'
-  //           );
-  //         }
-  //         setMessage(error.errors.message);
-  //       });
-  //   } else if (pageName === 'drop') {
-  //     ProductService.getPopularProduct({
-  //       params: { ordering: '-discount_rate', page: currentPage },
-  //     })
-  //       .then((res) => {
-  //         setError(false);
-  //         setLoading(false);
-  //         setProductItems(res.data);
-  //         setPaginationData(res.paging);
-  //       })
-  //       .catch((error) => {
-  //         setError(true);
-  //         setLoading(false);
-  //         if (error.errors.code === 4000) {
-  //           setMessage(
-  //             'There is an error in the system. Please contact with the admin'
-  //           );
-  //         }
-  //         setMessage(error.errors.message);
-  //       });
-  //   }
-  // }, [currentPage]);
+  }, [currentPage, search]);
 
   return (
     <>
@@ -124,15 +101,29 @@ const ProductList = ({ pageName }) => {
                 </>
               ) : (
                 <>
-                  <p className="text-blue-600 font-bold text-2xl capitalize">
-                    Top drops products
-                  </p>
-                  <div className="flex flex-row justify-between">
-                    <p>
-                      Check out these most drops products on Tiki to get the
-                      biggest benefit
-                    </p>
-                  </div>
+                  {pageName === 'drops' ? (
+                    <>
+                      <p className="text-blue-600 font-bold text-2xl capitalize">
+                        Top drops products
+                      </p>
+                      <div className="flex flex-row justify-between">
+                        <p>
+                          Check out these most drops products on Tiki to get the
+                          biggest benefit
+                        </p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-blue-600 font-bold text-2xl capitalize">
+                        Result from Tiki
+                      </p>
+                      <div className="flex flex-row justify-between">
+                        Check out these products that we get directly from Tiki,
+                        easily to searching and watching
+                      </div>
+                    </>
+                  )}
                 </>
               )}
             </div>

@@ -17,12 +17,13 @@ import WatchDetail from './components/WatchDetail';
 import ActivateAccount from './pages/ActivateAccount';
 import { withAuthentication } from './components/Session';
 import ResendActivation from './pages/ResendActivation';
+import SearchResult from './components/SearchResult';
 
 dotenv.config();
 
 function App() {
   return (
-    <div className="App w-screen h-screen flex flex-col overflow-x-hidden justify-between">
+    <div className="App w-screen h-screen flex flex-col overflow-x-hidden justify-between filter">
       <Router>
         <Header />
         <Switch>
@@ -43,6 +44,7 @@ function App() {
             path={`${ROUTES.RESEND_ACTIVATION}`}
             component={ResendActivation}
           />
+          <Route path={`${ROUTES.SEARCH_RESULT}`} component={SearchResult} />
         </Switch>
         <Footer />
       </Router>

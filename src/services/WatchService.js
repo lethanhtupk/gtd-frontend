@@ -15,4 +15,12 @@ export default class WatchService {
   static async getDetailWatch(id) {
     return await BaseService.get(`${WATCH_RESOURCE}${id}`);
   }
+
+  static async updateWatch(id, payload) {
+    return await BaseService.put(`${WATCH_RESOURCE}${id}/update`, payload);
+  }
+
+  static async deleteWatch(id) {
+    return await BaseService.delete(`${WATCH_RESOURCE}${id}/delete`);
+  }
 }

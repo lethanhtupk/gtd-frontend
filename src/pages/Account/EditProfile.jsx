@@ -84,7 +84,7 @@ const EditProfileForm = (props) => {
         <input
           id="email"
           type="text"
-          className="py-2 border border-gray-300 px-4 rounded-lg"
+          className="py-2 border border-gray-300 px-4 rounded-lg bg-yellow-50"
           disabled
           value={formik.values.email}
         />

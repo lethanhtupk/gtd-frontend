@@ -12,10 +12,12 @@ const LoginPage = (props) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const accessToken = localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN);
-  if (accessToken && accessToken !== 'undefined') {
-    props.history.push(ROUTES.HOME);
-  }
+  useEffect(() => {
+    const accessToken = localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN);
+    if (accessToken && accessToken !== 'undefined') {
+      props.history.push(ROUTES.HOME);
+    }
+  }, []);
 
   return (
     <>

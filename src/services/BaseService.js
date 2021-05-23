@@ -33,8 +33,9 @@ axios.interceptors.response.use(
 
     if (
       error?.config?.url === 'auth/jwt/refresh/' &&
-      error?.response?.status === 400
+      error?.response?.status === 401
     ) {
+      window.localStorage.removeItem(LOCAL_STORAGE.ACCESS_TOKEN);
       window.localStorage.removeItem(LOCAL_STORAGE.USER_INFO);
       window.localStorage.removeItem(LOCAL_STORAGE.REFRESH_TOKEN);
     }
@@ -238,31 +239,33 @@ const BaseService = {
       axios
         .delete(url, config)
         .then((res) => {
-          if (res.status !== 200 || res.data.success !== true) {
+          console.log('res in base service======', res);
+          if (res.status !== 204) {
             const { data } = res;
             // eslint-disable-next-line prefer-promise-reject-errors
             reject({
-              error_code: data.error_code,
-              errors: data.errors,
+              code: res.status,
+              errors: {
+                ...data,
+              },
             });
           } else {
             resolve({
-              data: res.data.data,
-              pagination: res.data.pagination,
+              code: res.status,
+              ...res.data,
             });
           }
         })
         .catch((errors) => {
           // TODO: Refactor
-          if (
-            errors?.response?.data?.errors &&
-            errors?.response?.data?.error_code < 4000
-          ) {
+          console.log('errors in base service========,', errors.response);
+
+          if (errors?.response?.data && errors?.response?.status < 4000) {
             // eslint-disable-next-line prefer-promise-reject-errors
             reject({
-              code: errors.response.data.error_code,
+              code: errors.response.status,
               errors: {
-                message: errors.response.data.errors,
+                ...errors.response.data,
               },
             });
           } else {

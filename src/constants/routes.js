@@ -13,3 +13,4 @@ export const PRODUCTS = '/products';
 export const WATCHES = '/watches';
 export const ACTIVATE = '/activate';
 export const RESEND_ACTIVATION = '/resend-activation';
+export const SEARCH_RESULT = '/search-result';

@@ -1,23 +1,23 @@
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import React, { useEffect, useState } from 'react';
 import { CloseIcon } from '../Icons';
-import { FailedAlert, SuccessAlert } from '../Alert';
 import WatchService from '../../services/WatchService';
-import { seed } from '../../utils/Seed';
+import { displayWatchStatus } from '../../utils/Helpers';
+import { FailedAlert, SuccessAlert } from '../Alert';
 
-const ModalCreate = ({ showModal, setShowModal }) => {
+const EditWatchModal = ({ watchData, openModal, setOpenModal }) => {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
-  const [visible, setVisible] = useState(showModal);
+  const [visible, setVisible] = useState(openModal);
 
   useEffect(() => {
-    setVisible(showModal);
-  }, [showModal]);
+    setVisible(openModal);
+  }, [openModal]);
 
   useEffect(() => {
-    setShowModal(visible);
+    setOpenModal(visible);
   }, [visible]);
 
   return (
@@ -27,7 +27,7 @@ const ModalCreate = ({ showModal, setShowModal }) => {
           visible ? 'visible ' : 'invisible '
         }absolute border border-gray-500 rounded-lg bg-white text-black`}
       >
-        <div className="close-icon flex flex-row justify-end px-2 py-2">
+        <div className="close-icon flex flex-row justify-end px-2 py-2 cursor-pointer">
           <div
             onClick={() => {
               setVisible(false);
@@ -36,6 +36,7 @@ const ModalCreate = ({ showModal, setShowModal }) => {
             <CloseIcon />
           </div>
         </div>
+
         <div className="w-full flex flex-row justify-center">
           {message !== '' ? (
             <div className="w-4/5">
@@ -48,7 +49,8 @@ const ModalCreate = ({ showModal, setShowModal }) => {
           ) : null}
         </div>
 
-        <CreateWatchForm
+        <EditWatchForm
+          watchData={watchData}
           setError={setError}
           setMessage={setMessage}
           setLoading={setLoading}
@@ -58,7 +60,9 @@ const ModalCreate = ({ showModal, setShowModal }) => {
   );
 };
 
-export const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
+export const EditWatchForm = (props) => {
+  const { setError, setMessage, setLoading, watchData } = props;
+
   const validate = (values) => {
     const errors = {};
     const expectedPrice = values.expected_price;
@@ -70,30 +74,33 @@ export const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
 
   const formik = useFormik({
     initialValues: {
-      expected_price: 0,
+      status: watchData.status,
+      expected_price: watchData.expected_price,
     },
     validationSchema: Yup.object({
+      status: Yup.number()
+        .oneOf([1, 2], 'Invalid Status')
+        .required('This field is required'),
       expected_price: Yup.number().required('This field is required'),
     }),
-    validate,
     onSubmit: (values) => {
       const data = {
-        product: seed.id,
         expected_price: values.expected_price,
+        status: values.status,
       };
-      WatchService.createWatch(data)
+      WatchService.updateWatch(watchData.id, data)
         .then((res) => {
-          if (res.code === 201) {
+          if (res.code === 200) {
             setError(false);
             setLoading(false);
-            setMessage('Create new watch success!');
+            setMessage('Update your watch success!');
           }
         })
         .catch((error) => {
           setError(true);
           setLoading(false);
           setMessage(
-            'Failed to create watch, please check your input or try later'
+            'Failed to update watch, please check your input or try later'
           );
         });
     },
@@ -102,10 +109,10 @@ export const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
   return (
     <form onSubmit={formik.handleSubmit} className="flex flex-col px-4 py-4">
       <div className="form-content">
-        <label htmlFor="expected_price" className="flex flex-col">
+        <label htmlFor="link_to_product" className="flex flex-col">
           Expect price
           <input
-            id="expected_price"
+            id="link_to_product"
             type="text"
             {...formik.getFieldProps('expected_price')}
             className="py-2 border border-gray-300 px-4 rounded-lg"
@@ -116,15 +123,42 @@ export const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
             </div>
           ) : null}
         </label>
+        <label htmlFor="status" className="flex flex-col mt-2">
+          Status
+          {watchData.status === 1 ? (
+            <select
+              name="status"
+              {...formik.getFieldProps('status')}
+              className="py-2 border border-gray-300 px-4 bg-gray-300 rounded-lg"
+            >
+              <option value="1" label={displayWatchStatus(1)} selected />
+              <option value="2" label={displayWatchStatus(2)} />
+            </select>
+          ) : (
+            <select
+              name="status"
+              {...formik.getFieldProps('status')}
+              className="py-2 border border-gray-300 px-4 bg-gray-300 rounded-lg"
+            >
+              <option value="1" label={displayWatchStatus(1)} />
+              <option value="2" label={displayWatchStatus(2)} selected />
+            </select>
+          )}
+          {formik.touched.expected_price && formik.errors.expected_price ? (
+            <div className="text-red-600 text-xs normal-case font-normal mt-1">
+              {formik.errors.expected_price}
+            </div>
+          ) : null}
+        </label>
         <button
           type="submit"
-          className="uppercase text-white font-semibold bg-gray-700 px-4 py-3 rounded-lg hover:bg-gray-500 hover:border-4 mt-8"
+          className="uppercase text-white font-semibold bg-gray-700 px-4 py-3 rounded-lg hover:bg-gray-500 hover:border-4 mt-8 focus:outline-none"
         >
-          Start Tracking
+          Update watch
         </button>
       </div>
     </form>
   );
 };
 
-export default ModalCreate;
+export default EditWatchModal;

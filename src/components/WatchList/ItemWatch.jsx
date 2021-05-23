@@ -8,6 +8,8 @@ import {
   truncate,
 } from '../../utils/Helpers';
 import * as ROUTES from '../../constants/routes';
+import withAuthorization from '../Session/withAuthorization';
+import { CheckIcon, XCircleIcon } from '../Icons';
 
 const ItemWatch = ({ watchData }) => {
   const [productData, setProductData] = useState({});
@@ -54,6 +56,15 @@ const ItemWatch = ({ watchData }) => {
             </p>
             <p className="text-gray-500 text-sm mb-2 flex flex-row">
               Status:&nbsp;
+              {watchData.status === 1 ? (
+                <div className="text-green-500">
+                  <CheckIcon />
+                </div>
+              ) : (
+                <div className="text-red-500">
+                  <XCircleIcon />
+                </div>
+              )}
               <p
                 className={
                   watchData.status === 1 ? 'text-green-500' : 'text-red-500'
@@ -69,4 +80,6 @@ const ItemWatch = ({ watchData }) => {
   );
 };
 
-export default ItemWatch;
+const condition = (authUser) => !!authUser;
+
+export default withAuthorization(condition)(ItemWatch);

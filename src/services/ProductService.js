@@ -16,4 +16,8 @@ export default class ProductService {
   static async getProductDetail(id) {
     return await BaseService.get(`${PRODUCT_RESOURCE}${id}`, {});
   }
+
+  static async searchProduct(data) {
+    return await BaseService.get(`${PRODUCT_RESOURCE}search`, data, {});
+  }
 }
