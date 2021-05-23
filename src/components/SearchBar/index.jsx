@@ -10,10 +10,9 @@ const SearchBar = (props) => {
     if (e.key === 'Enter') {
       const location = {
         pathname: ROUTES.SEARCH_RESULT,
-        state: { search: searchPattern },
+        state: { search: searchPattern, page: 1 },
       };
-      console.log(location);
-      props.history.replace(location);
+      props.history.push(location);
       setSearchPattern('');
     }
     return null;
