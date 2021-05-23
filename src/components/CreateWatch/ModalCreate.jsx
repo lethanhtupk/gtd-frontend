@@ -4,9 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { CloseIcon } from '../Icons';
 import { FailedAlert, SuccessAlert } from '../Alert';
 import WatchService from '../../services/WatchService';
-import { seed } from '../../utils/Seed';
 
-const ModalCreate = ({ showModal, setShowModal }) => {
+const ModalCreate = ({ showModal, setShowModal, productData }) => {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
@@ -49,6 +48,7 @@ const ModalCreate = ({ showModal, setShowModal }) => {
         </div>
 
         <CreateWatchForm
+          productData={productData}
           setError={setError}
           setMessage={setMessage}
           setLoading={setLoading}
@@ -58,7 +58,12 @@ const ModalCreate = ({ showModal, setShowModal }) => {
   );
 };
 
-export const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
+export const CreateWatchForm = ({
+  setError,
+  setMessage,
+  setLoading,
+  productData,
+}) => {
   const validate = (values) => {
     const errors = {};
     const expectedPrice = values.expected_price;
@@ -78,7 +83,7 @@ export const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
     validate,
     onSubmit: (values) => {
       const data = {
-        product: seed.id,
+        product: productData.id,
         expected_price: values.expected_price,
       };
       WatchService.createWatch(data)

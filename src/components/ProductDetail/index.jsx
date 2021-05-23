@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
 import ProductService from '../../services/ProductService';
-import { numberWithCommas, truncate } from '../../utils/Helpers';
 import ModalCreate from '../CreateWatch/ModalCreate';
+import { numberWithCommas, truncate } from '../../utils/Helpers';
 import { PlusIcon } from '../Icons';
 import Rating from '../Rating';
 
@@ -72,6 +72,7 @@ const ProductDetail = ({ match }) => {
                   >
                     <PlusIcon />
                     <ModalCreate
+                      productData={productData}
                       showModal={showModal}
                       setShowModal={setShowModal}
                     />
