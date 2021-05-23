@@ -160,7 +160,7 @@ const BaseService = {
       axios
         .post(url, data, config)
         .then((res) => {
-          if (res.status !== 200 && res.status !== 201) {
+          if (res.status !== 200 && res.status !== 201 && res.status !== 204) {
             const { data } = res;
             // eslint-disable-next-line prefer-promise-reject-errors
             reject({
