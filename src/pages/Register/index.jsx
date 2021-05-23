@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import ClipLoader from 'react-spinners/ClipLoader';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import * as ROUTES from '../../constants/routes';
@@ -9,7 +10,7 @@ import { SuccessAlert, FailedAlert } from '../../components/Alert';
 const RegisterPage = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
@@ -21,11 +22,21 @@ const RegisterPage = () => {
           Create An Account
         </div>
 
-        {error ? (
-          <FailedAlert message={message} invisible={loading} />
+        {loading ? (
+          <div className="flex flex-col justify-center items-center">
+            <ClipLoader size={30} />
+            <div>Please wait...</div>
+          </div>
         ) : (
-          <SuccessAlert message={message} invisible={loading} />
+          <>
+            {error ? (
+              <FailedAlert message={message} invisible={loading} />
+            ) : (
+              <SuccessAlert message={message} invisible={loading} />
+            )}
+          </>
         )}
+
         <RegisterForm
           setMessage={setMessage}
           setError={setError}
@@ -70,6 +81,7 @@ const RegisterFormBase = (props) => {
         .required('This field is required'),
     }),
     onSubmit: (values) => {
+      setLoading(true);
       createAccount(values)
         .then((res) => {
           setMessage(
