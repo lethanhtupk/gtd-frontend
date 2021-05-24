@@ -41,6 +41,14 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
     if (expectedPrice < 0) {
       errors.expected_price = 'Invalid expected price';
     }
+    const patternUrl = /(http|https):\/\/tiki\.vn/;
+    const patternPid = /p[0-9]+/;
+    const pid = patternPid.exec(values.link_to_product);
+    if (!patternUrl.test(values.link_to_product)) {
+      errors.link_to_product = 'Invalid URL or URL not from Tiki';
+    } else if (!pid) {
+      errors.link_to_product = "Invalid product's URL";
+    }
     return errors;
   };
 
@@ -55,13 +63,7 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
     }),
     validate,
     onSubmit: (values) => {
-      const patternUrl = /(http|https):\/\/tiki\.vn/;
       const patternPid = /p[0-9]+/;
-      if (!patternUrl.test(values.link_to_product)) {
-        setError(true);
-        setLoading(false);
-        setMessage('Your input is invalid URL or not from Tiki');
-      }
       const pid = patternPid.exec(values.link_to_product)[0];
       const data = {
         product: pid.slice(1),
@@ -88,9 +90,9 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="flex flex-row justify-between px-4 py-4 items-end"
+      className="flex flex-row justify-between px-4 py-4 items-center"
     >
-      <label htmlFor="link_to_product" className="flex flex-col w-3/5">
+      <label htmlFor="link_to_product" className="flex flex-col w-3/5 h-20">
         Link to product
         <input
           id="link_to_product"
@@ -99,12 +101,12 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
           className="py-2 border border-gray-300 px-4 rounded-lg"
         />
         {formik.touched.link_to_product && formik.errors.link_to_product ? (
-          <div className="text-red-600 text-xs normal-case font-normal mt-1">
+          <div className="text-red-600 text-xs normal-case font-normal mt-1 ml-1">
             {formik.errors.link_to_product}
           </div>
         ) : null}
       </label>
-      <label htmlFor="link_to_product" className="flex flex-col">
+      <label htmlFor="link_to_product" className="flex flex-col h-20">
         Expect price
         <input
           id="link_to_product"
@@ -113,7 +115,7 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
           className="py-2 border border-gray-300 px-4 rounded-lg"
         />
         {formik.touched.expected_price && formik.errors.expected_price ? (
-          <div className="text-red-600 text-xs normal-case font-normal mt-1">
+          <div className="text-red-600 text-xs normal-case font-normal mt-1 ml-1">
             {formik.errors.expected_price}
           </div>
         ) : null}
