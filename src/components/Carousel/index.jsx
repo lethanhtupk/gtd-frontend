@@ -29,12 +29,13 @@ const ProductCarousel = ({ type }) => {
         .catch((error) => {
           setError(true);
           setLoading(false);
-          if (error.errors.code === 4000) {
+          if (error.code === 4000) {
             setMessage(
               'There is an error in the system. Please contact with the admin'
             );
+          } else {
+            setMessage(error.errors.detail);
           }
-          setMessage(error.errors.message);
         });
     } else if (type === 'top-drops') {
       ProductService.getTopDropProduct({
@@ -47,12 +48,13 @@ const ProductCarousel = ({ type }) => {
         .catch((error) => {
           setError(true);
           setLoading(false);
-          if (error.errors.code === 4000) {
+          if (error.code === 4000) {
             setMessage(
               'There is an error in the system. Please contact with the admin'
             );
+          } else {
+            setMessage(error.errors.detail);
           }
-          setMessage(error.errors.message);
         });
     }
   }, []);
@@ -70,7 +72,7 @@ const ProductCarousel = ({ type }) => {
       ) : (
         <>
           {error ? (
-            <div>{message}</div>
+            <div className="text-red-500 text-base">{message}</div>
           ) : (
             <AliceCarousel
               mouseTracking

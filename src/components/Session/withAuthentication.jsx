@@ -8,6 +8,7 @@ const withAuthentication = (Component) => {
     const [authUser, setAuthUser] = useState(
       localStorage.getItem(LOCAL_STORAGE.USER_INFO)
     );
+    const [error, setError] = useState();
 
     useEffect(() => {
       if (
@@ -19,7 +20,9 @@ const withAuthentication = (Component) => {
             setAuthUser(res);
             localStorage.setItem(LOCAL_STORAGE.USER_INFO, res);
           })
-          .catch((e) => console.log(e));
+          .catch((e) => {
+            setError(e);
+          });
       }
     }, []);
 

@@ -7,6 +7,7 @@ import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../Session';
 import withAuthorization from '../Session/withAuthorization';
 import ItemWatch from './ItemWatch';
+import { FailedAlert } from '../Alert';
 
 const WatchtList = () => {
   const { authUser } = useContext(AuthUserContext);
@@ -29,7 +30,11 @@ const WatchtList = () => {
       .catch((error) => {
         setError(true);
         setLoading(false);
-        setMessage('There is a system error, please try it later');
+        if (error.code === 4000) {
+          setMessage('There is a system error, please contact with the admin');
+        } else {
+          setMessage(error.errors.detail);
+        }
       });
   }, [authUser, currentPage]);
 
@@ -41,13 +46,10 @@ const WatchtList = () => {
         </div>
       ) : (
         <>
-          {watchList.length === 0 ? (
-            <div className="flex flex-row justify-center items-center text-2xl">
+          {error ? (
+            <div className="flex flex-row justify-center items-center">
               <div className="flex flex-col items-center">
-                <p>
-                  You do not have any watch yet, create a new watch to start
-                  tracking
-                </p>
+                <FailedAlert message={message} />
                 <div className="flex mt-4 text-xl">
                   <p>Back to&nbsp;</p>
                   <Link
@@ -61,24 +63,46 @@ const WatchtList = () => {
             </div>
           ) : (
             <>
-              <div className="flex flex-row justify-center mt-16">
-                <div className="w-4/5">
-                  <div className="grid grid-cols-4">
-                    {watchList.map((item, index) => (
-                      <div className="mr-2 mb-2" key={index}>
-                        <ItemWatch watchData={item} />
-                      </div>
-                    ))}
+              {watchList.length === 0 ? (
+                <div className="flex flex-row justify-center items-center text-2xl">
+                  <div className="flex flex-col items-center">
+                    <p>
+                      You do not have any watch yet, create a new watch to start
+                      tracking
+                    </p>
+                    <div className="flex mt-4 text-xl">
+                      <p>Back to&nbsp;</p>
+                      <Link
+                        to={ROUTES.HOME}
+                        className="text-blue-500 hover:underline"
+                      >
+                        home page
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="flex flex-row justify-center">
-                <Pagination
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                  totalPage={paginationData.last_page}
-                />
-              </div>
+              ) : (
+                <>
+                  <div className="flex flex-row justify-center mt-16">
+                    <div className="w-4/5">
+                      <div className="grid grid-cols-4">
+                        {watchList.map((item, index) => (
+                          <div className="mr-2 mb-2" key={index}>
+                            <ItemWatch watchData={item} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-row justify-center">
+                    <Pagination
+                      currentPage={currentPage}
+                      setCurrentPage={setCurrentPage}
+                      totalPage={paginationData.last_page}
+                    />
+                  </div>
+                </>
+              )}
             </>
           )}
         </>

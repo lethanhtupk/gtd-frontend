@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { ERROR_UNKNOWN, LOCAL_STORAGE } from '../utils/Constant';
 
-const REACT_APP_API_ENDPOINT = `${process.env.REACT_APP_API_ENDPOINT}`;
-
 axios.defaults.baseURL = `${process.env.REACT_APP_API_ENDPOINT}`;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
