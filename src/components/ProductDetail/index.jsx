@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
 import ProductService from '../../services/ProductService';
 import ModalCreate from '../CreateWatch/ModalCreate';
 import { numberWithCommas, truncate } from '../../utils/Helpers';
 import { PlusIcon } from '../Icons';
 import Rating from '../Rating';
+import AuthUserContext from '../Session/context';
 
 const ProductDetail = ({ match }) => {
   const [showAll, setShowAll] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [productData, setProductData] = useState({});
   const [loading, setLoading] = useState(true);
+  const { authUser } = useContext(AuthUserContext);
 
   useEffect(() => {
     ProductService.getProductDetail(match.params.id)
@@ -66,17 +68,19 @@ const ProductDetail = ({ match }) => {
                   >
                     View at Tiki
                   </button>
-                  <div
-                    className="ml-4 text-red-500 cursor-pointer"
-                    onClick={() => setShowModal(true)}
-                  >
-                    <PlusIcon />
-                    <ModalCreate
-                      productData={productData}
-                      showModal={showModal}
-                      setShowModal={setShowModal}
-                    />
-                  </div>
+                  {authUser[0] ? (
+                    <div
+                      className="ml-4 text-red-500 cursor-pointer"
+                      onClick={() => setShowModal(true)}
+                    >
+                      <PlusIcon />
+                      <ModalCreate
+                        productData={productData}
+                        showModal={showModal}
+                        setShowModal={setShowModal}
+                      />
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>
