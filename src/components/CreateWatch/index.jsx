@@ -63,10 +63,10 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
     }),
     validate,
     onSubmit: (values) => {
-      const patternPid = /p[0-9]+/;
+      const patternPid = /-p[0-9]+/;
       const pid = patternPid.exec(values.link_to_product)[0];
       const data = {
-        product: pid.slice(1),
+        product: pid.slice(2),
         expected_price: values.expected_price,
       };
       WatchService.createWatch(data)
