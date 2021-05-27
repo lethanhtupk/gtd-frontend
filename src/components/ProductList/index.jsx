@@ -159,7 +159,7 @@ const ProductList = ({ pageName, search, page }) => {
                     <ClipLoader size={50} />
                   </div>
                 ) : (
-                  <div className="grid grid-cols-4">
+                  <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
                     {productItems.map((item, index) => (
                       <div className="mr-2 mb-2" key={index}>
                         <ItemCarousel data={item} />

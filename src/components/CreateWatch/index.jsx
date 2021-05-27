@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
+import ClipLoader from 'react-spinners/ClipLoader';
 import * as Yup from 'yup';
 import { MailIcon } from '../Icons';
 import { FailedAlert, SuccessAlert } from '../Alert';
 import WatchService from '../../services/WatchService';
+import { convertToNumber, numberWithCommas } from '../../utils/Helpers';
 
 const CreateWatch = () => {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className="w-4/5">
@@ -17,13 +19,26 @@ const CreateWatch = () => {
         <p className="ml-2">Create Tiki Price Watches</p>
       </div>
       <div className="border border-red-700 bg-white flex flex-col">
-        <div className="flex justify-center mt-4">
-          {error ? (
-            <FailedAlert message={message} invisible={loading} />
-          ) : (
-            <SuccessAlert message={message} invisible={loading} />
-          )}
-        </div>
+        {loading ? (
+          <div className="flex flex-col justify-center items-center mt-8">
+            <ClipLoader size={30} />
+            <div>Please wait...</div>
+          </div>
+        ) : (
+          <div className="flex justify-center mt-4">
+            {error ? (
+              <FailedAlert
+                message={message}
+                invisible={loading || message === ''}
+              />
+            ) : (
+              <SuccessAlert
+                message={message}
+                invisible={loading || message === ''}
+              />
+            )}
+          </div>
+        )}
         <CreateWatchForm
           setError={setError}
           setMessage={setMessage}
@@ -37,9 +52,13 @@ const CreateWatch = () => {
 const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
   const validate = (values) => {
     const errors = {};
-    const expectedPrice = values.expected_price;
-    if (expectedPrice < 0) {
-      errors.expected_price = 'Invalid expected price';
+    if (values.expected_price === '') {
+      errors.expected_price = 'This field is required';
+    } else {
+      const expectedPrice = convertToNumber(values.expected_price);
+      if (isNaN(expectedPrice) || expectedPrice < 0) {
+        errors.expected_price = 'Invalid expected price';
+      }
     }
     const patternUrl = /(http|https):\/\/tiki\.vn/;
     const patternPid = /p[0-9]+/;
@@ -55,11 +74,11 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
   const formik = useFormik({
     initialValues: {
       link_to_product: '',
-      expected_price: 0,
+      expected_price: '',
     },
     validationSchema: Yup.object({
       link_to_product: Yup.string().required('This field is required'),
-      expected_price: Yup.number().required('This field is required'),
+      expected_price: Yup.string().required('This field is required'),
     }),
     validate,
     onSubmit: (values) => {
@@ -67,8 +86,9 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
       const pid = patternPid.exec(values.link_to_product)[0];
       const data = {
         product: pid.slice(2),
-        expected_price: values.expected_price,
+        expected_price: convertToNumber(values.expected_price),
       };
+      setLoading(true);
       WatchService.createWatch(data)
         .then((res) => {
           if (res.code === 201) {
@@ -80,9 +100,19 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
         .catch((error) => {
           setError(true);
           setLoading(false);
-          setMessage(
-            'Failed to create watch, please check your input or try later'
-          );
+          if (error.errors?.expected_price) {
+            setMessage('Make sure your price is smaller than current price');
+          } else if (error.errors?.product) {
+            if (
+              error.errors?.product === 'cannot find any product with that ID'
+            ) {
+              setMessage('We cannot find the product, please try another one!');
+            } else {
+              setMessage('You already watching this product');
+            }
+          } else {
+            setMessage('Something went wrong, please try later');
+          }
         });
     },
   });
@@ -108,12 +138,26 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
       </label>
       <label htmlFor="link_to_product" className="flex flex-col h-20">
         Expect price
-        <input
-          id="link_to_product"
-          type="text"
-          {...formik.getFieldProps('expected_price')}
-          className="py-2 border border-gray-300 px-4 rounded-lg"
-        />
+        <div className="flex flex-row items-center relative">
+          <input
+            id="link_to_product"
+            type="text"
+            {...formik.getFieldProps('expected_price')}
+            onChange={(e) => {
+              const { value } = e.target;
+              const formattedValue = (
+                Number(value.replace(/\D/g, '')) || ''
+              ).toLocaleString();
+              if (formattedValue !== '') {
+                formik.setFieldValue('expected_price', formattedValue);
+              } else {
+                formik.setFieldValue('expected_price', value);
+              }
+            }}
+            className="py-2 border border-gray-300 px-4 rounded-lg w-full"
+          />
+          <div className="text-gray-500 right-2 absolute">VND</div>
+        </div>
         {formik.touched.expected_price && formik.errors.expected_price ? (
           <div className="text-red-600 text-xs normal-case font-normal mt-1 ml-1">
             {formik.errors.expected_price}

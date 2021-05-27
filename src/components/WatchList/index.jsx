@@ -85,7 +85,7 @@ const WatchtList = () => {
                 <>
                   <div className="flex flex-row justify-center mt-16">
                     <div className="w-4/5">
-                      <div className="grid grid-cols-4">
+                      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
                         {watchList.map((item, index) => (
                           <div className="mr-2 mb-2" key={index}>
                             <ItemWatch watchData={item} />

@@ -5,6 +5,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { CloseIcon } from '../Icons';
 import { FailedAlert, SuccessAlert } from '../Alert';
 import WatchService from '../../services/WatchService';
+import { convertToNumber } from '../../utils/Helpers';
 
 const ModalCreate = ({ showModal, setShowModal, productData }) => {
   const [error, setError] = useState(false);
@@ -76,25 +77,29 @@ export const CreateWatchForm = ({
 }) => {
   const validate = (values) => {
     const errors = {};
-    const expectedPrice = values.expected_price;
-    if (expectedPrice < 0) {
-      errors.expected_price = 'Invalid expected price';
+    if (values.expected_price === '') {
+      errors.expected_price = 'This field is required';
+    } else {
+      const expectedPrice = convertToNumber(values.expected_price);
+      if (isNaN(expectedPrice) || expectedPrice < 0) {
+        errors.expected_price = 'Invalid expected price';
+      }
     }
     return errors;
   };
 
   const formik = useFormik({
     initialValues: {
-      expected_price: 0,
+      expected_price: '',
     },
     validationSchema: Yup.object({
-      expected_price: Yup.number().required('This field is required'),
+      expected_price: Yup.string().required('This field is required'),
     }),
     validate,
     onSubmit: (values) => {
       const data = {
         product: productData.id,
-        expected_price: values.expected_price,
+        expected_price: convertToNumber(values.expected_price),
       };
       setLoading(true);
       WatchService.createWatch(data)
@@ -124,12 +129,26 @@ export const CreateWatchForm = ({
       <div className="form-content">
         <label htmlFor="expected_price" className="flex flex-col">
           Expect price
-          <input
-            id="expected_price"
-            type="text"
-            {...formik.getFieldProps('expected_price')}
-            className="py-2 border border-gray-300 px-4 rounded-lg"
-          />
+          <div className="flex flex-row items-center relative">
+            <input
+              id="expected_price"
+              type="text"
+              {...formik.getFieldProps('expected_price')}
+              onChange={(e) => {
+                const { value } = e.target;
+                const formattedValue = (
+                  Number(value.replace(/\D/g, '')) || ''
+                ).toLocaleString();
+                if (formattedValue !== '') {
+                  formik.setFieldValue('expected_price', formattedValue);
+                } else {
+                  formik.setFieldValue('expected_price', value);
+                }
+              }}
+              className="py-2 border border-gray-300 px-4 rounded-lg w-full"
+            />
+            <div className="absolute right-2 text-gray-500">VND</div>
+          </div>
           {formik.touched.expected_price && formik.errors.expected_price ? (
             <div className="text-red-600 text-xs normal-case font-normal mt-1">
               {formik.errors.expected_price}

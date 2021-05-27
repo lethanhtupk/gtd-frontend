@@ -5,9 +5,13 @@ export const truncate = (str, number) => {
 };
 
 export const numberWithCommas = (number) => {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
 export const displayWatchStatus = (status) => {
   return WATCH_STATUS[status];
+};
+
+export const convertToNumber = (price) => {
+  return parseInt(price.replace(/,/g, ''), 10);
 };
