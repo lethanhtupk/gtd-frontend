@@ -30,9 +30,15 @@ const RegisterPage = () => {
         ) : (
           <>
             {error ? (
-              <FailedAlert message={message} invisible={loading} />
+              <FailedAlert
+                message={message}
+                invisible={loading || message === ''}
+              />
             ) : (
-              <SuccessAlert message={message} invisible={loading} />
+              <SuccessAlert
+                message={message}
+                invisible={loading || message === ''}
+              />
             )}
           </>
         )}
@@ -192,7 +198,7 @@ const RegisterFormBase = (props) => {
       </button>
       <div className="mt-2">
         Already have an account?{' '}
-        <Link to="/login" className="text-blue-500 underline">
+        <Link to="/login" className="text-blue-500 hover:underline">
           Login now
         </Link>
       </div>

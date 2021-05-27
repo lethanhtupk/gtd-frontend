@@ -10,7 +10,7 @@ import { LOCAL_STORAGE } from '../../utils/Constant';
 const LoginPage = (props) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const accessToken = localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN);
@@ -28,9 +28,15 @@ const LoginPage = (props) => {
         <div className="uppercase font-semibold text-2xl mb-4">Login</div>
 
         {error ? (
-          <FailedAlert message={message} invisible={loading} />
+          <FailedAlert
+            message={message}
+            invisible={loading || message === ''}
+          />
         ) : (
-          <SuccessAlert message={message} invisible={loading} />
+          <SuccessAlert
+            message={message}
+            invisible={loading || message === ''}
+          />
         )}
         <LoginForm
           setMessage={setMessage}
@@ -61,6 +67,7 @@ const LoginFormBase = (props) => {
         .required('This field is required'),
     }),
     onSubmit: (values) => {
+      setLoading(true);
       loginAccount(values)
         .then((res) => {
           localStorage.setItem('access', res.access);
@@ -124,7 +131,7 @@ const LoginFormBase = (props) => {
       <div className="mt-2 flex flex-col">
         <p>
           Do not have an account yet?{' '}
-          <Link to={ROUTES.REGISTER} className="text-blue-500 underline">
+          <Link to={ROUTES.REGISTER} className="text-blue-500 hover:underline">
             Register now
           </Link>
         </p>
@@ -132,7 +139,7 @@ const LoginFormBase = (props) => {
           Already have an account but not activate yet?{' '}
           <Link
             to={ROUTES.RESEND_ACTIVATION}
-            className="text-blue-500 underline"
+            className="text-blue-500 hover:underline"
           >
             Resend activation email
           </Link>
