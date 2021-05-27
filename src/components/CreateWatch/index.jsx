@@ -101,7 +101,7 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
           setError(true);
           setLoading(false);
           if (error.errors?.expected_price) {
-            setMessage('Make sure your price is smaller than current price');
+            setMessage('The price must smaller than current price');
           } else if (error.errors?.product) {
             if (
               error.errors?.product === 'cannot find any product with that ID'

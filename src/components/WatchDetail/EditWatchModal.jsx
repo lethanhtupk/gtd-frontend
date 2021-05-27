@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
+import ClipLoader from 'react-spinners/ClipLoader';
 import * as Yup from 'yup';
 import { CloseIcon } from '../Icons';
 import WatchService from '../../services/WatchService';
-import { displayWatchStatus } from '../../utils/Helpers';
+import {
+  convertToNumber,
+  displayWatchStatus,
+  numberWithCommas,
+} from '../../utils/Helpers';
 import { FailedAlert, SuccessAlert } from '../Alert';
 
 const EditWatchModal = ({ watchData, openModal, setOpenModal }) => {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(openModal);
 
   useEffect(() => {
@@ -38,15 +43,23 @@ const EditWatchModal = ({ watchData, openModal, setOpenModal }) => {
         </div>
 
         <div className="w-full flex flex-row justify-center">
-          {message !== '' ? (
-            <div className="w-4/5">
-              {error ? (
-                <FailedAlert message={message} invisible={loading} />
-              ) : (
-                <SuccessAlert message={message} invisible={loading} />
-              )}
+          {loading ? (
+            <div className="flex flex-col justify-center items-center">
+              <ClipLoader size={30} />
             </div>
-          ) : null}
+          ) : (
+            <>
+              {message !== '' ? (
+                <div className="w-4/5">
+                  {error ? (
+                    <FailedAlert message={message} invisible={loading} />
+                  ) : (
+                    <SuccessAlert message={message} invisible={loading} />
+                  )}
+                </div>
+              ) : null}
+            </>
+          )}
         </div>
 
         <EditWatchForm
@@ -65,9 +78,13 @@ export const EditWatchForm = (props) => {
 
   const validate = (values) => {
     const errors = {};
-    const expectedPrice = values.expected_price;
-    if (expectedPrice < 0) {
-      errors.expected_price = 'Invalid expected price';
+    if (values.expected_price === '') {
+      errors.expected_price = 'This field is required';
+    } else {
+      const expectedPrice = convertToNumber(values.expected_price);
+      if (isNaN(expectedPrice) || expectedPrice < 0) {
+        errors.expected_price = 'Invalid expected price';
+      }
     }
     return errors;
   };
@@ -75,19 +92,21 @@ export const EditWatchForm = (props) => {
   const formik = useFormik({
     initialValues: {
       status: watchData.status,
-      expected_price: watchData.expected_price,
+      expected_price: numberWithCommas(watchData.expected_price),
     },
+    validate,
     validationSchema: Yup.object({
       status: Yup.number()
         .oneOf([1, 2], 'Invalid Status')
         .required('This field is required'),
-      expected_price: Yup.number().required('This field is required'),
+      expected_price: Yup.string().required('This field is required'),
     }),
     onSubmit: (values) => {
       const data = {
-        expected_price: values.expected_price,
+        expected_price: convertToNumber(values.expected_price),
         status: values.status,
       };
+      setLoading(true);
       WatchService.updateWatch(watchData.id, data)
         .then((res) => {
           if (res.code === 200) {
@@ -97,11 +116,14 @@ export const EditWatchForm = (props) => {
           }
         })
         .catch((error) => {
+          console.log(error);
           setError(true);
           setLoading(false);
-          setMessage(
-            'Failed to update watch, please check your input or try later'
-          );
+          if (error.errors?.expected_price) {
+            setMessage('The price must smaller than current price');
+          } else {
+            setMessage('Failed to update watch, please try later');
+          }
         });
     },
   });
@@ -111,12 +133,26 @@ export const EditWatchForm = (props) => {
       <div className="form-content">
         <label htmlFor="link_to_product" className="flex flex-col">
           Expect price
-          <input
-            id="link_to_product"
-            type="text"
-            {...formik.getFieldProps('expected_price')}
-            className="py-2 border border-gray-300 px-4 rounded-lg"
-          />
+          <div className="flex flex-row items-center relative">
+            <input
+              id="link_to_product"
+              type="text"
+              {...formik.getFieldProps('expected_price')}
+              onChange={(e) => {
+                const { value } = e.target;
+                const formattedValue = (
+                  Number(value.replace(/\D/g, '')) || ''
+                ).toLocaleString();
+                if (formattedValue !== '') {
+                  formik.setFieldValue('expected_price', formattedValue);
+                } else {
+                  formik.setFieldValue('expected_price', value);
+                }
+              }}
+              className="py-2 border border-gray-300 px-4 rounded-lg w-full"
+            />
+            <div className="text-gray-500 right-2 absolute">VND</div>
+          </div>
           {formik.touched.expected_price && formik.errors.expected_price ? (
             <div className="text-red-600 text-xs normal-case font-normal mt-1">
               {formik.errors.expected_price}
@@ -144,9 +180,9 @@ export const EditWatchForm = (props) => {
               <option value="2" label={displayWatchStatus(2)} selected />
             </select>
           )}
-          {formik.touched.expected_price && formik.errors.expected_price ? (
+          {formik.touched.status && formik.errors.status ? (
             <div className="text-red-600 text-xs normal-case font-normal mt-1">
-              {formik.errors.expected_price}
+              {formik.errors.status}
             </div>
           ) : null}
         </label>

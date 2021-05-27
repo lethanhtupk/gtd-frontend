@@ -9,6 +9,10 @@ module.exports = {
         customBlack: '#1C1C1C',
       },
     },
+    minWidth: {
+      '1/4': '25%',
+      '1/3': '33%',
+    },
   },
   variants: {
     extend: {},

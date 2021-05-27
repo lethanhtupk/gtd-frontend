@@ -61,7 +61,16 @@ const WatchDetail = ({ match }) => {
                   <div className="image">
                     <img src={productData.images[0]?.base_url} alt="product" />
                   </div>
-                  <div className="overview col-span-2 bg-white ml-2 px-4 py-4">
+                  <div className="overview col-span-2 bg-white ml-2 px-4 py-4 relative">
+                    {openModal ? (
+                      <div className="absolute right-8 top-12 min-w-1/3">
+                        <EditWatchModal
+                          watchData={watchData}
+                          openModal={openModal}
+                          setOpenModal={setOpenModal}
+                        />
+                      </div>
+                    ) : null}
                     <div className="flex flex-row justify-between">
                       <div className="text-gray-600 text-sm flex">
                         Brand:{' '}
@@ -76,18 +85,10 @@ const WatchDetail = ({ match }) => {
                         </div>
                         <div
                           className="hover:text-black cursor-pointer"
-                          onClick={() => setOpenModal(true)}
+                          onClick={() => setOpenModal(!openModal)}
                         >
                           <PenIcon />
                         </div>
-
-                        {openModal ? (
-                          <EditWatchModal
-                            watchData={watchData}
-                            openModal={openModal}
-                            setOpenModal={setOpenModal}
-                          />
-                        ) : null}
                       </div>
                     </div>
                     <p className="font-light text-xl">{productData.name}</p>

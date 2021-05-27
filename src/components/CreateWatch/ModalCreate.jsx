@@ -114,7 +114,7 @@ export const CreateWatchForm = ({
           setError(true);
           setLoading(false);
           if (error.errors?.expected_price) {
-            setMessage('Make sure your price is smaller than current price');
+            setMessage('The price must smaller than current price');
           } else if (error.errors?.product) {
             setMessage('You already watching this product');
           } else {

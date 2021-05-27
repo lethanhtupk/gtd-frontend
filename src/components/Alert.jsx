@@ -14,7 +14,7 @@ export const FailedAlert = ({ message }) => (
         />
       </svg>
     </span>
-    <p className="ml-6">{message}</p>
+    <p className="text-center">{message}</p>
   </div>
 );
 
@@ -27,6 +27,6 @@ export const SuccessAlert = ({ message, invisible }) => (
     }
     role="alert"
   >
-    <p>{message}</p>
+    <p className="text-center">{message}</p>
   </div>
 );
