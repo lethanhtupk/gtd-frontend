@@ -11,7 +11,12 @@ import {
 } from '../../utils/Helpers';
 import { FailedAlert, SuccessAlert } from '../Alert';
 
-const EditWatchModal = ({ watchData, openModal, setOpenModal }) => {
+const EditWatchModal = ({
+  watchData,
+  setWatchData,
+  openModal,
+  setOpenModal,
+}) => {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -64,6 +69,7 @@ const EditWatchModal = ({ watchData, openModal, setOpenModal }) => {
 
         <EditWatchForm
           watchData={watchData}
+          setWatchData={setWatchData}
           setError={setError}
           setMessage={setMessage}
           setLoading={setLoading}
@@ -74,7 +80,7 @@ const EditWatchModal = ({ watchData, openModal, setOpenModal }) => {
 };
 
 export const EditWatchForm = (props) => {
-  const { setError, setMessage, setLoading, watchData } = props;
+  const { setError, setMessage, setLoading, watchData, setWatchData } = props;
 
   const validate = (values) => {
     const errors = {};
@@ -114,9 +120,10 @@ export const EditWatchForm = (props) => {
             setLoading(false);
             setMessage('Update your watch success!');
           }
+          delete res.code;
+          setWatchData(res);
         })
         .catch((error) => {
-          console.log(error);
           setError(true);
           setLoading(false);
           if (error.errors?.expected_price) {

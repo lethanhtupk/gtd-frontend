@@ -31,7 +31,7 @@ const AccountOverview = ({ authUser, setActive }) => {
             type="button"
             onClick={() => setActive(1)}
             className="uppercase text-gray-500 border-2 border-gray-400 rounded-full mt-8 max-w-7xl font-medium hover:border-black hover:text-black
-               px-4 py-2 focus:outline-none"
+              px-4 py-2 focus:outline-none"
           >
             Edit Profile
           </button>

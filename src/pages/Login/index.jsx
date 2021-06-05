@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import ClipLoader from 'react-spinners/ClipLoader';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import * as ROUTES from '../../constants/routes';
@@ -27,17 +28,27 @@ const LoginPage = (props) => {
       <div className="mt-24 flex flex-col items-center">
         <div className="uppercase font-semibold text-2xl mb-4">Login</div>
 
-        {error ? (
-          <FailedAlert
-            message={message}
-            invisible={loading || message === ''}
-          />
+        {loading ? (
+          <div className="flex flex-col items-center">
+            <ClipLoader size={30} />
+            <div>Please wait...</div>
+          </div>
         ) : (
-          <SuccessAlert
-            message={message}
-            invisible={loading || message === ''}
-          />
+          <>
+            {error ? (
+              <FailedAlert
+                message={message}
+                invisible={loading || message === ''}
+              />
+            ) : (
+              <SuccessAlert
+                message={message}
+                invisible={loading || message === ''}
+              />
+            )}
+          </>
         )}
+
         <LoginForm
           setMessage={setMessage}
           setError={setError}
@@ -77,12 +88,12 @@ const LoginFormBase = (props) => {
         })
         .catch((e) => {
           setError(true);
-          setLoading(false);
           if (e.code < 4000 && e.errors.detail) {
             setMessage(e.errors.detail);
           } else {
             setMessage('Something went wrong, please try later');
           }
+          setLoading(false);
         });
     },
   });

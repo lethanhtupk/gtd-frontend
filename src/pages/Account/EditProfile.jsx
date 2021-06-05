@@ -53,6 +53,7 @@ const EditProfileForm = (props) => {
             setMessage('Update your profile success');
             setLoading(false);
             delete res['code'];
+            authUser[1](res);
           }
         })
         .catch((error) => {

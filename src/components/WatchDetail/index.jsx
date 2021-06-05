@@ -66,6 +66,7 @@ const WatchDetail = ({ match }) => {
                       <div className="absolute right-8 top-12 min-w-1/3">
                         <EditWatchModal
                           watchData={watchData}
+                          setWatchData={setWatchData}
                           openModal={openModal}
                           setOpenModal={setOpenModal}
                         />

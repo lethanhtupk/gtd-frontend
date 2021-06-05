@@ -63,7 +63,9 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
     const patternUrl = /(http|https):\/\/tiki\.vn/;
     const patternPid = /p[0-9]+/;
     const pid = patternPid.exec(values.link_to_product);
-    if (!patternUrl.test(values.link_to_product)) {
+    if (values.link_to_product === '') {
+      errors.link_to_product = 'This field is required';
+    } else if (!patternUrl.test(values.link_to_product)) {
       errors.link_to_product = 'Invalid URL or URL not from Tiki';
     } else if (!pid) {
       errors.link_to_product = "Invalid product's URL";

@@ -86,7 +86,7 @@ const RegisterFormBase = (props) => {
         .max(30, 'Full name is too long')
         .required('This field is required'),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { setFieldError }) => {
       setLoading(true);
       createAccount(values)
         .then((res) => {
@@ -97,11 +97,15 @@ const RegisterFormBase = (props) => {
           setLoading(false);
         })
         .catch((e) => {
-          setError(true);
           setLoading(false);
           if (e.code < 4000 && e.errors.email) {
+            setError(true);
+
             setMessage('User with this email address already exists');
+          } else if (e.code < 4000 && e.errors.password) {
+            setFieldError('password', e.errors.password[0]);
           } else {
+            setError(true);
             setMessage('Something went wrong, please try later');
           }
         });
