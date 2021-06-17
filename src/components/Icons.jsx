@@ -3,7 +3,7 @@ import React from 'react';
 export const DropDownIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6"
+    className="w-6 h-6"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -20,7 +20,7 @@ export const DropDownIcon = () => (
 export const HomeIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6"
+    className="w-6 h-6"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -31,7 +31,7 @@ export const HomeIcon = () => (
 export const PenIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6"
+    className="w-6 h-6"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -47,7 +47,7 @@ export const PenIcon = () => (
 export const LockIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
+    className="w-5 h-5"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -62,7 +62,7 @@ export const LockIcon = () => (
 export const MailIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6"
+    className="w-6 h-6"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -79,7 +79,7 @@ export const MailIcon = () => (
 export const Star = ({ isEmpty }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6"
+    className="w-6 h-6"
     fill={isEmpty ? 'none' : 'yellow'}
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -96,7 +96,7 @@ export const Star = ({ isEmpty }) => (
 export const PlusIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-10 w-10"
+    className="w-10 h-10"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -111,7 +111,7 @@ export const PlusIcon = () => (
 export const CloseIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
+    className="w-5 h-5"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -126,7 +126,7 @@ export const CloseIcon = () => (
 export const ChervonLeftIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
+    className="w-5 h-5"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -141,7 +141,7 @@ export const ChervonLeftIcon = () => (
 export const ChervonRightIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
+    className="w-5 h-5"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -156,7 +156,7 @@ export const ChervonRightIcon = () => (
 export const ChervonDoubleLeftIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
+    className="w-5 h-5"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -171,7 +171,7 @@ export const ChervonDoubleLeftIcon = () => (
 export const ChervonDoubleRightIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
+    className="w-5 h-5"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -191,7 +191,7 @@ export const ChervonDoubleRightIcon = () => (
 export const CheckIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
+    className="w-5 h-5"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -206,7 +206,7 @@ export const CheckIcon = () => (
 export const XCircleIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
+    className="w-5 h-5"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -221,7 +221,7 @@ export const XCircleIcon = () => (
 export const DeleteIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6"
+    className="w-6 h-6"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -238,7 +238,7 @@ export const DeleteIcon = () => (
 export const ConfirmDeleteIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-16 w-16"
+    className="w-16 h-16"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -255,7 +255,7 @@ export const ConfirmDeleteIcon = () => (
 export const SearchIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6"
+    className="w-6 h-6"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -265,6 +265,23 @@ export const SearchIcon = () => (
       strokeLinejoin="round"
       strokeWidth="2"
       d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+    />
+  </svg>
+);
+
+export const MenuIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-6 h-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M4 6h16M4 12h16M4 18h16"
     />
   </svg>
 );

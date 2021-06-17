@@ -25,8 +25,8 @@ const LoginPage = (props) => {
       <header>
         <title>Login an account - GTD</title>
       </header>
-      <div className="mt-24 flex flex-col items-center">
-        <div className="uppercase font-semibold text-2xl mb-4">Login</div>
+      <div className="flex flex-col items-center mt-24">
+        <div className="mb-4 text-2xl font-semibold uppercase">Login</div>
 
         {loading ? (
           <div className="flex flex-col items-center">
@@ -99,17 +99,20 @@ const LoginFormBase = (props) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="flex flex-col w-2/6">
-      <label htmlFor="email" className="flex flex-col uppercase font-semibold">
+    <form
+      onSubmit={formik.handleSubmit}
+      className="flex flex-col sm:w-2/3 md:w-1/2 lg:w-1/3"
+    >
+      <label htmlFor="email" className="flex flex-col font-semibold uppercase">
         Email*
         <input
           id="email"
           type="text"
-          className="py-2 border border-gray-300 px-4"
+          className="px-4 py-2 border border-gray-300"
           {...formik.getFieldProps('email')}
         />
         {formik.touched.email && formik.errors.email ? (
-          <div className="text-red-600 text-xs normal-case font-normal mt-1">
+          <div className="mt-1 text-xs font-normal text-red-600 normal-case">
             {formik.errors.email}
           </div>
         ) : null}
@@ -117,17 +120,17 @@ const LoginFormBase = (props) => {
 
       <label
         htmlFor="password"
-        className="flex flex-col uppercase font-semibold mt-2"
+        className="flex flex-col mt-2 font-semibold uppercase"
       >
         Password*
         <input
           id="password"
           type="password"
-          className="py-2 border border-gray-300 px-4"
+          className="px-4 py-2 border border-gray-300"
           {...formik.getFieldProps('password')}
         />
         {formik.touched.password && formik.errors.password ? (
-          <div className="text-red-600 text-xs normal-case font-normal mt-1">
+          <div className="mt-1 text-xs font-normal text-red-600 normal-case">
             {formik.errors.password}
           </div>
         ) : null}
@@ -135,26 +138,28 @@ const LoginFormBase = (props) => {
 
       <button
         type="submit"
-        className="uppercase text-white font-semibold bg-black py-4 rounded-sm mt-2 hover:bg-white hover:text-black hover:border-black hover:border-4"
+        className="py-4 mt-2 font-semibold text-white uppercase bg-black rounded-sm hover:bg-white hover:text-black hover:border-black hover:border-4"
       >
         Login
       </button>
-      <div className="mt-2 flex flex-col">
-        <p>
-          Do not have an account yet?{' '}
-          <Link to={ROUTES.REGISTER} className="text-blue-500 hover:underline">
+      <div className="flex flex-col justify-center mt-2 text-sm uppercase">
+        <div className="flex flex-col justify-between w-full md:flex-row">
+          <Link to={ROUTES.REGISTER} className="underline hover:text-blue-500">
             Register now
           </Link>
-        </p>
-        <p>
-          Already have an account but not activate yet?{' '}
           <Link
-            to={ROUTES.RESEND_ACTIVATION}
-            className="text-blue-500 hover:underline"
+            to={ROUTES.FORGET_PASSWORD}
+            className="underline hover:text-blue-500"
           >
-            Resend activation email
+            Forgot password
           </Link>
-        </p>
+        </div>
+        <Link
+          to={ROUTES.RESEND_ACTIVATION}
+          className="mt-2 underline hover:text-blue-500"
+        >
+          Resend activation email
+        </Link>
       </div>
     </form>
   );

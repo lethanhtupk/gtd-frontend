@@ -3,40 +3,47 @@ import { Link } from 'react-router-dom';
 import NavigationNonAuth from './Navigation/NavigationNonAuth';
 import NavigationAuth from './Navigation/NavigationAuth';
 import * as ROUTES from '../constants/routes';
-
 import { AuthUserContext } from './Session';
 import SearchBar from './SearchBar';
+import { MenuIcon } from './Icons';
 
 const Header = () => {
   return (
-    <div className="header h-16 w-screen bg-gray-600 relative top-0 left-0 flex flex-row justify-between px-8">
-      {/* logo part */}
-      <div className="flex flex-row items-center">
+    <div className="relative top-0 left-0 flex flex-row items-center justify-between w-screen h-16 px-4 bg-gray-600 md:px-8 header">
+      <div className="flex flex-col py-2 md:items-center md:flex-row">
         <Link
           to={ROUTES.HOME}
-          className="logo flex flex-col justify-center text-white"
+          className="flex flex-col justify-center text-white logo"
         >
           <div style={{ fontFamily: 'Antonio' }}>
-            <div className="brand-name text-3xl font-semibold">IO Saver</div>
-            <div className="slogan text-xs font-medium">Save your money</div>
+            <div className="text-3xl font-semibold brand-name">IO Saver</div>
+            <div className="text-xs font-medium slogan">Save your money</div>
           </div>
         </Link>
-        <div className="searchBox ml-8">
+        <div className="hidden ml-8 searchBox md:flex">
           <SearchBar />
         </div>
       </div>
 
-      {/* avatar Dropdown menu */}
-      <AuthUserContext.Consumer>
-        {(props) => {
-          const { authUser } = props;
-          return authUser[0] ? (
-            <NavigationAuth setAuthUser={authUser[1]} authUser={authUser[0]} />
-          ) : (
-            <NavigationNonAuth />
-          );
-        }}
-      </AuthUserContext.Consumer>
+      <div className="text-white md:hidden">
+        <MenuIcon />
+      </div>
+
+      <div className="flex-row items-center hidden md:flex">
+        <AuthUserContext.Consumer>
+          {(props) => {
+            const { authUser } = props;
+            return authUser[0] ? (
+              <NavigationAuth
+                setAuthUser={authUser[1]}
+                authUser={authUser[0]}
+              />
+            ) : (
+              <NavigationNonAuth />
+            );
+          }}
+        </AuthUserContext.Consumer>
+      </div>
     </div>
   );
 };
