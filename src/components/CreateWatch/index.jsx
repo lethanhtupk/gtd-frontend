@@ -133,7 +133,7 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
           id="link_to_product"
           type="text"
           {...formik.getFieldProps('link_to_product')}
-          className="px-4 py-2 border border-gray-300 rounded-lg"
+          className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none"
         />
         {formik.touched.link_to_product && formik.errors.link_to_product ? (
           <div className="mt-1 ml-1 text-xs font-normal text-red-600 normal-case">
@@ -162,7 +162,7 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
                 formik.setFieldValue('expected_price', value);
               }
             }}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none"
           />
           <div className="absolute text-gray-500 right-2">VND</div>
         </div>
