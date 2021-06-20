@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavigationNonAuth from './Navigation/NavigationNonAuth';
 import NavigationAuth from './Navigation/NavigationAuth';
@@ -8,9 +8,10 @@ import SearchBar from './SearchBar';
 import { MenuIcon } from './Icons';
 
 const Header = () => {
+  const [openNavigation, setOpenNavigation] = useState(false);
   return (
-    <div className="relative top-0 left-0 flex flex-row items-center justify-between w-screen h-16 px-4 bg-gray-600 md:px-8 header">
-      <div className="flex flex-col py-2 md:items-center md:flex-row">
+    <div className="relative top-0 left-0 flex flex-col justify-between w-screen bg-gray-900 md:bg-gray-600 md:items-center md:flex-row md:h-16 md:px-8 header">
+      <div className="flex flex-row items-center justify-between px-4 py-2 md:items-center md:flex-row">
         <Link
           to={ROUTES.HOME}
           className="flex flex-col justify-center text-white logo"
@@ -23,13 +24,27 @@ const Header = () => {
         <div className="hidden ml-8 searchBox md:flex">
           <SearchBar />
         </div>
+        <div
+          className="text-white md:hidden"
+          onClick={() => setOpenNavigation(!openNavigation)}
+        >
+          <MenuIcon />
+        </div>
       </div>
 
-      <div className="text-white md:hidden">
-        <MenuIcon />
+      <div
+        className={`w-screen bg-gray-700 md:hidden ${
+          openNavigation ? '' : 'hidden'
+        }`}
+      >
+        <SearchBar setOpenNavigation={setOpenNavigation} />
       </div>
 
-      <div className="flex-row items-center hidden h-full md:flex">
+      <div
+        className={`md:flex-row md:items-center md:h-full md:flex md:w-auto w-screen bg-gray-600 md:justify-end ${
+          openNavigation ? '' : 'hidden'
+        }`}
+      >
         <AuthUserContext.Consumer>
           {(props) => {
             const { authUser } = props;
@@ -39,7 +54,7 @@ const Header = () => {
                 authUser={authUser[0]}
               />
             ) : (
-              <NavigationNonAuth />
+              <NavigationNonAuth setOpenNavigation={setOpenNavigation} />
             );
           }}
         </AuthUserContext.Consumer>
