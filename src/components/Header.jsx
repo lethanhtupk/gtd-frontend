@@ -29,7 +29,7 @@ const Header = () => {
         <MenuIcon />
       </div>
 
-      <div className="flex-row items-center hidden md:flex">
+      <div className="flex-row items-center hidden h-full md:flex">
         <AuthUserContext.Consumer>
           {(props) => {
             const { authUser } = props;

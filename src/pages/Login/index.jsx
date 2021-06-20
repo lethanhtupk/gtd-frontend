@@ -154,12 +154,6 @@ const LoginFormBase = (props) => {
             Forgot password
           </Link>
         </div>
-        <Link
-          to={ROUTES.RESEND_ACTIVATION}
-          className="mt-2 underline hover:text-blue-500"
-        >
-          Resend activation email
-        </Link>
       </div>
     </form>
   );

@@ -14,13 +14,13 @@ const CreateWatch = () => {
 
   return (
     <div className="w-4/5">
-      <div className="py-2 bg-red-700 text-white px-2 font-bold text-lg flex flex-row items-center">
+      <div className="flex flex-row items-center px-2 py-2 text-lg font-bold text-white bg-red-700">
         <MailIcon />
         <p className="ml-2">Create Tiki Price Watches</p>
       </div>
-      <div className="border border-red-700 bg-white flex flex-col">
+      <div className="flex flex-col bg-white border border-red-700">
         {loading ? (
-          <div className="flex flex-col justify-center items-center mt-8">
+          <div className="flex flex-col items-center justify-center mt-8">
             <ClipLoader size={30} />
             <div>Please wait...</div>
           </div>
@@ -122,25 +122,31 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="flex flex-row justify-between px-4 py-4 items-center"
+      className="flex flex-col justify-between px-4 py-4 lg:items-center lg:flex-row"
     >
-      <label htmlFor="link_to_product" className="flex flex-col w-3/5 h-20">
+      <label
+        htmlFor="link_to_product"
+        className="flex flex-col h-20 lg:w-3/5 lg:px-2"
+      >
         Link to product
         <input
           id="link_to_product"
           type="text"
           {...formik.getFieldProps('link_to_product')}
-          className="py-2 border border-gray-300 px-4 rounded-lg"
+          className="px-4 py-2 border border-gray-300 rounded-lg"
         />
         {formik.touched.link_to_product && formik.errors.link_to_product ? (
-          <div className="text-red-600 text-xs normal-case font-normal mt-1 ml-1">
+          <div className="mt-1 ml-1 text-xs font-normal text-red-600 normal-case">
             {formik.errors.link_to_product}
           </div>
         ) : null}
       </label>
-      <label htmlFor="link_to_product" className="flex flex-col h-20">
+      <label
+        htmlFor="link_to_product"
+        className="flex flex-col h-20 mt-4 lg:px-2 lg:mt-0"
+      >
         Expect price
-        <div className="flex flex-row items-center relative">
+        <div className="relative flex flex-row items-center">
           <input
             id="link_to_product"
             type="text"
@@ -156,19 +162,19 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
                 formik.setFieldValue('expected_price', value);
               }
             }}
-            className="py-2 border border-gray-300 px-4 rounded-lg w-full"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
           />
-          <div className="text-gray-500 right-2 absolute">VND</div>
+          <div className="absolute text-gray-500 right-2">VND</div>
         </div>
         {formik.touched.expected_price && formik.errors.expected_price ? (
-          <div className="text-red-600 text-xs normal-case font-normal mt-1 ml-1">
+          <div className="mt-1 ml-1 text-xs font-normal text-red-600 normal-case">
             {formik.errors.expected_price}
           </div>
         ) : null}
       </label>
       <button
         type="submit"
-        className="uppercase text-white font-semibold bg-gray-700 px-4 py-3 rounded-lg hover:bg-gray-500 hover:border-4 focus:outline-none"
+        className="px-4 py-3 mt-4 font-medium text-white uppercase bg-gray-700 rounded-lg h-42 lg:mt-0 hover:bg-gray-500 hover:border-4 focus:outline-none"
       >
         Start Tracking
       </button>

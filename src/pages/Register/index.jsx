@@ -203,10 +203,12 @@ const RegisterFormBase = (props) => {
       >
         Register
       </button>
-      <div className="mt-2">
-        Already have an account?{' '}
-        <Link to="/login" className="text-blue-500 hover:underline">
+      <div className="flex justify-between mt-2 text-sm underline uppercase">
+        <Link to="/login" className="hover:text-blue-500">
           Login now
+        </Link>
+        <Link to={ROUTES.RESEND_ACTIVATION} className=" hover:text-blue-500">
+          Resend activation email
         </Link>
       </div>
     </form>
