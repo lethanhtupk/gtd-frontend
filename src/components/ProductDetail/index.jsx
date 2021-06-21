@@ -26,45 +26,45 @@ const ProductDetail = ({ match }) => {
   return (
     <>
       {loading ? (
-        <div className="w-full h-full flex flex-row justify-center items-center">
+        <div className="flex flex-row items-center justify-center w-full h-full">
           <ClipLoader size={50} />
         </div>
       ) : (
-        <div className="w-full flex flex-row justify-center">
-          <div className="mt-12 w-4/5">
-            <div className="product-overview grid grid-cols-3">
-              <div className="image">
+        <div className="flex flex-row justify-center w-full">
+          <div className="flex flex-col items-center w-screen mt-12 md:w-4/5">
+            <div className="grid grid-cols-1 md:grid-cols-3 product-overview justify-items-center">
+              <div className="w-11/12 item image md:w-auto">
                 <img src={productData.images[0]?.base_url} alt="product" />
               </div>
-              <div className="overview col-span-2 bg-white ml-2 px-4 py-4">
-                <p className="text-gray-600 text-sm flex">
+              <div className="w-11/12 col-span-2 px-4 py-4 mt-5 bg-white md:ml-2 overview md:mt-0 md:w-full">
+                <p className="flex text-sm text-gray-600">
                   Brand:{' '}
-                  <p className="text-blue-500 ml-1">{` ${productData.brand?.name}`}</p>
+                  <p className="ml-1 text-blue-500">{` ${productData.brand?.name}`}</p>
                 </p>
-                <p className="font-light text-xl">{productData.name}</p>
-                <div className="rating-section mt-4 flex flex-row">
+                <p className="text-xl font-light">{productData.name}</p>
+                <div className="flex flex-row mt-4 rating-section">
                   <Rating rate={productData.rating_average} />
                 </div>
-                <div className="price-section flex flex-row items-center mt-8">
+                <div className="flex flex-row items-center mt-8 price-section">
                   <p className="text-2xl font-bold">
                     {numberWithCommas(productData.price)} đ
                   </p>
-                  <div className="discount-section ml-4">
-                    <div className="flex-row flex">
-                      <p className="line-through text-xs">
+                  <div className="ml-4 discount-section">
+                    <div className="flex flex-row">
+                      <p className="text-xs line-through">
                         {numberWithCommas(productData.list_price)} đ
                       </p>
-                      <p className="line-through text-xs ml-2">{`${productData.discount_rate}%`}</p>
+                      <p className="ml-2 text-xs line-through">{`${productData.discount_rate}%`}</p>
                     </div>
                   </div>
                 </div>
-                <div className="button-section mt-16 flex flex-row items-center">
+                <div className="flex flex-row items-center mt-16 button-section">
                   <button
                     type="button"
                     onClick={() =>
                       window.open(`https://tiki.vn/${productData.url_path}`)
                     }
-                    className="text-lg font-semibold py-2 px-8 bg-yellow-300 hover:bg-yellow-400 rounded-lg"
+                    className="px-8 py-2 text-lg font-semibold bg-yellow-300 rounded-lg hover:bg-yellow-400"
                   >
                     View at Tiki
                   </button>
@@ -84,7 +84,7 @@ const ProductDetail = ({ match }) => {
                 </div>
               </div>
             </div>
-            <div className="product-description mt-8">
+            <div className="w-11/12 mt-8 product-description md:w-full">
               <ShowDescription
                 showAll={showAll}
                 setShowAll={setShowAll}
@@ -104,16 +104,16 @@ const ProductDetail = ({ match }) => {
 export const ShowDescription = ({ showAll, setShowAll, description }) => {
   return (
     <>
-      <p className="uppercase text-lg text-black mb-4">Product description</p>
-      <div className="bg-white px-8 py-4">
+      <p className="mb-4 text-lg text-black uppercase">Product description</p>
+      <div className="px-8 py-4 bg-white">
         {showAll ? (
           <>
             <div dangerouslySetInnerHTML={{ __html: description }} />
-            <div className="w-full flex flex-row justify-center mt-4">
+            <div className="flex flex-row justify-center w-full mt-4">
               <button
                 type="button"
                 onClick={() => setShowAll(false)}
-                className="border border-blue-500 text-blue-500 rounded-lg px-8 py-2 hover:text-white hover:bg-blue-500 focus:outline-none"
+                className="px-8 py-2 text-blue-500 border border-blue-500 rounded-lg hover:text-white hover:bg-blue-500 focus:outline-none"
               >
                 Show less
               </button>
@@ -124,11 +124,11 @@ export const ShowDescription = ({ showAll, setShowAll, description }) => {
             <div
               dangerouslySetInnerHTML={{ __html: truncate(description, 800) }}
             />
-            <div className="w-full flex flex-row justify-center mt-4">
+            <div className="flex flex-row justify-center w-full mt-4">
               <button
                 type="button"
                 onClick={() => setShowAll(true)}
-                className="border border-blue-500 text-blue-500 rounded-lg px-8 py-2 hover:text-white hover:bg-blue-500 focus:outline-none"
+                className="px-8 py-2 text-blue-500 border border-blue-500 rounded-lg hover:text-white hover:bg-blue-500 focus:outline-none"
               >
                 Watch more content
               </button>
