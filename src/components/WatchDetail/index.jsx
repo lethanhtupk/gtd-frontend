@@ -41,13 +41,13 @@ const WatchDetail = ({ match }) => {
   return (
     <>
       {loading ? (
-        <div className="w-full h-full flex flex-row justify-center items-center">
+        <div className="flex flex-row items-center justify-center w-full h-full">
           <ClipLoader size={50} />
         </div>
       ) : (
         <>
           {error ? (
-            <div className="flex justify-center items-center text-red-500 text-3xl">
+            <div className="flex items-center justify-center text-3xl text-red-500">
               {error.errors.detail}
             </div>
           ) : (
@@ -56,12 +56,12 @@ const WatchDetail = ({ match }) => {
                 openDelete ? 'filter blur-sm grayscale' : null
               }`}
             >
-              <div className="mt-12 w-4/5">
-                <div className="product-overview grid grid-cols-3">
+              <div className="w-4/5 mt-12">
+                <div className="grid grid-cols-3 product-overview">
                   <div className="image">
                     <img src={productData.images[0]?.base_url} alt="product" />
                   </div>
-                  <div className="overview col-span-2 bg-white ml-2 px-4 py-4 relative">
+                  <div className="relative col-span-2 px-4 py-4 ml-2 bg-white overview">
                     {openModal ? (
                       <div className="absolute right-8 top-12 min-w-1/3">
                         <EditWatchModal
@@ -73,43 +73,45 @@ const WatchDetail = ({ match }) => {
                       </div>
                     ) : null}
                     <div className="flex flex-row justify-between">
-                      <div className="text-gray-600 text-sm flex">
+                      <div className="flex text-sm text-gray-600">
                         Brand:{' '}
-                        <p className="text-blue-500 ml-1 cursor-pointer hover:underline">{` ${productData.brand?.name}`}</p>
+                        <p className="ml-1 text-blue-500 cursor-pointer hover:underline">{` ${
+                          productData.brand?.name ?? 'Unknown'
+                        }`}</p>
                       </div>
-                      <div className="text-gray-500 w-1/2 right-0 flex flex-row justify-end">
+                      <div className="right-0 flex flex-row justify-end w-1/2 text-gray-500">
                         <div
-                          className="mr-2 hover:text-black cursor-pointer"
+                          className="mr-2 cursor-pointer hover:text-black"
                           onClick={() => setOpenDelete(!openDelete)}
                         >
                           <DeleteIcon />
                         </div>
                         <div
-                          className="hover:text-black cursor-pointer"
+                          className="cursor-pointer hover:text-black"
                           onClick={() => setOpenModal(!openModal)}
                         >
                           <PenIcon />
                         </div>
                       </div>
                     </div>
-                    <p className="font-light text-xl">{productData.name}</p>
-                    <div className="rating-section mt-4 flex flex-row">
+                    <p className="text-xl font-light">{productData.name}</p>
+                    <div className="flex flex-row mt-4 rating-section">
                       <Rating rate={productData.rating_average} />
                     </div>
-                    <div className="price-section flex flex-row items-center mt-8">
+                    <div className="flex flex-row items-center mt-8 price-section">
                       <p className="text-2xl font-bold">
                         {numberWithCommas(productData.price)} đ
                       </p>
-                      <div className="discount-section ml-4">
-                        <div className="flex-row flex">
-                          <p className="line-through text-xs">
+                      <div className="ml-4 discount-section">
+                        <div className="flex flex-row">
+                          <p className="text-xs line-through">
                             {numberWithCommas(productData.list_price)} đ
                           </p>
-                          <p className="line-through text-xs ml-2">{`${productData.discount_rate}%`}</p>
+                          <p className="ml-2 text-xs line-through">{`${productData.discount_rate}%`}</p>
                         </div>
                       </div>
                     </div>
-                    <div className="watch-section mt-4">
+                    <div className="mt-4 watch-section">
                       <div className="flex flex-row">
                         <p>Expected price:&nbsp;</p>
                         <p className="">
@@ -144,13 +146,13 @@ const WatchDetail = ({ match }) => {
                         </p>
                       </div>
                     </div>
-                    <div className="button-section mt-16 flex flex-row items-center">
+                    <div className="flex flex-row items-center mt-16 button-section">
                       <button
                         type="button"
                         onClick={() =>
                           window.open(`https://tiki.vn/${productData.url_path}`)
                         }
-                        className="text-lg font-semibold py-2 px-8 bg-yellow-300 hover:bg-yellow-400 rounded-lg"
+                        className="px-8 py-2 text-lg font-semibold bg-yellow-300 rounded-lg hover:bg-yellow-400"
                       >
                         View at Tiki
                       </button>

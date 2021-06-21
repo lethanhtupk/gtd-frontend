@@ -58,7 +58,7 @@ const ProductDetail = ({ match }) => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-row items-center mt-16 button-section">
+                <div className="relative flex flex-row items-center mt-16 button-section">
                   <button
                     type="button"
                     onClick={() =>

@@ -37,8 +37,8 @@ const DeleteConfirmModal = (props) => {
   };
 
   return (
-    <div className="w-96 h-auto border border-gray-500 bg-white absolute inset-1/3 rounded-lg">
-      <div className="close-icon flex flex-row justify-end px-2 py-2 cursor-pointer">
+    <div className="absolute h-auto bg-white border border-gray-500 rounded-lg w-96 inset-1/3">
+      <div className="flex flex-row justify-end px-2 py-2 cursor-pointer close-icon">
         <div onClick={() => setVisible(false)}>
           <CloseIcon />
         </div>
@@ -51,28 +51,28 @@ const DeleteConfirmModal = (props) => {
           </>
         ) : (
           <>
-            <div className="text-red-500 w-full flex flex-row justify-center">
+            <div className="flex flex-row justify-center w-full text-red-500">
               <ConfirmDeleteIcon />
             </div>
             {error ? (
               <>
-                <div className="title text-red-500 text-2xl mt-5">
+                <div className="mt-5 text-2xl text-red-500 title">
                   Delete watch failed
                 </div>
-                <div className="text-red-400 text-center">
+                <div className="text-center text-red-400">
                   {error.errors.detail}
                 </div>
               </>
             ) : (
               <>
-                <div className="title text-gray-600 text-2xl mt-5">
+                <div className="text-2xl text-gray-600 title">
                   Are you sure?
                 </div>
-                <div className="text-gray-500 text-center">
+                <div className="text-center text-gray-500">
                   Do you really want to delete these records? This process
                   cannot be undone.
                 </div>
-                <div className="button mt-4">
+                <div className="mt-4 button">
                   <button
                     type="button"
                     className="px-8 py-2 text-white bg-gray-500 rounded-sm hover:bg-gray-600 focus:outline-none"
@@ -83,7 +83,7 @@ const DeleteConfirmModal = (props) => {
                   <button
                     type="button"
                     onClick={() => onDeleteHandler()}
-                    className="px-8 py-2 text-white bg-red-500 rounded-sm ml-2 hover:bg-red-600 focus:outline-none"
+                    className="px-8 py-2 ml-2 text-white bg-red-500 rounded-sm hover:bg-red-600 focus:outline-none"
                   >
                     Delete
                   </button>
