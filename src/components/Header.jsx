@@ -10,10 +10,11 @@ import { MenuIcon } from './Icons';
 const Header = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
   return (
-    <div className="relative top-0 left-0 flex flex-col justify-between w-screen bg-gray-900 md:bg-gray-600 md:items-center md:flex-row md:h-16 md:px-8 header">
-      <div className="flex flex-row items-center justify-between px-4 py-2 md:items-center md:flex-row">
+    <div className="relative top-0 left-0 flex flex-col justify-between w-screen bg-gray-900 md:bg-gray-600 md:items-center md:flex-row md:h-16 md:px-4 header">
+      <div className="flex flex-row items-center justify-between px-4 py-2 md:px-0 md:items-center md:flex-row">
         <Link
           to={ROUTES.HOME}
+          onClick={() => setOpenNavigation(false)}
           className="flex flex-col justify-center text-white logo"
         >
           <div style={{ fontFamily: 'Antonio' }}>
@@ -52,6 +53,8 @@ const Header = () => {
               <NavigationAuth
                 setAuthUser={authUser[1]}
                 authUser={authUser[0]}
+                openNavigation={openNavigation}
+                setOpenNavigation={setOpenNavigation}
               />
             ) : (
               <NavigationNonAuth setOpenNavigation={setOpenNavigation} />
