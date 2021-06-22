@@ -17,7 +17,7 @@ const EditProfile = ({ authUser, setActive }) => {
       <header>
         <title>Edit profile - GTD</title>
       </header>
-      <div className="flex flex-col w-9/12 h-full px-8 py-16 text-black bg-white">
+      <div className="flex flex-col h-full px-8 py-16 text-black bg-white">
         <div className="mb-4 text-4xl font-black">Edit Profile</div>
         {loading ? (
           <div className="flex flex-col items-center">

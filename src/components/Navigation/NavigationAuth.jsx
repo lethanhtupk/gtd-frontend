@@ -100,21 +100,30 @@ const NavigationAuth = ({
         </div>
         <Link
           to={ROUTES.ACCOUNT_OVERVIEW}
-          onClick={() => setOpenNavigation(false)}
+          onClick={() => {
+            setOpenNavigation(false);
+            setTimeout(() => location.reload(), 1);
+          }}
           className="py-2 mt-5 text-white font-base md:hidden"
         >
           Account overview
         </Link>
         <Link
           to={ROUTES.EDIT_PROFILE}
-          onClick={() => setOpenNavigation(false)}
+          onClick={() => {
+            setOpenNavigation(false);
+            setTimeout(() => location.reload(), 1);
+          }}
           className="py-2 text-white font-base md:hidden"
         >
           Edit profile
         </Link>
         <Link
           to={ROUTES.CHANGE_PASSWORD}
-          onClick={() => setOpenNavigation(false)}
+          onClick={() => {
+            setOpenNavigation(false);
+            setTimeout(() => location.reload(), 1);
+          }}
           className="py-2 text-white font-base md:hidden"
         >
           Change password

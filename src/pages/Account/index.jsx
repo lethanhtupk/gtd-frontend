@@ -21,38 +21,45 @@ const AccountPage = (props) => {
   );
   return (
     <>
-      <div className="account-page w-full h-full flex justify-center">
+      <div className="flex justify-center w-full h-full account-page">
         <div className="flex w-4/5 mt-8">
           <Router>
-            <SideBar
-              authUser={authUser}
-              active={active}
-              setActive={setActive}
-            />
-            <Switch>
-              <Route
-                path={ROUTES.ACCOUNT_OVERVIEW}
-                exact
-                component={() => (
-                  <AccountOverview authUser={authUser} setActive={setActive} />
-                )}
+            <div className="hidden w-3/12 bg-gray-600 md:block">
+              <SideBar
+                authUser={authUser}
+                active={active}
+                setActive={setActive}
               />
-              <Route
-                path={ROUTES.EDIT_PROFILE}
-                exact
-                component={() => (
-                  <EditProfile authUser={authUser} setActive={setActive} />
-                )}
-              />
-              <Route
-                path={ROUTES.CHANGE_PASSWORD}
-                exact
-                component={() => (
-                  <ChangePassword authUser={authUser} setActive={setActive} />
-                )}
-              />
-              <AccountOverview authUser={authUser} setActive={setActive} />
-            </Switch>
+            </div>
+            <div className="w-full md:w-9/12">
+              <Switch>
+                <Route
+                  path={ROUTES.ACCOUNT_OVERVIEW}
+                  exact
+                  component={() => (
+                    <AccountOverview
+                      authUser={authUser}
+                      setActive={setActive}
+                    />
+                  )}
+                />
+                <Route
+                  path={ROUTES.EDIT_PROFILE}
+                  exact
+                  component={() => (
+                    <EditProfile authUser={authUser} setActive={setActive} />
+                  )}
+                />
+                <Route
+                  path={ROUTES.CHANGE_PASSWORD}
+                  exact
+                  component={() => (
+                    <ChangePassword authUser={authUser} setActive={setActive} />
+                  )}
+                />
+                <AccountOverview authUser={authUser} setActive={setActive} />
+              </Switch>
+            </div>
           </Router>
         </div>
       </div>

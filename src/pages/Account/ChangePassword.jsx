@@ -16,8 +16,8 @@ const ChangePassword = ({ authUser, setActive }) => {
       <header>
         <title>Change password - GTD</title>
       </header>
-      <div className="w-9/12 h-full bg-white flex flex-col text-black px-8 py-16">
-        <div className="text-4xl font-black mb-4">Change password</div>
+      <div className="flex flex-col h-full px-8 py-16 text-black bg-white">
+        <div className="mb-4 text-4xl font-black">Change password</div>
         {error ? (
           <FailedAlert message={message} invisible={loading} />
         ) : (
@@ -77,17 +77,17 @@ const ChangePasswordForm = (props) => {
     <form onSubmit={formik.handleSubmit} className="flex flex-col w-full">
       <label
         htmlFor="current_password"
-        className="flex flex-col font-semibold mt-8"
+        className="flex flex-col mt-8 font-semibold"
       >
         Current password
         <input
           id="current_password"
           type="password"
-          className="py-2 border border-gray-300 px-4 rounded-lg"
+          className="px-4 py-2 border border-gray-300 rounded-lg"
           {...formik.getFieldProps('current_password')}
         />
         {formik.touched.current_password && formik.errors.current_password ? (
-          <div className="text-red-600 text-xs normal-case font-normal mt-1">
+          <div className="mt-1 text-xs font-normal text-red-600 normal-case">
             {formik.errors.current_password}
           </div>
         ) : null}
@@ -95,17 +95,17 @@ const ChangePasswordForm = (props) => {
 
       <label
         htmlFor="new_password"
-        className="flex flex-col font-semibold mt-8"
+        className="flex flex-col mt-8 font-semibold"
       >
         New password
         <input
           id="new_password"
           type="password"
-          className="py-2 border border-gray-300 px-4 rounded-lg"
+          className="px-4 py-2 border border-gray-300 rounded-lg"
           {...formik.getFieldProps('new_password')}
         />
         {formik.touched.new_password && formik.errors.new_password ? (
-          <div className="text-red-600 text-xs normal-case font-normal mt-1">
+          <div className="mt-1 text-xs font-normal text-red-600 normal-case">
             {formik.errors.new_password}
           </div>
         ) : null}
@@ -113,37 +113,35 @@ const ChangePasswordForm = (props) => {
 
       <label
         htmlFor="re_new_password"
-        className="flex flex-col font-semibold mt-8"
+        className="flex flex-col mt-8 font-semibold"
       >
         Repeat password
         <input
           id="re_new_password"
           type="password"
-          className="py-2 border border-gray-300 px-4 rounded-lg"
+          className="px-4 py-2 border border-gray-300 rounded-lg"
           {...formik.getFieldProps('re_new_password')}
         />
         {formik.touched.re_new_password && formik.errors.re_new_password ? (
-          <div className="text-red-600 text-xs normal-case font-normal mt-1">
+          <div className="mt-1 text-xs font-normal text-red-600 normal-case">
             {formik.errors.re_new_password}
           </div>
         ) : null}
       </label>
 
-      <div className="flex flex-row justify-end">
+      <div className="flex flex-col md:justify-end md:flex-row">
         <Link to={ROUTES.ACCOUNT_OVERVIEW}>
           <button
             type="button"
             onClick={() => setActive(0)}
-            className="uppercase text-gray-500 rounded-full mt-8 w-1/5 font-medium hover:border-black hover:border-2 hover:text-black
-              px-4 py-2 focus:outline-none"
+            className="w-1/5 px-4 py-2 mt-4 font-medium text-gray-500 uppercase rounded-full md:mt-8 hover:border-black hover:border-2 hover:text-black focus:outline-none"
           >
             Cancel
           </button>
         </Link>
         <button
           type="submit"
-          className="uppercase text-gray-500 hover:text-black bg-green-400 rounded-full mt-8 min:w-1/5 font-medium
-              px-4 py-2 focus:outline-none"
+          className="px-4 py-2 mt-4 font-medium text-gray-500 uppercase bg-green-400 rounded-full md:mt-8 hover:text-black min:w-1/5 focus:outline-none"
         >
           Set new password
         </button>

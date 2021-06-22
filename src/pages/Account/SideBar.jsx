@@ -9,11 +9,11 @@ const SideBar = ({ authUser, active, setActive }) => {
   };
 
   return (
-    <div className="w-3/12 bg-gray-600 flex flex-col py-4 text-white">
+    <div className="flex flex-col py-4 text-white">
       <div className="flex flex-col items-center mb-8">
         <img
           src={authUser[0]?.photo_url ? authUser[0]?.photo_url : defaultAvatar}
-          className="w-20 h-20 rounded-full object-cover"
+          className="object-cover w-20 h-20 rounded-full"
           alt="avatar"
           onError={addDefaultSrc}
         />
@@ -26,7 +26,7 @@ const SideBar = ({ authUser, active, setActive }) => {
             className={active === index ? 'border-l-8 border-green-400' : ''}
             onClick={() => setActive(index)}
           >
-            <div className="py-4 px-4 border-t border-gray-500 border-b items-center hover:bg-gray-700 cursor-pointer">
+            <div className="items-center px-4 py-4 border-t border-b border-gray-500 cursor-pointer hover:bg-gray-700">
               <Link to={item.path} className="flex flex-row">
                 <div
                   className={active === index ? 'text-white' : 'text-gray-400'}
