@@ -118,7 +118,7 @@ export const ResetPasswordConfirmFormBase = (props) => {
         New password*
         <input
           id="new_password"
-          type="text"
+          type="password"
           className="px-4 py-2 border border-gray-300"
           {...formik.getFieldProps('new_password')}
         />
@@ -136,7 +136,7 @@ export const ResetPasswordConfirmFormBase = (props) => {
         Confirm new password*
         <input
           id="re_new_password"
-          type="text"
+          type="password"
           className="px-4 py-2 border border-gray-300"
           {...formik.getFieldProps('re_new_password')}
         />
