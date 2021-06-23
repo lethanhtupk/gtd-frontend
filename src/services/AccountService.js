@@ -51,4 +51,16 @@ export default class AccountServices {
   static async resendActivation(data) {
     return await BaseService.post('auth/users/resend_activation/', data, {});
   }
+
+  static async resetPassword(data) {
+    return await BaseService.post('auth/users/reset_password/', data, {});
+  }
+
+  static async resetPasswordConfirm(data) {
+    return await BaseService.post(
+      'auth/users/reset_password_confirm/',
+      data,
+      {}
+    );
+  }
 }

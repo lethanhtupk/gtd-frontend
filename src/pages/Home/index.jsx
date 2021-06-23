@@ -34,12 +34,9 @@ const HomePage = () => {
               </div>
               <div className="flex justify-end w-1/4">
                 <Link to={ROUTES.POPULAR_PRODUCTS}>
-                  <a
-                    href="/popular-product"
-                    className="text-blue-500 hover:text-blue-600 hover:underline"
-                  >
+                  <p className="text-blue-500 hover:text-blue-600 hover:underline">
                     View all
-                  </a>
+                  </p>
                 </Link>
               </div>
             </div>
@@ -63,12 +60,9 @@ const HomePage = () => {
               </div>
               <div className="flex justify-end w-1/4">
                 <Link to={ROUTES.TOP_DROPS_PRODUCT}>
-                  <a
-                    href="/top-drop-down"
-                    className="text-blue-500 hover:text-blue-600 hover:underline"
-                  >
+                  <p className="text-blue-500 hover:text-blue-600 hover:underline">
                     View all
-                  </a>
+                  </p>
                 </Link>
               </div>
             </div>

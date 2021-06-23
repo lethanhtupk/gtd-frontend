@@ -19,6 +19,7 @@ import { withAuthentication } from './components/Session';
 import ResendActivation from './pages/ResendActivation';
 import SearchResult from './components/SearchResult';
 import ForgetPassword from './pages/ForgetPassword';
+import ResetPasswordConfirm from './pages/ResetPasswordConfirm';
 
 dotenv.config();
 
@@ -40,6 +41,10 @@ function App() {
           <Route
             path={`${ROUTES.ACTIVATE}/:uid/:token`}
             component={ActivateAccount}
+          />
+          <Route
+            path={`${ROUTES.RESET_PASSWORD_CONFIRM}/:uid/:token`}
+            component={ResetPasswordConfirm}
           />
           <Route
             path={`${ROUTES.RESEND_ACTIVATION}`}

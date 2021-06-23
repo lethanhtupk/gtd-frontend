@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import ClipLoader from 'react-spinners/ClipLoader';
 import AccountServices from '../../services/AccountService';
 import * as ROUTES from '../../constants/routes';
 import { FailedAlert, SuccessAlert } from '../../components/Alert';
@@ -10,7 +11,7 @@ import { LOCAL_STORAGE } from '../../utils/Constant';
 const ResendActivation = (props) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const accessToken = localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN);
   if (accessToken && accessToken !== 'undefined') {
@@ -24,11 +25,27 @@ const ResendActivation = (props) => {
           Resend activation email
         </div>
 
-        {error ? (
-          <FailedAlert message={message} invisible={loading} />
+        {loading ? (
+          <div className="flex flex-col items-center">
+            <ClipLoader size={30} />
+            <div>Please wait...</div>
+          </div>
         ) : (
-          <SuccessAlert message={message} invisible={loading} />
+          <>
+            {error ? (
+              <FailedAlert
+                message={message}
+                invisible={loading || message === ''}
+              />
+            ) : (
+              <SuccessAlert
+                message={message}
+                invisible={loading || message === ''}
+              />
+            )}
+          </>
         )}
+
         <ResendActivationForm
           setMessage={setMessage}
           setError={setError}
@@ -59,9 +76,9 @@ export const ResendActivationFormBase = (props) => {
         .required('This field is required'),
     }),
     onSubmit: (values) => {
+      setLoading(true);
       resendActivation(values)
         .then((res) => {
-          console.log(res);
           setMessage(
             'We have been send you a new activation email, please check you inbox'
           );
@@ -69,7 +86,6 @@ export const ResendActivationFormBase = (props) => {
           setError();
         })
         .catch((e) => {
-          console.log(e);
           setError(true);
           setLoading(false);
           setMessage('Your account has been activated or incorrect email');
@@ -80,7 +96,7 @@ export const ResendActivationFormBase = (props) => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="flex flex-col sm:w-2/3 md:w-1/2 lg:w-1/3"
+      className="flex flex-col w-4/5 sm:w-2/3 md:w-1/2 lg:w-1/3"
     >
       <label htmlFor="email" className="flex flex-col font-medium uppercase">
         Email*

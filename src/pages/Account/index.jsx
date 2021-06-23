@@ -12,6 +12,8 @@ const AccountPage = (props) => {
   const { authUser } = props;
   const currentPath = window.location.pathname;
 
+  console.log(currentPath);
+
   const currentActive = sideBarData.filter(
     (item, index) => item.path === currentPath
   );
@@ -19,24 +21,25 @@ const AccountPage = (props) => {
   const [active, setActive] = useState(
     currentActive.length > 0 ? currentActive[0].key : 0
   );
+
   return (
     <>
       <div className="flex justify-center w-full h-full account-page">
-        <div className="flex w-4/5 mt-8">
+        <div className="flex w-5/6 mt-8 md:w-4/5">
+          <div className="hidden w-3/12 bg-gray-600 md:block">
+            <SideBar
+              authUser={authUser}
+              active={active}
+              setActive={setActive}
+            />
+          </div>
           <Router>
-            <div className="hidden w-3/12 bg-gray-600 md:block">
-              <SideBar
-                authUser={authUser}
-                active={active}
-                setActive={setActive}
-              />
-            </div>
             <div className="w-full md:w-9/12">
               <Switch>
                 <Route
                   path={ROUTES.ACCOUNT_OVERVIEW}
                   exact
-                  component={() => (
+                  render={(props) => (
                     <AccountOverview
                       authUser={authUser}
                       setActive={setActive}
@@ -46,14 +49,14 @@ const AccountPage = (props) => {
                 <Route
                   path={ROUTES.EDIT_PROFILE}
                   exact
-                  component={() => (
+                  render={() => (
                     <EditProfile authUser={authUser} setActive={setActive} />
                   )}
                 />
                 <Route
                   path={ROUTES.CHANGE_PASSWORD}
                   exact
-                  component={() => (
+                  render={() => (
                     <ChangePassword authUser={authUser} setActive={setActive} />
                   )}
                 />

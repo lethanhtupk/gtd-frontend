@@ -148,7 +148,7 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
         Expect price
         <div className="relative flex flex-row items-center">
           <input
-            id="link_to_product"
+            id="expected_price"
             type="text"
             {...formik.getFieldProps('expected_price')}
             onChange={(e) => {

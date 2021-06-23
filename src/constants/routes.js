@@ -15,3 +15,4 @@ export const ACTIVATE = '/activate';
 export const RESEND_ACTIVATION = '/resend-activation';
 export const SEARCH_RESULT = '/search-result';
 export const FORGET_PASSWORD = '/reset-password';
+export const RESET_PASSWORD_CONFIRM = '/password-reset';

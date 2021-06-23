@@ -115,7 +115,7 @@ const RegisterFormBase = (props) => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="flex flex-col mt-2 sm:w-2/3 md:w-1/2 lg:w-1/3"
+      className="flex flex-col w-4/5 mt-2 sm:w-2/3 md:w-1/2 lg:w-1/3"
     >
       <label htmlFor="email" className="flex flex-col font-semibold uppercase">
         Email*
@@ -203,7 +203,7 @@ const RegisterFormBase = (props) => {
       >
         Register
       </button>
-      <div className="flex justify-between mt-2 text-sm underline uppercase">
+      <div className="flex flex-col justify-between mt-2 text-sm underline uppercase md:flex-row">
         <Link to="/login" className="hover:text-blue-500">
           Login now
         </Link>

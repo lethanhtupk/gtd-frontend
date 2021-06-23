@@ -8,7 +8,7 @@ import * as ROUTES from '../../constants/routes';
 import { FailedAlert, SuccessAlert } from '../../components/Alert';
 import { LOCAL_STORAGE } from '../../utils/Constant';
 
-const ForgetPassword = (props) => {
+const ResetPasswordConfirm = (props) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ const ForgetPassword = (props) => {
     <>
       <div className="flex flex-col items-center mt-24">
         <div className="mb-4 text-2xl font-medium uppercase">
-          Reset your password
+          Set your new password
         </div>
 
         {loading ? (
@@ -46,49 +46,62 @@ const ForgetPassword = (props) => {
           </>
         )}
 
-        <ResetPasswordForm
+        <ResetPasswordConfirmForm
           setMessage={setMessage}
           setError={setError}
           setLoading={setLoading}
+          params={props.match.params}
         />
       </div>
       <header>
-        <title>Reset password - GTD </title>
+        <title>Set your new password - GTD </title>
       </header>
     </>
   );
 };
 
-export const ResetPasswordFormBase = (props) => {
+export const ResetPasswordConfirmFormBase = (props) => {
   const { setMessage, setError, setLoading } = props;
+  const validate = (values) => {
+    const errors = {};
+    if (values.new_password !== values.re_new_password) {
+      errors.re_new_password =
+        'Confirm password must to be matched with password';
+    }
+    return errors;
+  };
 
-  const resetPassword = async (data) => {
-    return await AccountServices.resetPassword(data);
+  const resetPasswordConfirm = async (data) => {
+    return await AccountServices.resetPasswordConfirm(data);
   };
 
   const formik = useFormik({
     initialValues: {
-      email: '',
+      new_password: '',
+      re_new_password: '',
     },
+    validate,
     validationSchema: Yup.object({
-      email: Yup.string()
-        .email('Invalid email address')
-        .required('This field is required'),
+      new_password: Yup.string().required('This field is required'),
+      re_new_password: Yup.string().required('This field is required'),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { setFieldError }) => {
+      values = { ...values, ...props.params };
       setLoading(true);
-      resetPassword(values)
+      resetPasswordConfirm(values)
         .then((res) => {
-          setMessage(
-            'We have been send you an email to reset your password, please check you inbox'
-          );
+          setMessage('Your password has been reset successfully');
           setLoading(false);
           setError();
         })
         .catch((e) => {
-          setError(true);
           setLoading(false);
-          setMessage('Cannot find your email on system');
+          if (e.code < 4000 && e.errors.new_password) {
+            setFieldError('new_password', e.errors.new_password[0]);
+          } else {
+            setError(true);
+            setMessage('Something went wrong, please try later');
+          }
         });
     },
   });
@@ -96,19 +109,40 @@ export const ResetPasswordFormBase = (props) => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="flex flex-col w-4/5 sm:w-2/3 md:w-1/2 lg:w-1/3"
+      className="flex flex-col w-4/5 mt-2 sm:w-2/3 md:w-1/2 lg:w-1/3"
     >
-      <label htmlFor="email" className="flex flex-col font-medium uppercase">
-        Email*
+      <label
+        htmlFor="new_password"
+        className="flex flex-col font-medium uppercase"
+      >
+        New password*
         <input
-          id="email"
+          id="new_password"
           type="text"
           className="px-4 py-2 border border-gray-300"
-          {...formik.getFieldProps('email')}
+          {...formik.getFieldProps('new_password')}
         />
-        {formik.touched.email && formik.errors.email ? (
+        {formik.touched.new_password && formik.errors.new_password ? (
           <div className="mt-1 text-xs font-normal text-red-600 normal-case">
-            {formik.errors.email}
+            {formik.errors.new_password}
+          </div>
+        ) : null}
+      </label>
+
+      <label
+        htmlFor="re_new_password"
+        className="flex flex-col mt-4 font-medium uppercase"
+      >
+        Confirm new password*
+        <input
+          id="re_new_password"
+          type="text"
+          className="px-4 py-2 border border-gray-300"
+          {...formik.getFieldProps('re_new_password')}
+        />
+        {formik.touched.re_new_password && formik.errors.re_new_password ? (
+          <div className="mt-1 text-xs font-normal text-red-600 normal-case">
+            {formik.errors.re_new_password}
           </div>
         ) : null}
       </label>
@@ -129,6 +163,8 @@ export const ResetPasswordFormBase = (props) => {
   );
 };
 
-export const ResetPasswordForm = withRouter(ResetPasswordFormBase);
+export const ResetPasswordConfirmForm = withRouter(
+  ResetPasswordConfirmFormBase
+);
 
-export default ForgetPassword;
+export default ResetPasswordConfirm;
