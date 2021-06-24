@@ -29,11 +29,11 @@ const ItemWatch = ({ watchData }) => {
   return (
     <>
       {loading ? (
-        <div className="w-full h-full flex flex-row justify-center items-center">
+        <div className="flex flex-row items-center justify-center w-full h-full">
           <ClipLoader size={30} />
         </div>
       ) : (
-        <div className="item-carousel border border-gray-500 bg-white">
+        <div className="bg-white border border-gray-500 item-carousel">
           <div className="image">
             <img
               src={productData.thumbnail_url}
@@ -41,20 +41,20 @@ const ItemWatch = ({ watchData }) => {
               className="w-full"
             />
           </div>
-          <div className="detail px-8 flex flex-col items-center bg-gray-100">
+          <div className="flex flex-col items-center px-8 bg-gray-100 detail">
             <Link to={`${ROUTES.WATCHES}/${watchData.id}`}>
-              <p className="title text-blue-500 text-lg hover:text-blue-600 hover:underline h-16">
+              <p className="h-16 text-lg text-blue-500 title hover:text-blue-600 hover:underline">
                 {truncate(productData.name, 36)}
               </p>
             </Link>
 
-            <p className="text-green-400 text-2xl mt-4">
+            <p className="mt-4 text-2xl text-green-400">
               {numberWithCommas(productData.price)} đ
             </p>
-            <p className="text-gray-500 text-sm mb-2">
+            <p className="mb-2 text-sm text-gray-500">
               Expected price: {numberWithCommas(watchData.expected_price)}
             </p>
-            <p className="text-gray-500 text-sm mb-2 flex flex-row">
+            <div className="flex flex-row mb-2 text-sm text-gray-500">
               Status:&nbsp;
               {watchData.status === 1 ? (
                 <div className="text-green-500">
@@ -72,7 +72,7 @@ const ItemWatch = ({ watchData }) => {
               >
                 {` ${displayWatchStatus(watchData.status)}`}
               </p>
-            </p>
+            </div>
           </div>
         </div>
       )}

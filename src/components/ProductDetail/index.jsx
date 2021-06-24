@@ -52,7 +52,7 @@ const ProductDetail = ({ match }) => {
             </div>
           ) : (
             <div className="flex flex-row justify-center w-full">
-              <div className="flex flex-col items-center w-screen mt-12 md:w-4/5">
+              <div className="flex flex-col items-center w-screen mt-12 mb-8 md:w-4/5 md:mb-0">
                 <div className="grid grid-cols-1 md:grid-cols-3 product-overview justify-items-center">
                   <div className="w-11/12 item image md:w-auto">
                     <img src={productData.images[0]?.base_url} alt="product" />

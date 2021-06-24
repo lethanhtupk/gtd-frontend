@@ -67,12 +67,12 @@ const WatchDetail = ({ match }) => {
                 openDelete ? 'filter blur-sm grayscale' : null
               }`}
             >
-              <div className="w-4/5 mt-12">
-                <div className="grid grid-cols-3 product-overview">
+              <div className="w-5/6 mt-12 mb-8 md:w-4/5 md:mb-0">
+                <div className="grid grid-cols-1 md:grid-cols-3 product-overview">
                   <div className="image">
                     <img src={productData.images[0]?.base_url} alt="product" />
                   </div>
-                  <div className="relative col-span-2 px-4 py-4 ml-2 bg-white overview">
+                  <div className="relative w-full col-span-2 px-4 py-4 mt-6 bg-white md:ml-2 overview md:mt-0">
                     {openModal ? (
                       <div className="absolute right-8 top-12 min-w-1/3">
                         <EditWatchModal
