@@ -56,7 +56,9 @@ function App() {
           />
           <Route path={`${ROUTES.SEARCH_RESULT}`} component={SearchResult} />
         </Switch>
-        <Footer />
+        <div className="hidden object-bottom md:block">
+          <Footer />
+        </div>
       </Router>
     </div>
   );

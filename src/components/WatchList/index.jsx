@@ -8,6 +8,7 @@ import { AuthUserContext } from '../Session';
 import withAuthorization from '../Session/withAuthorization';
 import ItemWatch from './ItemWatch';
 import { FailedAlert } from '../Alert';
+import { NoItem } from '../NoItem';
 
 const WatchtList = () => {
   const { authUser } = useContext(AuthUserContext);
@@ -41,13 +42,13 @@ const WatchtList = () => {
   return (
     <>
       {loading ? (
-        <div className="w-full h-full flex flex-row items-center justify-center">
+        <div className="flex flex-row items-center justify-center w-full h-full">
           <ClipLoader size={50} />
         </div>
       ) : (
         <>
           {error ? (
-            <div className="flex flex-row justify-center items-center">
+            <div className="flex flex-row items-center justify-center">
               <div className="flex flex-col items-center">
                 <FailedAlert message={message} />
                 <div className="flex mt-4 text-xl">
@@ -64,22 +65,8 @@ const WatchtList = () => {
           ) : (
             <>
               {watchList.length === 0 ? (
-                <div className="flex flex-row justify-center items-center text-2xl">
-                  <div className="flex flex-col items-center">
-                    <p>
-                      You do not have any watch yet, create a new watch to start
-                      tracking
-                    </p>
-                    <div className="flex mt-4 text-xl">
-                      <p>Back to&nbsp;</p>
-                      <Link
-                        to={ROUTES.HOME}
-                        className="text-blue-500 hover:underline"
-                      >
-                        home page
-                      </Link>
-                    </div>
-                  </div>
+                <div className="flex flex-row items-center justify-center py-32 rounded-2xl">
+                  <NoItem />
                 </div>
               ) : (
                 <>
@@ -87,7 +74,7 @@ const WatchtList = () => {
                     <div className="w-4/5">
                       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
                         {watchList.map((item, index) => (
-                          <div className="mr-2 mb-2" key={index}>
+                          <div className="mb-2 mr-2" key={index}>
                             <ItemWatch watchData={item} />
                           </div>
                         ))}

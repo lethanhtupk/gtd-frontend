@@ -49,6 +49,30 @@ const NavigationAuth = ({
           >
             Your Price Watches
           </Link>
+          {authUser.role === 2 && !authUser.seller ? (
+            <Link
+              to={ROUTES.CHANGE_PASSWORD}
+              onClick={() => {
+                setOpenNavigation(false);
+                setTimeout(() => location.reload(), 1);
+              }}
+              className="px-4 py-2 text-white font-base md:hidden"
+            >
+              Connect to a shop
+            </Link>
+          ) : null}
+          {authUser.role === 2 && authUser.seller ? (
+            <Link
+              to={ROUTES.CHANGE_PASSWORD}
+              onClick={() => {
+                setOpenNavigation(false);
+                setTimeout(() => location.reload(), 1);
+              }}
+              className="px-4 py-2 text-white font-base md:hidden"
+            >
+              Your shop
+            </Link>
+          ) : null}
           <a
             to={ROUTES.ACCOUNT}
             onClick={() => (window.location.href = ROUTES.ACCOUNT)}
@@ -163,6 +187,22 @@ const NavigationAuth = ({
           >
             Your Price Watches
           </Link>
+          {authUser.role === 2 && !authUser.seller ? (
+            <Link
+              to={ROUTES.WATCHES}
+              className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
+            >
+              Connect to a shop
+            </Link>
+          ) : null}
+          {authUser.role === 2 && authUser.seller ? (
+            <Link
+              to={ROUTES.WATCHES}
+              className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
+            >
+              Your shop
+            </Link>
+          ) : null}
           <a
             to={ROUTES.ACCOUNT}
             onClick={() => (window.location.href = ROUTES.ACCOUNT)}

@@ -12,8 +12,6 @@ const AccountPage = (props) => {
   const { authUser } = props;
   const currentPath = window.location.pathname;
 
-  console.log(currentPath);
-
   const currentActive = sideBarData.filter(
     (item, index) => item.path === currentPath
   );
@@ -26,20 +24,20 @@ const AccountPage = (props) => {
     <>
       <div className="flex justify-center w-full h-full account-page">
         <div className="flex w-5/6 mt-8 md:w-4/5">
-          <div className="hidden w-3/12 bg-gray-600 md:block">
-            <SideBar
-              authUser={authUser}
-              active={active}
-              setActive={setActive}
-            />
-          </div>
           <Router>
+            <div className="hidden w-3/12 bg-gray-600 md:block">
+              <SideBar
+                authUser={authUser}
+                active={active}
+                setActive={setActive}
+              />
+            </div>
             <div className="w-full md:w-9/12">
               <Switch>
                 <Route
                   path={ROUTES.ACCOUNT_OVERVIEW}
                   exact
-                  render={(props) => (
+                  component={() => (
                     <AccountOverview
                       authUser={authUser}
                       setActive={setActive}
@@ -49,14 +47,14 @@ const AccountPage = (props) => {
                 <Route
                   path={ROUTES.EDIT_PROFILE}
                   exact
-                  render={() => (
+                  component={() => (
                     <EditProfile authUser={authUser} setActive={setActive} />
                   )}
                 />
                 <Route
                   path={ROUTES.CHANGE_PASSWORD}
                   exact
-                  render={() => (
+                  component={() => (
                     <ChangePassword authUser={authUser} setActive={setActive} />
                   )}
                 />

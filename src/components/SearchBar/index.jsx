@@ -49,7 +49,7 @@ const SearchBar = (props) => {
       <button
         type="submit"
         onClick={onSubmit}
-        className="px-4 py-2 text-white bg-gray-500 rounded-lg md:hidden border-lg focus:outline-none hover:bg-gray-400"
+        className="px-4 py-2 ml-2 text-white bg-gray-500 rounded-lg md:hidden border-lg focus:outline-none hover:bg-gray-400"
       >
         Search
       </button>
