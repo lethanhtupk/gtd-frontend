@@ -37,7 +37,7 @@ const DeleteConfirmModal = (props) => {
   };
 
   return (
-    <div className="absolute h-auto bg-white border border-gray-500 rounded-lg w-96 inset-1/3">
+    <div className="absolute flex flex-col w-5/6 bg-white border border-gray-500 rounded-lg h-72 md:h-auto inset-y-1/3 md:w-96 md:inset-1/3">
       <div className="flex flex-row justify-end px-2 py-2 cursor-pointer close-icon">
         <div onClick={() => setVisible(false)}>
           <CloseIcon />

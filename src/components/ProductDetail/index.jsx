@@ -58,10 +58,10 @@ const ProductDetail = ({ match }) => {
                     <img src={productData.images[0]?.base_url} alt="product" />
                   </div>
                   <div className="w-11/12 col-span-2 px-4 py-4 mt-5 bg-white md:ml-2 overview md:mt-0 md:w-full">
-                    <p className="flex text-sm text-gray-600">
+                    <div className="flex text-sm text-gray-600">
                       Brand:{' '}
                       <p className="ml-1 text-blue-500">{` ${productData.brand?.name}`}</p>
-                    </p>
+                    </div>
                     <p className="text-xl font-light">{productData.name}</p>
                     <div className="flex flex-row mt-4 rating-section">
                       <Rating rate={productData.rating_average} />

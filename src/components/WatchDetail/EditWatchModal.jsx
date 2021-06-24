@@ -37,7 +37,7 @@ const EditWatchModal = ({
           visible ? 'visible ' : 'invisible '
         }absolute border border-gray-500 rounded-lg bg-white text-black`}
       >
-        <div className="close-icon flex flex-row justify-end px-2 py-2 cursor-pointer">
+        <div className="flex flex-row justify-end px-2 py-2 cursor-pointer close-icon">
           <div
             onClick={() => {
               setVisible(false);
@@ -47,9 +47,9 @@ const EditWatchModal = ({
           </div>
         </div>
 
-        <div className="w-full flex flex-row justify-center">
+        <div className="flex flex-row justify-center w-full">
           {loading ? (
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col items-center justify-center">
               <ClipLoader size={30} />
             </div>
           ) : (
@@ -140,7 +140,7 @@ export const EditWatchForm = (props) => {
       <div className="form-content">
         <label htmlFor="link_to_product" className="flex flex-col">
           Expect price
-          <div className="flex flex-row items-center relative">
+          <div className="relative flex flex-row items-center">
             <input
               id="link_to_product"
               type="text"
@@ -156,12 +156,12 @@ export const EditWatchForm = (props) => {
                   formik.setFieldValue('expected_price', value);
                 }
               }}
-              className="py-2 border border-gray-300 px-4 rounded-lg w-full"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
             />
-            <div className="text-gray-500 right-2 absolute">VND</div>
+            <div className="absolute text-gray-500 right-2">VND</div>
           </div>
           {formik.touched.expected_price && formik.errors.expected_price ? (
-            <div className="text-red-600 text-xs normal-case font-normal mt-1">
+            <div className="mt-1 text-xs font-normal text-red-600 normal-case">
               {formik.errors.expected_price}
             </div>
           ) : null}
@@ -172,30 +172,30 @@ export const EditWatchForm = (props) => {
             <select
               name="status"
               {...formik.getFieldProps('status')}
-              className="py-2 border border-gray-300 px-4 bg-gray-300 rounded-lg"
+              className="px-4 py-2 bg-gray-300 border border-gray-300 rounded-lg"
             >
-              <option value="1" label={displayWatchStatus(1)} selected />
+              <option value="1" label={displayWatchStatus(1)} defaultValue />
               <option value="2" label={displayWatchStatus(2)} />
             </select>
           ) : (
             <select
               name="status"
               {...formik.getFieldProps('status')}
-              className="py-2 border border-gray-300 px-4 bg-gray-300 rounded-lg"
+              className="px-4 py-2 bg-gray-300 border border-gray-300 rounded-lg"
             >
               <option value="1" label={displayWatchStatus(1)} />
-              <option value="2" label={displayWatchStatus(2)} selected />
+              <option value="2" label={displayWatchStatus(2)} defaultValue />
             </select>
           )}
           {formik.touched.status && formik.errors.status ? (
-            <div className="text-red-600 text-xs normal-case font-normal mt-1">
+            <div className="mt-1 text-xs font-normal text-red-600 normal-case">
               {formik.errors.status}
             </div>
           ) : null}
         </label>
         <button
           type="submit"
-          className="uppercase text-white font-semibold bg-gray-700 px-4 py-3 rounded-lg hover:bg-gray-500 hover:border-4 mt-8 focus:outline-none"
+          className="px-4 py-3 mt-8 font-semibold text-white uppercase bg-gray-700 rounded-lg hover:bg-gray-500 hover:border-4 focus:outline-none"
         >
           Update watch
         </button>

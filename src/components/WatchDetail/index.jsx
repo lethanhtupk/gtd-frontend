@@ -58,7 +58,7 @@ const WatchDetail = ({ match }) => {
       ) : (
         <>
           {error ? (
-            <div className="flex flex-row items-center justify-center w-full h-full">
+            <div className="flex flex-row items-center justify-center w-full h-full ">
               {message}
             </div>
           ) : (
@@ -74,7 +74,7 @@ const WatchDetail = ({ match }) => {
                   </div>
                   <div className="relative w-full col-span-2 px-4 py-4 mt-6 bg-white md:ml-2 overview md:mt-0">
                     {openModal ? (
-                      <div className="absolute right-8 top-12 min-w-1/3">
+                      <div className="absolute right-0 w-full md:w-auto md:left-auto md:right-8 top-12 md:min-w-1/3">
                         <EditWatchModal
                           watchData={watchData}
                           setWatchData={setWatchData}
@@ -174,11 +174,13 @@ const WatchDetail = ({ match }) => {
             </div>
           )}
           {openDelete ? (
-            <DeleteConfirmModal
-              watchData={watchData}
-              openDelete={openDelete}
-              setOpenDelete={setOpenDelete}
-            />
+            <div className="flex flex-row justify-center">
+              <DeleteConfirmModal
+                watchData={watchData}
+                openDelete={openDelete}
+                setOpenDelete={setOpenDelete}
+              />
+            </div>
           ) : null}
         </>
       )}
