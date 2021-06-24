@@ -5,6 +5,7 @@ import WatchService from '../../services/WatchService';
 import { WATCH_STATUS } from '../../utils/Constant';
 import { numberWithCommas, displayWatchStatus } from '../../utils/Helpers';
 import { CheckIcon, DeleteIcon, PenIcon, XCircleIcon } from '../Icons';
+import { NotFound } from '../NotFound';
 import Rating from '../Rating';
 import withAuthorization from '../Session/withAuthorization';
 import DeleteConfirmModal from './DeleteConfirmModal';
@@ -13,10 +14,11 @@ import EditWatchModal from './EditWatchModal';
 const WatchDetail = ({ match }) => {
   const [watchData, setWatchData] = useState({});
   const [productData, setProductData] = useState({});
-  const [error, setError] = useState();
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [message, setMessage] = useState();
 
   useEffect(() => {
     WatchService.getDetailWatch(match.params.id)
@@ -33,8 +35,17 @@ const WatchDetail = ({ match }) => {
           });
       })
       .catch((error) => {
-        setError(error);
+        setError(true);
         setLoading(false);
+        if (error.code === 403 || error.code === 404) {
+          setMessage(<NotFound />);
+        } else {
+          setMessage(
+            <div className="text-sm text-red-500">
+              Something went wrong, please contact to the admin
+            </div>
+          );
+        }
       });
   }, []);
 
@@ -47,8 +58,8 @@ const WatchDetail = ({ match }) => {
       ) : (
         <>
           {error ? (
-            <div className="flex items-center justify-center text-3xl text-red-500">
-              {error.errors.detail}
+            <div className="flex flex-row items-center justify-center w-full h-full">
+              {message}
             </div>
           ) : (
             <div

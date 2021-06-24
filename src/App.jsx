@@ -20,6 +20,7 @@ import ResendActivation from './pages/ResendActivation';
 import SearchResult from './components/SearchResult';
 import ForgetPassword from './pages/ForgetPassword';
 import ResetPasswordConfirm from './pages/ResetPasswordConfirm';
+import NotFoundPage from './pages/NotFound';
 
 dotenv.config();
 
@@ -55,6 +56,7 @@ function App() {
             component={ForgetPassword}
           />
           <Route path={`${ROUTES.SEARCH_RESULT}`} component={SearchResult} />
+          <Route path="*" component={NotFoundPage} />
         </Switch>
         <div className="hidden object-bottom md:block">
           <Footer />
