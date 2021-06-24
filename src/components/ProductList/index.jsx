@@ -61,6 +61,7 @@ const ProductList = ({ pageName, search, page }) => {
           }
         });
     } else if (pageName === 'search-result') {
+      setLoading(true);
       ProductService.searchProduct({
         params: { limit: 12, search, page: currentPage },
       })
@@ -89,14 +90,15 @@ const ProductList = ({ pageName, search, page }) => {
     <>
       {loading ? (
         <>
-          <div className="flex justify-center items-center">
+          <div className="flex flex-col items-center justify-center h-screen">
             <ClipLoader size={50} />
+            <div>Please wait...</div>
           </div>
         </>
       ) : (
         <>
           {error ? (
-            <div className="flex flex-row justify-center items-center">
+            <div className="flex flex-row items-center justify-center">
               <div className="flex flex-col items-center">
                 <FailedAlert message={message} />
                 <div className="flex mt-4 text-xl">
@@ -113,10 +115,10 @@ const ProductList = ({ pageName, search, page }) => {
           ) : (
             <div className="flex flex-row justify-center mt-16">
               <div className="w-4/5">
-                <div className="describe pb-4">
+                <div className="pb-4 describe">
                   {pageName === 'popular' ? (
                     <>
-                      <p className="text-blue-600 font-bold text-2xl capitalize">
+                      <p className="text-2xl font-bold text-blue-600 capitalize">
                         Popular Products
                       </p>
                       <div className="flex flex-row justify-between">
@@ -130,7 +132,7 @@ const ProductList = ({ pageName, search, page }) => {
                     <>
                       {pageName === 'drops' ? (
                         <>
-                          <p className="text-blue-600 font-bold text-2xl capitalize">
+                          <p className="text-2xl font-bold text-blue-600 capitalize">
                             Top drops products
                           </p>
                           <div className="flex flex-row justify-between">
@@ -142,7 +144,7 @@ const ProductList = ({ pageName, search, page }) => {
                         </>
                       ) : (
                         <>
-                          <p className="text-blue-600 font-bold text-2xl capitalize">
+                          <p className="text-2xl font-bold text-blue-600 capitalize">
                             Result from Tiki
                           </p>
                           <div className="flex flex-row justify-between">
@@ -155,13 +157,13 @@ const ProductList = ({ pageName, search, page }) => {
                   )}
                 </div>
                 {loading ? (
-                  <div className="w-full h-full flex flex-row justify-center items-center">
+                  <div className="flex flex-row items-center justify-center w-full h-full">
                     <ClipLoader size={50} />
                   </div>
                 ) : (
                   <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
                     {productItems.map((item, index) => (
-                      <div className="mr-2 mb-2" key={index}>
+                      <div className="mb-2 mr-2" key={index}>
                         <ItemCarousel data={item} />
                       </div>
                     ))}

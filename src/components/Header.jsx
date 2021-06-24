@@ -23,7 +23,7 @@ const Header = () => {
           </div>
         </Link>
         <div className="hidden ml-8 searchBox md:flex">
-          <SearchBar />
+          <SearchBar setOpenNavigation={setOpenNavigation} />
         </div>
         <div
           className="text-white md:hidden"

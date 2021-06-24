@@ -66,13 +66,14 @@ const ProductCarousel = ({ type }) => {
   return (
     <>
       {loading ? (
-        <div className="w-full h-full flex flex-row justify-center items-center">
+        <div className="flex flex-col items-center justify-center w-full h-full">
           <ClipLoader size={30} />
+          <div>Please wait...</div>
         </div>
       ) : (
         <>
           {error ? (
-            <div className="text-red-500 text-base">{message}</div>
+            <div className="text-base text-red-500">{message}</div>
           ) : (
             <AliceCarousel
               mouseTracking
