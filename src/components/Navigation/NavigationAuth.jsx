@@ -25,7 +25,7 @@ const NavigationAuth = ({
   };
 
   return (
-    <div className="flex flex-col items-center pt-5 bg-gray-700 md:pt-0 md:flex-row justify-evenly md:bg-gray-600">
+    <div className="z-50 flex flex-col items-center pt-5 bg-gray-700 md:pt-0 md:flex-row justify-evenly md:bg-gray-600">
       {openNavigation ? (
         <div className="flex flex-col w-screen py-2 bg-gray-700 border-t border-b border-gray-500 md:hidden top-14 right-8 md:border-b-0 md:border-t-0">
           <Link
@@ -51,7 +51,7 @@ const NavigationAuth = ({
           </Link>
           {authUser.role === 2 && !authUser.seller ? (
             <Link
-              to={ROUTES.CHANGE_PASSWORD}
+              to={ROUTES.MANAGE_REQUEST}
               onClick={() => {
                 setOpenNavigation(false);
                 setTimeout(() => location.reload(), 1);
@@ -63,7 +63,7 @@ const NavigationAuth = ({
           ) : null}
           {authUser.role === 2 && authUser.seller ? (
             <Link
-              to={ROUTES.CHANGE_PASSWORD}
+              to={ROUTES.MANAGE_SHOP}
               onClick={() => {
                 setOpenNavigation(false);
                 setTimeout(() => location.reload(), 1);
@@ -189,7 +189,7 @@ const NavigationAuth = ({
           </Link>
           {authUser.role === 2 && !authUser.seller ? (
             <Link
-              to={ROUTES.WATCHES}
+              to={ROUTES.MANAGE_REQUEST}
               className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
             >
               Connect to a shop
@@ -197,7 +197,7 @@ const NavigationAuth = ({
           ) : null}
           {authUser.role === 2 && authUser.seller ? (
             <Link
-              to={ROUTES.WATCHES}
+              to={ROUTES.MANAGE_SHOP}
               className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
             >
               Your shop

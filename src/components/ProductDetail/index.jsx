@@ -41,8 +41,9 @@ const ProductDetail = ({ match }) => {
   return (
     <>
       {loading ? (
-        <div className="flex flex-row items-center justify-center w-full h-full">
+        <div className="flex flex-col items-center justify-center w-full h-full">
           <ClipLoader size={50} />
+          <div>Please wait...</div>
         </div>
       ) : (
         <>

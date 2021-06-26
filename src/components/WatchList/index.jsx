@@ -9,19 +9,26 @@ import withAuthorization from '../Session/withAuthorization';
 import ItemWatch from './ItemWatch';
 import { FailedAlert } from '../Alert';
 import { NoItem } from '../NoItem';
+import { displayWatchStatus } from '../../utils/Helpers';
 
 const WatchtList = () => {
   const { authUser } = useContext(AuthUserContext);
   const [watchList, setWatchList] = useState([]);
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [paginationData, setPaginationData] = useState({});
+  const [status, setStatus] = useState(null);
 
   useEffect(() => {
+    setLoading(true);
+    const params = {};
+    if (status) {
+      params.status = status;
+    }
     WatchService.getListWatches({
-      params: { owner: authUser[0]?.id, page: currentPage },
+      params: { owner: authUser[0]?.id, page: currentPage, ...params },
     })
       .then((res) => {
         setWatchList(res.data);
@@ -37,13 +44,14 @@ const WatchtList = () => {
           setMessage(error.errors.detail);
         }
       });
-  }, [authUser, currentPage]);
+  }, [authUser, currentPage, status]);
 
   return (
     <>
       {loading ? (
-        <div className="flex flex-row items-center justify-center w-full h-full">
+        <div className="flex flex-col items-center justify-center w-full h-full">
           <ClipLoader size={50} />
+          <div>Please wait...</div>
         </div>
       ) : (
         <>
@@ -71,6 +79,22 @@ const WatchtList = () => {
               ) : (
                 <>
                   <div className="flex flex-row justify-center mt-16">
+                    <div className="flex justify-end w-4/5">
+                      <select
+                        name="status"
+                        onChange={(e) => {
+                          setStatus(e.target.value);
+                        }}
+                        className="w-full px-4 py-2 bg-gray-300 border border-gray-300 rounded-lg focus:outline-none md:w-1/6"
+                      >
+                        <option value={null} label="--All--" defaultValue />
+                        <option value="1" label={displayWatchStatus(1)} />
+                        <option value="2" label={displayWatchStatus(2)} />
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center mt-8">
                     <div className="w-4/5">
                       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
                         {watchList.map((item, index) => (

@@ -9,7 +9,7 @@ export default class WatchService {
   }
 
   static async getListWatches(data) {
-    return await BaseService.get(`${WATCH_RESOURCE}`, data);
+    return await BaseService.get(`${WATCH_RESOURCE}?ordering=status`, data);
   }
 
   static async getDetailWatch(id) {

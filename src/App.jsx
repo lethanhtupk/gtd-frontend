@@ -21,6 +21,8 @@ import SearchResult from './components/SearchResult';
 import ForgetPassword from './pages/ForgetPassword';
 import ResetPasswordConfirm from './pages/ResetPasswordConfirm';
 import NotFoundPage from './pages/NotFound';
+import ManageShop from './pages/ManageShop';
+import ManageRequest from './pages/ManageRequest';
 
 dotenv.config();
 
@@ -54,6 +56,12 @@ function App() {
           <Route
             path={`${ROUTES.FORGET_PASSWORD}`}
             component={ForgetPassword}
+          />
+          <Route exact path={`${ROUTES.MANAGE_SHOP}`} component={ManageShop} />
+          <Route
+            exact
+            path={`${ROUTES.MANAGE_REQUEST}`}
+            component={ManageRequest}
           />
           <Route path={`${ROUTES.SEARCH_RESULT}`} component={SearchResult} />
           <Route path="*" component={NotFoundPage} />

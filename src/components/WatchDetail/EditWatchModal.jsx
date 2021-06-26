@@ -47,10 +47,11 @@ const EditWatchModal = ({
           </div>
         </div>
 
-        <div className="flex flex-row justify-center w-full">
+        <div className="flex flex-row items-center justify-center w-full">
           {loading ? (
             <div className="flex flex-col items-center justify-center">
               <ClipLoader size={30} />
+              <div>Please wait...</div>
             </div>
           ) : (
             <>
@@ -156,7 +157,7 @@ export const EditWatchForm = (props) => {
                   formik.setFieldValue('expected_price', value);
                 }
               }}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none"
             />
             <div className="absolute text-gray-500 right-2">VND</div>
           </div>
@@ -172,7 +173,7 @@ export const EditWatchForm = (props) => {
             <select
               name="status"
               {...formik.getFieldProps('status')}
-              className="px-4 py-2 bg-gray-300 border border-gray-300 rounded-lg"
+              className="px-4 py-2 bg-gray-300 border border-gray-300 rounded-lg focus:outline-none"
             >
               <option value="1" label={displayWatchStatus(1)} defaultValue />
               <option value="2" label={displayWatchStatus(2)} />
@@ -181,7 +182,7 @@ export const EditWatchForm = (props) => {
             <select
               name="status"
               {...formik.getFieldProps('status')}
-              className="px-4 py-2 bg-gray-300 border border-gray-300 rounded-lg"
+              className="px-4 py-2 bg-gray-300 border border-gray-300 rounded-lg focus:outline-none"
             >
               <option value="1" label={displayWatchStatus(1)} />
               <option value="2" label={displayWatchStatus(2)} defaultValue />

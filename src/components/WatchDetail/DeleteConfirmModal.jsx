@@ -9,7 +9,10 @@ const DeleteConfirmModal = (props) => {
   const { openDelete, setOpenDelete, watchData } = props;
   const [visible, setVisible] = useState(openDelete);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState('');
+
+  console.log(watchData);
 
   useEffect(() => {
     setVisible(openDelete);
@@ -21,18 +24,30 @@ const DeleteConfirmModal = (props) => {
 
   const onDeleteHandler = () => {
     setLoading(true);
-    WatchService.deleteWatch(watchData.id)
+    WatchService.updateWatch(watchData.id, {
+      expected_price: watchData.expected_price,
+      status: 3,
+    })
       .then((res) => {
+        console.log(res);
         setTimeout(() => {
           setLoading(false);
         }, 1000);
         props.history.push(ROUTES.WATCHES);
       })
       .catch((error) => {
+        console.log(error);
         setTimeout(() => {
           setLoading(false);
         }, 1000);
-        setError(error);
+        setError(true);
+        if (error.code === 500) {
+          setMessage(
+            'There is an error in the system, please contact with the admin'
+          );
+        } else {
+          setMessage(error.errors.detail);
+        }
       });
   };
 
@@ -59,8 +74,17 @@ const DeleteConfirmModal = (props) => {
                 <div className="mt-5 text-2xl text-red-500 title">
                   Delete watch failed
                 </div>
-                <div className="text-center text-red-400">
-                  {error.errors.detail}
+                <div className="text-sm text-center text-red-400">
+                  {message}
+                </div>
+                <div className="mt-4 button">
+                  <button
+                    type="button"
+                    className="px-8 py-2 text-white bg-gray-500 rounded-sm hover:bg-gray-600 focus:outline-none"
+                    onClick={() => setVisible(false)}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </>
             ) : (

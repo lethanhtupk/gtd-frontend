@@ -3,6 +3,7 @@ import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import ClipLoader from 'react-spinners/ClipLoader';
 import ProductService from '../../services/ProductService';
+import { SadEmoji } from '../Icons';
 import ItemCarousel from './ItemCarousel';
 
 const responsive = {
@@ -73,7 +74,10 @@ const ProductCarousel = ({ type }) => {
       ) : (
         <>
           {error ? (
-            <div className="text-base text-red-500">{message}</div>
+            <div className="flex flex-row justify-center text-red-500">
+              <SadEmoji />
+              <p className="text-sm ">{message}</p>
+            </div>
           ) : (
             <AliceCarousel
               mouseTracking
