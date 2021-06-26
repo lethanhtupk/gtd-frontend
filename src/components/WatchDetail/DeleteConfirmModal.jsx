@@ -12,8 +12,6 @@ const DeleteConfirmModal = (props) => {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
 
-  console.log(watchData);
-
   useEffect(() => {
     setVisible(openDelete);
   }, [openDelete]);
@@ -29,14 +27,12 @@ const DeleteConfirmModal = (props) => {
       status: 3,
     })
       .then((res) => {
-        console.log(res);
         setTimeout(() => {
           setLoading(false);
         }, 1000);
         props.history.push(ROUTES.WATCHES);
       })
       .catch((error) => {
-        console.log(error);
         setTimeout(() => {
           setLoading(false);
         }, 1000);

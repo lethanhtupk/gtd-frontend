@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
 import ProductService from '../../services/ProductService';
 import WatchService from '../../services/WatchService';
-import { WATCH_STATUS } from '../../utils/Constant';
 import { numberWithCommas, displayWatchStatus } from '../../utils/Helpers';
 import { CheckIcon, DeleteIcon, PenIcon, XCircleIcon } from '../Icons';
 import { NotFound } from '../NotFound';
