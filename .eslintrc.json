@@ -36,6 +36,7 @@
     "react/no-danger": "off",
     "no-plusplus": "off",
     "react/destructuring-assignment": "off",
-    "no-restricted-globals": "off"
+    "no-restricted-globals": "off",
+    "no-nested-ternary": "off"
   }
 }

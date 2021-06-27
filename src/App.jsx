@@ -28,7 +28,7 @@ dotenv.config();
 
 function App() {
   return (
-    <div className="flex flex-col justify-between w-screen h-screen overflow-x-hidden App filter">
+    <div className="flex flex-col w-screen h-screen overflow-x-hidden md:justify-between App filter">
       <Router>
         <Header />
         <Switch>

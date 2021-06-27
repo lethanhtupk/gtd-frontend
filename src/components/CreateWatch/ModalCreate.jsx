@@ -46,12 +46,14 @@ const ModalCreate = ({ showModal, setShowModal, productData }) => {
           ) : (
             <>
               {message !== '' ? (
-                <div className="flex flex-row justify-center md:w-4/5">
-                  {error ? (
-                    <FailedAlert message={message} invisible={loading} />
-                  ) : (
-                    <SuccessAlert message={message} invisible={loading} />
-                  )}
+                <div className="flex flex-row justify-center">
+                  <div className="w-4/5">
+                    {error ? (
+                      <FailedAlert message={message} invisible={loading} />
+                    ) : (
+                      <SuccessAlert message={message} invisible={loading} />
+                    )}
+                  </div>
                 </div>
               ) : null}
             </>
