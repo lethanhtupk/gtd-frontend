@@ -22,21 +22,19 @@ const ProductDetail = (props) => {
   const handleChartData = (productData) => {
     const { watches } = productData;
     const chartData = {};
-    watches.map((watch) => {
+    watches.forEach((watch) => {
       if (chartData[watch['expected_price']]) {
         chartData[watch['expected_price']] += 1;
       } else {
         chartData[watch['expected_price']] = 1;
       }
-      return 1;
     });
     return chartData;
   };
 
   useEffect(() => {
-    if (productData) {
+    if (productData && props.location.state.name === 'shop-products') {
       const chartData = handleChartData(productData);
-      console.log(chartData);
       setChartData(chartData);
     }
   }, [productData]);
@@ -62,7 +60,7 @@ const ProductDetail = (props) => {
           }
         });
     } else {
-      ProductService.shopProducts(props.match.params.id)
+      ProductService.shopProductsDetail(props.match.params.id)
         .then((res) => {
           setProductData(res);
           setLoading(false);

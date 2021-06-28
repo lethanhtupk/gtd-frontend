@@ -21,6 +21,8 @@ const WatchtList = () => {
   const [paginationData, setPaginationData] = useState({});
   const [status, setStatus] = useState(null);
 
+  console.log(watchList);
+
   useEffect(() => {
     setLoading(true);
     const params = {};
