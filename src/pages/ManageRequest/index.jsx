@@ -16,7 +16,7 @@ import {
 } from '../../components/Icons';
 import DeleteConfirmModal from './DeleteConfirmModal';
 
-const ManageRequest = ({ authUser }) => {
+const ManageRequest = () => {
   const [showModal, setShowModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [requests, setRequests] = useState([]);
@@ -32,13 +32,12 @@ const ManageRequest = ({ authUser }) => {
         const sellerId = res.data[0].seller;
         SellerService.getSellerById(sellerId)
           .then((res) => {
-            setSeller(res);
             setLoading(false);
+            setSeller(res);
           })
           .catch((error) => {
             setLoading(false);
             setMessage('Something went wrong, please contact with the admin');
-            setLoading(false);
           });
         setRequests(res.data);
       })
@@ -85,18 +84,18 @@ const ManageRequest = ({ authUser }) => {
                   <div className="relative w-5/6 px-4 py-4 bg-white md:w-4/5">
                     <div className="flex flex-row items-center">
                       <img
-                        src={seller.logo}
+                        src={seller?.logo}
                         alt="shop_logo"
                         className="object-cover w-12"
                       />
-                      <div className="ml-4 font-semibold">{seller.name}</div>
+                      <div className="ml-4 font-semibold">{seller?.name}</div>
                     </div>
                     <div className="mt-2">
                       <div className="flex justify-center w-1/2 px-2 py-2 text-blue-600 border border-blue-600 rounded-lg md:w-1/6">
                         <ShoppingIcon />
                         <button
                           type="button"
-                          onClick={() => window.open(seller.link)}
+                          onClick={() => window.open(seller?.link)}
                           className="text-sm font-semibold focus:outline-none"
                         >
                           Go To Shop
