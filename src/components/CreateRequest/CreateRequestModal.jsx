@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useFormik } from 'formik';
+import React, { useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import ClipLoader from 'react-spinners/ClipLoader';
-import * as Yup from 'yup';
 import { CloseIcon } from '../Icons';
-import WatchService from '../../services/WatchService';
-import { convertToNumber, displayWatchStatus } from '../../utils/Helpers';
 import { FailedAlert, SuccessAlert } from '../Alert';
 import SellerService from '../../services/SellerService';
 
 let timeoutId;
 
-const CreateRequestModal = ({ setShowModal }) => {
+const CreateRequestModal = ({ setShowModal, setRequests }) => {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -46,7 +42,7 @@ const CreateRequestModal = ({ setShowModal }) => {
           ) : (
             <>
               {message !== '' ? (
-                <div className="flex flex-row justify-center w-full mt-4">
+                <div className="flex flex-row justify-center w-full mt-4 md:w-4/5">
                   {error ? (
                     <FailedAlert message={message} invisible={loading} />
                   ) : (
@@ -107,6 +103,7 @@ export const CreateRequestForm = (props) => {
     setLoading(true);
     SellerService.createRequest({ seller: selectedValue.id })
       .then((res) => {
+        console.log(res);
         setMessage('Your request has been created successfully');
         setLoading(false);
       })

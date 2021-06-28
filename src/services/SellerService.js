@@ -29,6 +29,10 @@ export default class SellerService {
     return await BaseService.get(`${REQUEST_RESOURCE}`, data);
   }
 
+  static async deleteRequest(id, data) {
+    return await BaseService.delete(`${REQUEST_RESOURCE}${id}`, data);
+  }
+
   // static async getProductDetail(id) {
   //   return await BaseService.get(`${PRODUCT_RESOURCE}${id}`, {});
   // }

@@ -14,9 +14,11 @@ import {
   ShoppingIcon,
   XCircleIcon,
 } from '../../components/Icons';
+import DeleteConfirmModal from './DeleteConfirmModal';
 
 const ManageRequest = ({ authUser }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [requests, setRequests] = useState([]);
   const [seller, setSeller] = useState();
   const [error, setError] = useState(false);
@@ -74,7 +76,9 @@ const ManageRequest = ({ authUser }) => {
             <>
               <div
                 className={`${
-                  showModal ? 'filter blur-sm grayscale' : ''
+                  showModal || showConfirmModal
+                    ? 'filter blur-sm grayscale'
+                    : ''
                 } flex flex-row items-center justify-center py-32 rounded-2xl`}
               >
                 {requests.length > 0 ? (
@@ -126,7 +130,10 @@ const ManageRequest = ({ authUser }) => {
                             </p>
                           </div>
                         </div>
-                        <div className="flex flex-row items-center justify-center w-1/2 px-4 py-2 text-sm font-semibold text-red-600 border border-red-600 rounded-lg md:w-1/6">
+                        <div
+                          onClick={() => setShowConfirmModal(true)}
+                          className="flex flex-row items-center justify-center w-1/2 px-4 py-2 text-sm font-semibold text-red-600 border border-red-600 rounded-lg md:w-1/6"
+                        >
                           <DeleteIcon />
                           <div>Delete</div>
                         </div>
@@ -144,7 +151,17 @@ const ManageRequest = ({ authUser }) => {
               </div>
 
               {showModal ? (
-                <CreateRequestModal setShowModal={setShowModal} />
+                <CreateRequestModal
+                  setShowModal={setShowModal}
+                  setRequests={setRequests}
+                />
+              ) : null}
+              {showConfirmModal ? (
+                <DeleteConfirmModal
+                  setShowConfirmModal={setShowConfirmModal}
+                  request={requests[0]}
+                  setRequests={setRequests}
+                />
               ) : null}
             </>
           )}
