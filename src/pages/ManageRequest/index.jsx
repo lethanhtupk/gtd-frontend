@@ -15,7 +15,7 @@ import {
   XCircleIcon,
 } from '../../components/Icons';
 
-const ManageRequest = () => {
+const ManageRequest = ({ authUser }) => {
   const [showModal, setShowModal] = useState(false);
   const [requests, setRequests] = useState([]);
   const [seller, setSeller] = useState();
@@ -157,6 +157,6 @@ const ManageRequest = () => {
   );
 };
 
-const condition = (authUser) => !!authUser;
+const condition = (authUser) => !!authUser && authUser['role'] === 2;
 
 export default withAuthorization(condition)(ManageRequest);

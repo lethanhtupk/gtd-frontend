@@ -6,7 +6,7 @@ import { LOCAL_STORAGE } from '../../utils/Constant';
 const withAuthentication = (Component) => {
   const WithAuthentication = (props) => {
     const [authUser, setAuthUser] = useState(
-      localStorage.getItem(LOCAL_STORAGE.USER_INFO)
+      JSON.parse(localStorage.getItem(LOCAL_STORAGE.USER_INFO))
     );
     const [error, setError] = useState();
 
@@ -18,7 +18,7 @@ const withAuthentication = (Component) => {
         AccountServices.currentUser()
           .then((res) => {
             setAuthUser(res);
-            localStorage.setItem(LOCAL_STORAGE.USER_INFO, res);
+            localStorage.setItem(LOCAL_STORAGE.USER_INFO, JSON.stringify(res));
           })
           .catch((e) => {
             setError(e);
