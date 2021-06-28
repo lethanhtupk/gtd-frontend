@@ -196,7 +196,6 @@ const BaseService = {
       axios
         .put(url, data, config)
         .then((res) => {
-          console.log('res in base service======', res);
           if (res.status !== 200) {
             const { data } = res;
             // eslint-disable-next-line prefer-promise-reject-errors
@@ -214,7 +213,6 @@ const BaseService = {
           }
         })
         .catch((errors) => {
-          console.log('errors in base service========,', errors.response);
           // TODO: Refactor
           if (errors?.response?.data && errors?.response?.status < 4000) {
             // eslint-disable-next-line prefer-promise-reject-errors
@@ -237,7 +235,6 @@ const BaseService = {
       axios
         .delete(url, config)
         .then((res) => {
-          console.log('res in base service======', res);
           if (res.status !== 204) {
             const { data } = res;
             // eslint-disable-next-line prefer-promise-reject-errors
@@ -256,8 +253,6 @@ const BaseService = {
         })
         .catch((errors) => {
           // TODO: Refactor
-          console.log('errors in base service========,', errors.response);
-
           if (errors?.response?.data && errors?.response?.status < 4000) {
             // eslint-disable-next-line prefer-promise-reject-errors
             reject({

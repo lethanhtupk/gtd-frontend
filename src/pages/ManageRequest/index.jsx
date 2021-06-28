@@ -46,7 +46,7 @@ const ManageRequest = ({ authUser }) => {
         setMessage('Something went wrong, please contact with the admin');
         setLoading(false);
       });
-  }, []);
+  }, [showModal]);
 
   return (
     <>

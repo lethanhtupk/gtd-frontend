@@ -7,7 +7,7 @@ import SellerService from '../../services/SellerService';
 
 let timeoutId;
 
-const CreateRequestModal = ({ setShowModal, setRequests }) => {
+const CreateRequestModal = ({ setShowModal }) => {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -103,7 +103,6 @@ export const CreateRequestForm = (props) => {
     setLoading(true);
     SellerService.createRequest({ seller: selectedValue.id })
       .then((res) => {
-        console.log(res);
         setMessage('Your request has been created successfully');
         setLoading(false);
       })
