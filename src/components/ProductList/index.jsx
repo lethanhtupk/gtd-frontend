@@ -83,6 +83,29 @@ const ProductList = ({ pageName, search, page }) => {
             setMessage(error.errors.detail);
           }
         });
+    } else if (pageName === 'shop-products') {
+      setLoading(true);
+      ProductService.shopProducts({
+        params: { limit: 12, search, page: currentPage },
+      })
+        .then((res) => {
+          setError(false);
+          setLoading(false);
+          setProductItems(res.data);
+          setCurrentPage(res.paging.current_page);
+          setPaginationData(res.paging);
+        })
+        .catch((error) => {
+          setError(true);
+          setLoading(false);
+          if (error.code === 4000) {
+            setMessage(
+              'There is an error in the system. Please contact with the admin'
+            );
+          } else {
+            setMessage('Something went wrong, please contact with the admin');
+          }
+        });
     }
   }, [currentPage, search]);
 
@@ -144,13 +167,27 @@ const ProductList = ({ pageName, search, page }) => {
                         </>
                       ) : (
                         <>
-                          <p className="text-2xl font-bold text-blue-600 capitalize">
-                            Result from Tiki
-                          </p>
-                          <div className="flex flex-row justify-between">
-                            Check out these products that we get directly from
-                            Tiki, easily to searching and watching
-                          </div>
+                          {pageName === 'shop-products' ? (
+                            <>
+                              <p className="text-2xl font-bold text-blue-600 capitalize">
+                                Products in your shop
+                              </p>
+                              <div className="flex flex-row justify-between">
+                                Check out your products and desire price of your
+                                customers to get the most values.
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <p className="text-2xl font-bold text-blue-600 capitalize">
+                                Result from Tiki
+                              </p>
+                              <div className="flex flex-row justify-between">
+                                Check out these products that we get directly
+                                from Tiki, easily to searching and watching
+                              </div>
+                            </>
+                          )}
                         </>
                       )}
                     </>
@@ -164,7 +201,7 @@ const ProductList = ({ pageName, search, page }) => {
                   <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
                     {productItems.map((item, index) => (
                       <div className="mb-2 mr-2" key={index}>
-                        <ItemCarousel data={item} />
+                        <ItemCarousel data={item} pageName={pageName} />
                       </div>
                     ))}
                   </div>

@@ -20,4 +20,8 @@ export default class ProductService {
   static async searchProduct(data) {
     return await BaseService.get(`${PRODUCT_RESOURCE}search`, data, {});
   }
+
+  static async shopProducts(id, data) {
+    return await BaseService.get(`${PRODUCT_RESOURCE}${id}/manage`, data);
+  }
 }

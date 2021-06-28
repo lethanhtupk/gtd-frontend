@@ -7,35 +7,80 @@ import { PlusIcon } from '../Icons';
 import Rating from '../Rating';
 import AuthUserContext from '../Session/context';
 import { NotFound } from '../NotFound';
+import LineChart from '../LineChart';
 
-const ProductDetail = ({ match }) => {
+const ProductDetail = (props) => {
   const [showAll, setShowAll] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [productData, setProductData] = useState({});
+  const [productData, setProductData] = useState();
   const [loading, setLoading] = useState(true);
   const { authUser } = useContext(AuthUserContext);
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
+  const [chartData, setChartData] = useState({});
+
+  const handleChartData = (productData) => {
+    const { watches } = productData;
+    const chartData = {};
+    watches.map((watch) => {
+      if (chartData[watch['expected_price']]) {
+        chartData[watch['expected_price']] += 1;
+      } else {
+        chartData[watch['expected_price']] = 1;
+      }
+      return 1;
+    });
+    return chartData;
+  };
 
   useEffect(() => {
-    ProductService.getProductDetail(match.params.id)
-      .then((res) => {
-        setProductData(res);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(true);
-        setLoading(false);
-        if (error.code === 400 && error.errors.product) {
-          setMessage(<NotFound />);
-        } else {
-          setMessage(
-            <div className="text-red-500 text-">
-              Something went wrong, please contact with the admin
-            </div>
-          );
-        }
-      });
+    if (productData) {
+      const chartData = handleChartData(productData);
+      console.log(chartData);
+      setChartData(chartData);
+    }
+  }, [productData]);
+
+  useEffect(() => {
+    if (props.location.state.name !== 'shop-products') {
+      ProductService.getProductDetail(props.match.params.id)
+        .then((res) => {
+          setProductData(res);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setError(true);
+          setLoading(false);
+          if (error.code === 400 && error.errors.product) {
+            setMessage(<NotFound />);
+          } else {
+            setMessage(
+              <div className="text-red-500 text-">
+                Something went wrong, please contact with the admin
+              </div>
+            );
+          }
+        });
+    } else {
+      ProductService.shopProducts(props.match.params.id)
+        .then((res) => {
+          setProductData(res);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setError(true);
+          setLoading(false);
+          if (error.code === 400 && error.errors.product) {
+            setMessage(<NotFound />);
+          } else {
+            setMessage(
+              <div className="text-red-500 text-">
+                Something went wrong, please contact with the admin
+              </div>
+            );
+          }
+        });
+    }
   }, []);
 
   return (
@@ -63,20 +108,20 @@ const ProductDetail = ({ match }) => {
                       Brand:{' '}
                       <p className="ml-1 text-blue-500">{` ${productData.brand?.name}`}</p>
                     </div>
-                    <p className="text-xl font-light">{productData.name}</p>
+                    <p className="text-xl font-light">{productData?.name}</p>
                     <div className="flex flex-row mt-4 rating-section">
-                      <Rating rate={productData.rating_average} />
+                      <Rating rate={productData?.rating_average} />
                     </div>
                     <div className="flex flex-row items-center mt-8 price-section">
                       <p className="text-2xl font-bold">
-                        {numberWithCommas(productData.price)} đ
+                        {numberWithCommas(productData?.price)} đ
                       </p>
                       <div className="ml-4 discount-section">
                         <div className="flex flex-row">
                           <p className="text-xs line-through">
-                            {numberWithCommas(productData.list_price)} đ
+                            {numberWithCommas(productData?.list_price)} đ
                           </p>
-                          <p className="ml-2 text-xs line-through">{`${productData.discount_rate}%`}</p>
+                          <p className="ml-2 text-xs line-through">{`${productData?.discount_rate}%`}</p>
                         </div>
                       </div>
                     </div>
@@ -84,7 +129,9 @@ const ProductDetail = ({ match }) => {
                       <button
                         type="button"
                         onClick={() =>
-                          window.open(`https://tiki.vn/${productData.url_path}`)
+                          window.open(
+                            `https://tiki.vn/${productData?.url_path}`
+                          )
                         }
                         className="px-8 py-2 text-lg font-semibold bg-yellow-300 rounded-lg hover:bg-yellow-400"
                       >
@@ -106,20 +153,26 @@ const ProductDetail = ({ match }) => {
                     </div>
                   </div>
                 </div>
-                <div className="w-11/12 mt-8 product-description md:w-full">
-                  <ShowDescription
-                    showAll={showAll}
-                    setShowAll={setShowAll}
-                    description={productData.description}
-                  />
-                </div>
+                {props.location.state.name !== 'shop-products' ? (
+                  <div className="w-11/12 mt-8 product-description md:w-full">
+                    <ShowDescription
+                      showAll={showAll}
+                      setShowAll={setShowAll}
+                      description={productData.description}
+                    />
+                  </div>
+                ) : (
+                  <div className="w-11/12 mt-8 bg-white md:w-full">
+                    <LineChart chartData={chartData} />
+                  </div>
+                )}
               </div>
             </div>
           )}
         </>
       )}
       <header>
-        <title>{productData.name}</title>
+        <title>{productData?.name}</title>
       </header>
     </>
   );
