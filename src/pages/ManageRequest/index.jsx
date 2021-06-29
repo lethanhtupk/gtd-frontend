@@ -37,12 +37,12 @@ const ManageRequest = () => {
           })
           .catch((error) => {
             setLoading(false);
-            setMessage('Something went wrong, please contact with the admin');
+            setMessage('Có lỗi xảy ra, liên hệ với admin ngay!');
           });
         setRequests(res.data);
       })
       .catch((error) => {
-        setMessage('Something went wrong, please contact with the admin');
+        setMessage('Có lỗi xảy ra, liên hệ với admin ngay!');
         setLoading(false);
       });
   }, [showModal]);
@@ -52,7 +52,7 @@ const ManageRequest = () => {
       {loading ? (
         <div className="flex flex-col items-center justify-center w-full h-full">
           <ClipLoader size={50} />
-          <div>Please wait...</div>
+          <div>Xin chờ...</div>
         </div>
       ) : (
         <>
@@ -61,12 +61,12 @@ const ManageRequest = () => {
               <div className="flex flex-col items-center">
                 <FailedAlert message={message} />
                 <div className="flex mt-4 text-xl">
-                  <p>Back to&nbsp;</p>
+                  <p>Quay lại&nbsp;</p>
                   <Link
                     to={ROUTES.HOME}
                     className="text-blue-500 hover:underline"
                   >
-                    home page
+                    trang chủ
                   </Link>
                 </div>
               </div>
@@ -98,7 +98,7 @@ const ManageRequest = () => {
                           onClick={() => window.open(seller?.link)}
                           className="text-sm font-semibold focus:outline-none"
                         >
-                          Go To Shop
+                          Xem cửa hàng
                         </button>
                       </div>
                       <div className="flex flex-row mt-4">
@@ -134,13 +134,13 @@ const ManageRequest = () => {
                           className="flex flex-row items-center justify-center w-1/2 px-4 py-2 text-sm font-semibold text-red-600 border border-red-600 rounded-lg md:w-1/6"
                         >
                           <DeleteIcon />
-                          <div>Delete</div>
+                          <div>Xóa</div>
                         </div>
                       </div>
                       <div className="mt-4 text-sm text-red-500">
-                        *Note: You can only request for a shop at a time. Please
-                        delete your previous request and re-create in case you
-                        would like to change.
+                        *Chú ý: Bạn chỉ có thể tạo một yêu cầu tại một thời
+                        điểm. Vui lòng xóa yêu cầu cũ trong trường hợp bạn muốn
+                        tạo yêu cầu khác.
                       </div>
                     </div>
                   </div>

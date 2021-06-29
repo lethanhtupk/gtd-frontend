@@ -21,8 +21,6 @@ const WatchtList = () => {
   const [paginationData, setPaginationData] = useState({});
   const [status, setStatus] = useState(null);
 
-  console.log(watchList);
-
   useEffect(() => {
     setLoading(true);
     const params = {};
@@ -41,7 +39,7 @@ const WatchtList = () => {
         setError(true);
         setLoading(false);
         if (error.code === 4000) {
-          setMessage('There is a system error, please contact with the admin');
+          setMessage('Có lỗi hệ thống, liên hệ admin ngay.');
         } else {
           setMessage(error.errors.detail);
         }
@@ -53,7 +51,7 @@ const WatchtList = () => {
       {loading ? (
         <div className="flex flex-col items-center justify-center w-full h-full">
           <ClipLoader size={50} />
-          <div>Please wait...</div>
+          <div>Xin chờ...</div>
         </div>
       ) : (
         <>
@@ -62,12 +60,12 @@ const WatchtList = () => {
               <div className="flex flex-col items-center">
                 <FailedAlert message={message} />
                 <div className="flex mt-4 text-xl">
-                  <p>Back to&nbsp;</p>
+                  <p>Quay lại&nbsp;</p>
                   <Link
                     to={ROUTES.HOME}
                     className="text-blue-500 hover:underline"
                   >
-                    home page
+                    trang chủ
                   </Link>
                 </div>
               </div>
@@ -89,7 +87,7 @@ const WatchtList = () => {
                         }}
                         className="w-full px-4 py-2 bg-gray-300 border border-gray-300 rounded-lg focus:outline-none md:w-1/6"
                       >
-                        <option value={null} label="--All--" defaultValue />
+                        <option value={null} label="--Tất cả--" defaultValue />
                         <option value="1" label={displayWatchStatus(1)} />
                         <option value="2" label={displayWatchStatus(2)} />
                       </select>

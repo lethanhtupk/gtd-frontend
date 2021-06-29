@@ -39,7 +39,7 @@ const ChangePasswordForm = (props) => {
   const validate = (values) => {
     const errors = {};
     if (values.password !== values.re_password) {
-      errors.re_password = 'Confirm password must to be matched with password';
+      errors.re_password = 'Mật khẩu xác nhận phải trùng với mật khẩu mới';
     }
     return errors;
   };
@@ -51,23 +51,23 @@ const ChangePasswordForm = (props) => {
       re_new_password: '',
     },
     validationSchema: Yup.object({
-      current_password: Yup.string().required('This field is required'),
-      new_password: Yup.string().required('This field is required'),
-      re_new_password: Yup.string().required('This field is required'),
+      current_password: Yup.string().required('Trường này là bắt buộc'),
+      new_password: Yup.string().required('Trường này là bắt buộc'),
+      re_new_password: Yup.string().required('Trường này là bắt buộc'),
     }),
     validate,
     onSubmit: (values) => {
       AccountServices.changePassword(values)
         .then((res) => {
           if (res.code === 204) {
-            setMessage('Update your password success');
+            setMessage('Cập nhật mật khẩu thành công');
             setError(false);
             setLoading(false);
           }
         })
         .catch((error) => {
           setError(true);
-          setMessage('Change password failed, please re-check your input');
+          setMessage('Cập nhật thất bại, vui lòng kiểm tra và thử lại.');
           setLoading(false);
         });
     },
@@ -79,7 +79,7 @@ const ChangePasswordForm = (props) => {
         htmlFor="current_password"
         className="flex flex-col mt-8 font-semibold"
       >
-        Current password
+        Mật khẩu hiện tại
         <input
           id="current_password"
           type="password"
@@ -97,7 +97,7 @@ const ChangePasswordForm = (props) => {
         htmlFor="new_password"
         className="flex flex-col mt-8 font-semibold"
       >
-        New password
+        Mật khẩu mới
         <input
           id="new_password"
           type="password"
@@ -115,7 +115,7 @@ const ChangePasswordForm = (props) => {
         htmlFor="re_new_password"
         className="flex flex-col mt-8 font-semibold"
       >
-        Repeat password
+        Xác nhận mật khẩu mới
         <input
           id="re_new_password"
           type="password"
@@ -136,14 +136,14 @@ const ChangePasswordForm = (props) => {
             onClick={() => setActive(0)}
             className="w-1/5 px-4 py-2 mt-4 font-medium text-gray-500 uppercase rounded-full md:mt-8 hover:border-black hover:border-2 hover:text-black focus:outline-none"
           >
-            Cancel
+            Thoát
           </button>
         </Link>
         <button
           type="submit"
           className="px-4 py-2 mt-4 font-medium text-gray-500 uppercase bg-green-400 rounded-full md:mt-8 hover:text-black min:w-1/5 focus:outline-none"
         >
-          Set new password
+          Cập nhật mật khẩu
         </button>
       </div>
     </form>

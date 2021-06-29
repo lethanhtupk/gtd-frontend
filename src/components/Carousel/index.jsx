@@ -31,9 +31,7 @@ const ProductCarousel = ({ type }) => {
           setError(true);
           setLoading(false);
           if (error.code === 4000) {
-            setMessage(
-              'There is an error in the system. Please contact with the admin'
-            );
+            setMessage('Có lỗi hệ thống xảy ra. Liên hệ với admin ngay!');
           } else {
             setMessage(error.errors.detail);
           }
@@ -50,9 +48,7 @@ const ProductCarousel = ({ type }) => {
           setError(true);
           setLoading(false);
           if (error.code === 4000) {
-            setMessage(
-              'There is an error in the system. Please contact with the admin'
-            );
+            setMessage('Có lỗi hệ thống xảy ra. Liên hệ với admin ngay!');
           } else {
             setMessage(error.errors.detail);
           }
@@ -69,7 +65,7 @@ const ProductCarousel = ({ type }) => {
       {loading ? (
         <div className="flex flex-col items-center justify-center w-full h-full">
           <ClipLoader size={30} />
-          <div>Please wait...</div>
+          <div>Xin chờ...</div>
         </div>
       ) : (
         <>

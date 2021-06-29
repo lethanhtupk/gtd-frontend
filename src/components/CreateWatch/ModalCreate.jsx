@@ -41,7 +41,7 @@ const ModalCreate = ({ showModal, setShowModal, productData }) => {
           {loading ? (
             <div className="flex flex-col items-center justify-center">
               <ClipLoader size={30} />
-              <div>Please wait...</div>
+              <div>Xin chờ...</div>
             </div>
           ) : (
             <>
@@ -80,11 +80,11 @@ export const CreateWatchForm = ({
   const validate = (values) => {
     const errors = {};
     if (values.expected_price === '') {
-      errors.expected_price = 'This field is required';
+      errors.expected_price = 'Trường này là bắt buộc.';
     } else {
       const expectedPrice = convertToNumber(values.expected_price);
       if (isNaN(expectedPrice) || expectedPrice < 0) {
-        errors.expected_price = 'Invalid expected price';
+        errors.expected_price = 'Giá mong muốn không hợp lệ.';
       }
     }
     return errors;
@@ -95,7 +95,7 @@ export const CreateWatchForm = ({
       expected_price: '',
     },
     validationSchema: Yup.object({
-      expected_price: Yup.string().required('This field is required'),
+      expected_price: Yup.string().required('Trường này là bắt buộc.'),
     }),
     validate,
     onSubmit: (values) => {
@@ -109,18 +109,18 @@ export const CreateWatchForm = ({
           if (res.code === 201) {
             setError(false);
             setLoading(false);
-            setMessage('Create new watch success!');
+            setMessage('Theo dõi sản phẩm thành công.');
           }
         })
         .catch((error) => {
           setError(true);
           setLoading(false);
           if (error.errors?.expected_price) {
-            setMessage('The price must smaller than current price');
+            setMessage('Giá mong muốn phải nhỏ hơn giá hiện tại');
           } else if (error.errors?.product) {
-            setMessage('You already watching this product');
+            setMessage('Bạn đã theo dõi sản phẩm này rồi.');
           } else {
-            setMessage('Something went wrong, please try later');
+            setMessage('Có lỗi hệ thống, liên hệ với admin ngay!');
           }
         });
     },
@@ -130,7 +130,7 @@ export const CreateWatchForm = ({
     <form onSubmit={formik.handleSubmit} className="flex flex-col px-4 py-4">
       <div className="form-content">
         <label htmlFor="expected_price" className="flex flex-col">
-          Expect price
+          Giá mong muốn
           <div className="relative flex flex-row items-center">
             <input
               id="expected_price"
@@ -161,7 +161,7 @@ export const CreateWatchForm = ({
           type="submit"
           className="px-4 py-3 mt-8 font-semibold text-white uppercase bg-gray-700 rounded-lg hover:bg-gray-500 hover:border-4 focus:outline-none"
         >
-          Start Tracking
+          Theo dõi
         </button>
       </div>
     </form>

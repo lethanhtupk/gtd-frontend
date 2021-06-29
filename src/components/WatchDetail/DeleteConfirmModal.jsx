@@ -38,9 +38,7 @@ const DeleteConfirmModal = (props) => {
         }, 1000);
         setError(true);
         if (error.code === 500) {
-          setMessage(
-            'There is an error in the system, please contact with the admin'
-          );
+          setMessage('Có lỗi hệ thống, liên hệ với admin ngay!');
         } else {
           setMessage(error.errors.detail);
         }
@@ -58,7 +56,7 @@ const DeleteConfirmModal = (props) => {
         {loading ? (
           <>
             <ClipLoader size={50} />
-            <div>Please wait...</div>
+            <div>Xin chờ...</div>
           </>
         ) : (
           <>
@@ -67,9 +65,7 @@ const DeleteConfirmModal = (props) => {
             </div>
             {error ? (
               <>
-                <div className="mt-5 text-2xl text-red-500 title">
-                  Delete watch failed
-                </div>
+                <div className="mt-5 text-2xl text-red-500 title">Thất bại</div>
                 <div className="text-sm text-center text-red-400">
                   {message}
                 </div>
@@ -79,18 +75,18 @@ const DeleteConfirmModal = (props) => {
                     className="px-8 py-2 text-white bg-gray-500 rounded-sm hover:bg-gray-600 focus:outline-none"
                     onClick={() => setVisible(false)}
                   >
-                    Cancel
+                    Thoát
                   </button>
                 </div>
               </>
             ) : (
               <>
                 <div className="text-2xl text-gray-600 title">
-                  Are you sure?
+                  Bạn chắc chứ?
                 </div>
                 <div className="text-center text-gray-500">
-                  Do you really want to delete these records? This process
-                  cannot be undone.
+                  Bạn thực sự muốn xóa sản phẩm này không? Thao tác này sẽ không
+                  thể hoàn tác.
                 </div>
                 <div className="mt-4 button">
                   <button
@@ -98,14 +94,14 @@ const DeleteConfirmModal = (props) => {
                     className="px-8 py-2 text-white bg-gray-500 rounded-sm hover:bg-gray-600 focus:outline-none"
                     onClick={() => setVisible(false)}
                   >
-                    Cancel
+                    Thoát
                   </button>
                   <button
                     type="button"
                     onClick={() => onDeleteHandler()}
                     className="px-8 py-2 ml-2 text-white bg-red-500 rounded-sm hover:bg-red-600 focus:outline-none"
                   >
-                    Delete
+                    Xóa
                   </button>
                 </div>
               </>

@@ -47,7 +47,7 @@ const NavigationAuth = ({
             onClick={() => setOpenNavigation(false)}
             className="block px-4 py-2 text-white md:text-gray-800 hover:bg-indigo-500"
           >
-            Your Price Watches
+            Đang theo dõi
           </Link>
           {authUser.role === 2 && !authUser.seller ? (
             <Link
@@ -58,7 +58,7 @@ const NavigationAuth = ({
               }}
               className="px-4 py-2 text-white font-base md:hidden"
             >
-              Connect to a shop
+              Liên kết cửa hàng
             </Link>
           ) : null}
           {authUser.role === 2 && authUser.seller ? (
@@ -70,7 +70,7 @@ const NavigationAuth = ({
               }}
               className="px-4 py-2 text-white font-base md:hidden"
             >
-              Your shop
+              Cửa hàng của bạn
             </Link>
           ) : null}
           <a
@@ -78,7 +78,7 @@ const NavigationAuth = ({
             onClick={() => (window.location.href = ROUTES.ACCOUNT)}
             className="hidden block px-4 py-2 text-gray-800 cursor-pointer hover:bg-indigo-500 md:flex"
           >
-            Account
+            Tài khoản
           </a>
         </div>
       ) : null}
@@ -140,7 +140,7 @@ const NavigationAuth = ({
           }}
           className="py-2 text-white font-base md:hidden"
         >
-          Edit profile
+          Chỉnh sửa profile
         </Link>
         <Link
           to={ROUTES.CHANGE_PASSWORD}
@@ -150,7 +150,7 @@ const NavigationAuth = ({
           }}
           className="py-2 text-white font-base md:hidden"
         >
-          Change password
+          Đổi mật khẩu
         </Link>
         <div
           className="py-2 text-white font-base md:hidden"
@@ -159,7 +159,7 @@ const NavigationAuth = ({
             setOpenNavigation(false);
           }}
         >
-          Sign out
+          Đăng xuất
         </div>
       </div>
 
@@ -173,26 +173,26 @@ const NavigationAuth = ({
             to={ROUTES.POPULAR_PRODUCTS}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
           >
-            Popular products
+            Sản phẩm phổ biến
           </Link>
           <Link
             to={ROUTES.TOP_DROPS_PRODUCT}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
           >
-            Top drops
+            Sản phẩm giảm sâu
           </Link>
           <Link
             to={ROUTES.WATCHES}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
           >
-            Your Price Watches
+            Đang theo dõi
           </Link>
           {authUser.role === 2 && !authUser.seller ? (
             <Link
               to={ROUTES.MANAGE_REQUEST}
               className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
             >
-              Connect to a shop
+              Liên kết cửa hàng
             </Link>
           ) : null}
           {authUser.role === 2 && authUser.seller ? (
@@ -200,7 +200,7 @@ const NavigationAuth = ({
               to={ROUTES.MANAGE_SHOP}
               className="block px-4 py-2 text-gray-800 hover:bg-indigo-500"
             >
-              Your shop
+              Cửa hàng của bạn
             </Link>
           ) : null}
           <a
@@ -208,7 +208,7 @@ const NavigationAuth = ({
             onClick={() => (window.location.href = ROUTES.ACCOUNT)}
             className="block px-4 py-2 text-gray-800 cursor-pointer hover:bg-indigo-500"
           >
-            Account
+            Tài khoản
           </a>
         </div>
       ) : null}

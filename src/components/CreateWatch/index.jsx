@@ -16,13 +16,13 @@ const CreateWatch = () => {
     <div className="w-4/5">
       <div className="flex flex-row items-center px-2 py-2 text-lg font-bold text-white bg-red-700">
         <MailIcon />
-        <p className="ml-2">Create Tiki Price Watches</p>
+        <p className="ml-2">Theo dõi sản phẩm</p>
       </div>
       <div className="flex flex-col bg-white border border-red-700">
         {loading ? (
           <div className="flex flex-col items-center justify-center mt-8">
             <ClipLoader size={30} />
-            <div>Please wait...</div>
+            <div>Xin chờ...</div>
           </div>
         ) : (
           <div className="flex justify-center mt-4">
@@ -53,22 +53,22 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
   const validate = (values) => {
     const errors = {};
     if (values.expected_price === '') {
-      errors.expected_price = 'This field is required';
+      errors.expected_price = 'Trường này là bắt buộc.';
     } else {
       const expectedPrice = convertToNumber(values.expected_price);
       if (isNaN(expectedPrice) || expectedPrice < 0) {
-        errors.expected_price = 'Invalid expected price';
+        errors.expected_price = 'Giá mong muốn không hợp lệ.';
       }
     }
     const patternUrl = /(http|https):\/\/tiki\.vn/;
     const patternPid = /p[0-9]+/;
     const pid = patternPid.exec(values.link_to_product);
     if (values.link_to_product === '') {
-      errors.link_to_product = 'This field is required';
+      errors.link_to_product = 'Trường này là bắt buộc.';
     } else if (!patternUrl.test(values.link_to_product)) {
-      errors.link_to_product = 'Invalid URL or URL not from Tiki';
+      errors.link_to_product = 'Đường dẫn không hợp lệ.';
     } else if (!pid) {
-      errors.link_to_product = "Invalid product's URL";
+      errors.link_to_product = 'Đường dẫn không hợp lệ.';
     }
     return errors;
   };
@@ -79,8 +79,8 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
       expected_price: '',
     },
     validationSchema: Yup.object({
-      link_to_product: Yup.string().required('This field is required'),
-      expected_price: Yup.string().required('This field is required'),
+      link_to_product: Yup.string().required('Trường này là bắt buộc.'),
+      expected_price: Yup.string().required('Trường này là bắt buộc.'),
     }),
     validate,
     onSubmit: (values) => {
@@ -96,24 +96,26 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
           if (res.code === 201) {
             setError(false);
             setLoading(false);
-            setMessage('Create new watch success!');
+            setMessage('Theo dõi sản phẩm thành công.');
           }
         })
         .catch((error) => {
           setError(true);
           setLoading(false);
           if (error.errors?.expected_price) {
-            setMessage('The price must smaller than current price');
+            setMessage('Giá mong muốn phải nhỏ hơn giá hiện tại');
           } else if (error.errors?.product) {
             if (
               error.errors?.product === 'cannot find any product with that ID'
             ) {
-              setMessage('We cannot find the product, please try another one!');
+              setMessage(
+                'Không tìm thấy sản phẩm, hãy thử lại với sản phẩm khác.'
+              );
             } else {
-              setMessage('You already watching this product');
+              setMessage('Bạn đã theo dõi sản phẩm này rồi.');
             }
           } else {
-            setMessage('Something went wrong, please try later');
+            setMessage('Có lỗi hệ thống, liên hệ với admin ngay!');
           }
         });
     },
@@ -128,7 +130,7 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
         htmlFor="link_to_product"
         className="flex flex-col h-20 lg:w-3/5 lg:px-2"
       >
-        Link to product
+        Đường dẫn của sản phẩm
         <input
           id="link_to_product"
           type="text"
@@ -145,7 +147,7 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
         htmlFor="link_to_product"
         className="flex flex-col h-20 mt-4 lg:px-2 lg:mt-0"
       >
-        Expect price
+        Giá mong muốn
         <div className="relative flex flex-row items-center">
           <input
             id="expected_price"
@@ -176,7 +178,7 @@ const CreateWatchForm = ({ setError, setMessage, setLoading }) => {
         type="submit"
         className="px-4 py-3 mt-4 font-medium text-white uppercase bg-gray-700 rounded-lg h-42 lg:mt-0 hover:bg-gray-500 hover:border-4 focus:outline-none"
       >
-        Start Tracking
+        Theo dõi
       </button>
     </form>
   );

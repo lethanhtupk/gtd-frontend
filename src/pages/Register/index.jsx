@@ -18,14 +18,12 @@ const RegisterPage = () => {
         <title>Register an account - GTD</title>
       </header>
       <div className="flex flex-col items-center mt-24">
-        <div className="mb-4 text-2xl font-semibold uppercase">
-          Create An Account
-        </div>
+        <div className="mb-4 text-2xl font-semibold uppercase">Đăng ký</div>
 
         {loading ? (
           <div className="flex flex-col items-center justify-center">
             <ClipLoader size={30} />
-            <div>Please wait...</div>
+            <div>Xin chờ...</div>
           </div>
         ) : (
           <>
@@ -58,7 +56,7 @@ const RegisterFormBase = (props) => {
   const validate = (values) => {
     const errors = {};
     if (values.password !== values.re_password) {
-      errors.re_password = 'Confirm password must to be matched with password';
+      errors.re_password = 'Mật khẩu xác nhận phải trùng với mật khẩu';
     }
     return errors;
   };
@@ -77,22 +75,20 @@ const RegisterFormBase = (props) => {
     },
     validate,
     validationSchema: Yup.object({
-      password: Yup.string().required('This field is required'),
-      re_password: Yup.string().required('This field is required'),
+      password: Yup.string().required('Trường này là bắt buộc'),
+      re_password: Yup.string().required('Trường này là bắt buộc'),
       email: Yup.string()
-        .email('Invalid email address')
-        .required('This field is required'),
+        .email('Email không hợp lệ')
+        .required('Trường này là bắt buộc'),
       fullname: Yup.string()
-        .max(30, 'Full name is too long')
-        .required('This field is required'),
+        .max(30, 'Họ tên quá dài')
+        .required('Trường này là bắt buộc'),
     }),
     onSubmit: (values, { setFieldError }) => {
       setLoading(true);
       createAccount(values)
         .then((res) => {
-          setMessage(
-            'Create a new account successful, please activate your account'
-          );
+          setMessage('Tạo tài khoản thành công, vui lòng kích hoạt tài khoản');
           setError(false);
           setLoading(false);
         })
@@ -101,12 +97,12 @@ const RegisterFormBase = (props) => {
           if (e.code < 4000 && e.errors.email) {
             setError(true);
 
-            setMessage('User with this email address already exists');
+            setMessage('Email đã được sử dụng');
           } else if (e.code < 4000 && e.errors.password) {
             setFieldError('password', e.errors.password[0]);
           } else {
             setError(true);
-            setMessage('Something went wrong, please try later');
+            setMessage('Có lỗi xảy ra, liên hệ với admin ngay!');
           }
         });
     },
@@ -136,7 +132,7 @@ const RegisterFormBase = (props) => {
         htmlFor="fullname"
         className="flex flex-col mt-2 font-semibold uppercase"
       >
-        Full name*
+        Họ tên*
         <input
           id="fullname"
           type="text"
@@ -154,7 +150,7 @@ const RegisterFormBase = (props) => {
         htmlFor="password"
         className="flex flex-col mt-2 font-semibold uppercase"
       >
-        Password*
+        Mật khẩu*
         <input
           id="password"
           type="password"
@@ -172,7 +168,7 @@ const RegisterFormBase = (props) => {
         htmlFor="re_password"
         className="flex flex-col mt-2 font-semibold uppercase"
       >
-        Confirm Password*
+        Xác nhận mật khẩu*
         <input
           id="re_password"
           type="password"
@@ -192,7 +188,7 @@ const RegisterFormBase = (props) => {
           type="checkbox"
           {...formik.getFieldProps('is_seller')}
         />
-        <p className="ml-2">Register as a supplier</p>
+        <p className="ml-2">Đăng ký với tư cách nhà cung ứng</p>
         {formik.touched.is_seller && formik.errors.is_seller ? (
           <div>{formik.errors.is_seller}</div>
         ) : null}
@@ -201,14 +197,14 @@ const RegisterFormBase = (props) => {
         type="submit"
         className="py-4 mt-2 font-semibold text-white uppercase bg-black rounded-sm hover:bg-white hover:text-black hover:border-black hover:border-4"
       >
-        Register
+        Đăng ký
       </button>
       <div className="flex flex-col justify-between mt-2 text-sm underline uppercase md:flex-row">
         <Link to="/login" className="hover:text-blue-500">
-          Login now
+          Đăng nhập
         </Link>
         <Link to={ROUTES.RESEND_ACTIVATION} className=" hover:text-blue-500">
-          Resend activation email
+          Gửi lại email kích hoạt
         </Link>
       </div>
     </form>
@@ -219,7 +215,7 @@ const RegisterForm = withRouter(RegisterFormBase);
 
 const RegisterLink = () => (
   <p>
-    Do not have an account? <Link to={ROUTES.REGISTER}>Register</Link>
+    Bạn chưa có tài khoản? <Link to={ROUTES.REGISTER}>Đăng ký</Link>
   </p>
 );
 

@@ -40,7 +40,7 @@ const SearchBar = (props) => {
       </div>
       <input
         type="text"
-        placeholder="Search directly on Tiki"
+        placeholder="Tìm kiếm trên Tiki"
         value={searchPattern}
         onChange={onChangeValue}
         onKeyPress={handleKeyPress}
@@ -51,7 +51,7 @@ const SearchBar = (props) => {
         onClick={onSubmit}
         className="px-4 py-2 ml-2 text-white bg-gray-500 rounded-lg md:hidden border-lg focus:outline-none hover:bg-gray-400"
       >
-        Search
+        Tìm kiếm
       </button>
     </section>
   );

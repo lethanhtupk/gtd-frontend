@@ -20,14 +20,14 @@ export const NoItem = ({ isRequest, setShowModal }) => (
           onClick={() => setShowModal(true)}
           className="px-8 py-1 mt-4 text-gray-700 bg-yellow-400 rounded-sm hover:bg-yellow-500"
         >
-          Create a new request
+          Tạo một yêu cầu mới.
         </button>
       ) : (
         <Link
           to={ROUTES.HOME}
           className="px-8 py-1 mt-4 text-gray-700 bg-yellow-400 rounded-sm hover:bg-yellow-500"
         >
-          Watching now
+          Theo dõi ngay.
         </Link>
       )}
     </div>

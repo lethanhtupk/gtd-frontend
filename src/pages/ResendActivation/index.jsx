@@ -22,13 +22,13 @@ const ResendActivation = (props) => {
     <>
       <div className="flex flex-col items-center mt-24">
         <div className="mb-4 text-2xl font-medium uppercase">
-          Resend activation email
+          Gửi lại email kích hoạt
         </div>
 
         {loading ? (
           <div className="flex flex-col items-center">
             <ClipLoader size={30} />
-            <div>Please wait...</div>
+            <div>Xin chờ...</div>
           </div>
         ) : (
           <>
@@ -72,15 +72,15 @@ export const ResendActivationFormBase = (props) => {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email('Invalid email address')
-        .required('This field is required'),
+        .email('Email không hợp lệ')
+        .required('Trường này là bắt buộc'),
     }),
     onSubmit: (values) => {
       setLoading(true);
       resendActivation(values)
         .then((res) => {
           setMessage(
-            'We have been send you a new activation email, please check you inbox'
+            'Chúng tôi đã gửi cho bạn một email kích hoạt tài khoản, vui lòng kiểm tra hòm thư'
           );
           setLoading(false);
           setError();
@@ -88,7 +88,9 @@ export const ResendActivationFormBase = (props) => {
         .catch((e) => {
           setError(true);
           setLoading(false);
-          setMessage('Your account has been activated or incorrect email');
+          setMessage(
+            'Tài khoản của bạn đã được kích hoạt hoặc email không đúng'
+          );
         });
     },
   });
@@ -117,13 +119,13 @@ export const ResendActivationFormBase = (props) => {
         type="submit"
         className="py-4 mt-2 font-medium text-white uppercase bg-black rounded-sm hover:bg-white hover:text-black hover:border-black hover:border-4"
       >
-        Submit
+        Gửi
       </button>
       <Link
         to={ROUTES.LOGIN}
         className="mt-2 text-sm underline uppercase hover:text-blue-500"
       >
-        Cancel
+        Thoát
       </Link>
     </form>
   );

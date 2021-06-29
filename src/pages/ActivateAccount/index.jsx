@@ -33,7 +33,7 @@ const ActivateAccount = (props) => {
   return (
     <>
       {loading ? (
-        <div className="flex flex-row justify-center items-center w-full h-full">
+        <div className="flex flex-row items-center justify-center w-full h-full">
           <ClipLoader size={50} />
         </div>
       ) : (
@@ -41,24 +41,23 @@ const ActivateAccount = (props) => {
           {error ? (
             <div className="flex flex-row justify-center">
               <div className="flex flex-col items-center">
-                <p className="uppercase text-2xl font-semibold text-red-500">
+                <p className="text-2xl font-semibold text-red-500 uppercase">
                   Failed to activate
                 </p>
                 <p className="mt-4 text-xl text-red-400">
-                  Your account already activated.
+                  Tài khoản của bạn đã được kích hoạt
                 </p>
-                <p className="mt-4 fex flex-row">
+                <p className="flex-row mt-4 fex">
                   <p className="flex">
-                    If you make sure your account has not been activated yet,
-                    maybe the activation link has been broken, please
-                    click&nbsp;
+                    Nếu bạn chắc chắn tài khoản của bạn chưa được kích hoạt, vui
+                    lòng click&nbsp;
                     <Link to={ROUTES.RESEND_ACTIVATION}>
-                      <p className="text-blue-500 hover:underline cursor-pointer">
+                      <p className="text-blue-500 cursor-pointer hover:underline">
                         {' '}
-                        here
+                        vào đây
                       </p>
                     </Link>
-                    &nbsp;to request new activation email.
+                    &nbsp;để yêu cầu một email kích hoạt mới
                   </p>
                 </p>
               </div>
@@ -66,23 +65,22 @@ const ActivateAccount = (props) => {
           ) : (
             <div className="flex flex-row justify-center">
               <div className="flex flex-col items-center">
-                <p className="uppercase text-2xl font-semibold text-green-500">
-                  Activate your account successful
+                <p className="text-2xl font-semibold text-green-500 uppercase">
+                  Kích hoạt tài khoản thành công
                 </p>
                 <p className="mt-8">
-                  Congratulation, you already activated your account successful,
-                  you can now login to our site to start tracking your favorite
-                  product
+                  Chúc mừng bạn kích hoạt tài khoản thành công, hãy đăng nhập
+                  ngay để theo dõi sản phẩm yêu thích của bạn.
                 </p>
                 <p className="flex flex-row">
                   Click&nbsp;
                   <Link to={ROUTES.LOGIN}>
-                    <p className="text-blue-500 hover:underline cursor-pointer">
+                    <p className="text-blue-500 cursor-pointer hover:underline">
                       {' '}
-                      here
+                      ở đây
                     </p>
                   </Link>
-                  &nbsp;to login now
+                  &nbsp;để đăng nhập ngay.
                 </p>
               </div>
             </div>

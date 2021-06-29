@@ -19,14 +19,14 @@ export const NotFound = () => (
       </div>
     </div>
     <div className="mt-4 text-sm">
-      The page you are looking for can not be found or you do not have
-      permission for accessing it.
+      Trang bạn yêu cầu truy cập không có hoặc bạn không có quyền để truy cập
+      trang này.
     </div>
     <Link
       className="px-8 py-1 mt-8 text-gray-800 capitalize bg-yellow-400 rounded-sm hover:bg-yellow-500"
       to={ROUTES.HOME}
     >
-      Go to Home page
+      Quay về trang chủ
     </Link>
   </div>
 );
