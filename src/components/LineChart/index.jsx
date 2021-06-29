@@ -9,7 +9,7 @@ const LineChart = ({ chartData }) => {
     labels,
     datasets: [
       {
-        label: 'Number of watches',
+        label: 'Số lượt theo dõi',
         fill: false,
         lineTension: 0.5,
         backgroundColor: 'rgba(75,192,192,1)',
@@ -26,7 +26,7 @@ const LineChart = ({ chartData }) => {
         options={{
           title: {
             display: true,
-            text: 'Number of watches by price',
+            text: 'Thống kê số lượt theo dõi theo giá mong muốn.',
             fontSize: 20,
           },
           legend: {

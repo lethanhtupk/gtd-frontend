@@ -52,10 +52,10 @@ const ItemWatch = ({ watchData }) => {
               {numberWithCommas(productData.price)} đ
             </p>
             <p className="mb-2 text-sm text-gray-500">
-              Expected price: {numberWithCommas(watchData.expected_price)}
+              GIá mong muốn: {numberWithCommas(watchData.expected_price)} đ
             </p>
             <div className="flex flex-row mb-2 text-sm text-gray-500">
-              Status:&nbsp;
+              Trạng thái:&nbsp;
               {watchData.status === 1 ? (
                 <div className="text-green-500">
                   <CheckIcon />

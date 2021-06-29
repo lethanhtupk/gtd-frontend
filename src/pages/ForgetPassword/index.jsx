@@ -28,7 +28,7 @@ const ForgetPassword = (props) => {
         {loading ? (
           <div className="flex flex-col items-center">
             <ClipLoader size={30} />
-            <div>Please wait...</div>
+            <div>Xin chờ...</div>
           </div>
         ) : (
           <>
@@ -72,15 +72,15 @@ export const ResetPasswordFormBase = (props) => {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email('Invalid email address')
-        .required('This field is required'),
+        .email('Email không hợp lệ')
+        .required('Trường này là bắt buộc'),
     }),
     onSubmit: (values) => {
       setLoading(true);
       resetPassword(values)
         .then((res) => {
           setMessage(
-            'We have been send you an email to reset your password, please check you inbox'
+            'Chúng tôi đã gửi cho bạn một email để cài lại mật khẩu, vui lòng kiểm tra hòm thư.'
           );
           setLoading(false);
           setError();
@@ -88,7 +88,7 @@ export const ResetPasswordFormBase = (props) => {
         .catch((e) => {
           setError(true);
           setLoading(false);
-          setMessage('Cannot find your email on system');
+          setMessage('Không tìm thấy email của bạn trong hệ thống.');
         });
     },
   });
@@ -117,13 +117,13 @@ export const ResetPasswordFormBase = (props) => {
         type="submit"
         className="py-4 mt-2 font-medium text-white uppercase bg-black rounded-sm hover:bg-white hover:text-black hover:border-black hover:border-4"
       >
-        Submit
+        Gửi
       </button>
       <Link
         to={ROUTES.LOGIN}
         className="mt-2 text-sm underline uppercase hover:text-blue-500"
       >
-        Cancel
+        Thoát
       </Link>
     </form>
   );

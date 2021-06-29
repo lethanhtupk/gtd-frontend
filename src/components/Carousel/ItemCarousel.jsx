@@ -26,14 +26,14 @@ const ItemCarousel = ({ data, pageName }) => {
             {numberWithCommas(data.price)} đ
           </p>
           <p className="mb-2 text-sm text-gray-500">
-            List price: {numberWithCommas(data.list_price)}
+            Giá gốc: {numberWithCommas(data.list_price)} đ
           </p>
           <button
             type="button"
             onClick={() => window.open(`https://tiki.vn/${data.url_path}`)}
             className="w-full py-2 mb-2 text-lg font-semibold bg-yellow-300 rounded-lg hover:bg-yellow-400"
           >
-            Buy Now
+            Mua ngay
           </button>
         </div>
       </div>

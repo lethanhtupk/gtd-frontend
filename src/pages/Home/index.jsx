@@ -23,19 +23,17 @@ const HomePage = () => {
         <div className="justify-center w-4/5 mt-12 popular-product">
           <div className="describe">
             <p className="text-2xl font-bold text-blue-600 capitalize">
-              Popular Products
+              Sản phẩm phổ biến
             </p>
             <div className="flex flex-row justify-between">
-              <div className="w-3/4">
-                <p>
-                  Check out these recently popular deals on our site. See what
-                  our user recently watching
-                </p>
-              </div>
-              <div className="flex justify-end w-1/4">
+              <p>
+                Xem các sản phẩm đang được quan tâm và theo dõi nhiều bởi người
+                dùng sử dụng dịch vụ của chúng tôi.
+              </p>
+              <div className="flex justify-end">
                 <Link to={ROUTES.POPULAR_PRODUCTS}>
                   <p className="text-blue-500 hover:text-blue-600 hover:underline">
-                    View all
+                    Xem thêm
                   </p>
                 </Link>
               </div>
@@ -49,19 +47,17 @@ const HomePage = () => {
         <div className="justify-center w-4/5 mt-12 popular-product">
           <div className="describe">
             <p className="text-2xl font-bold text-blue-600 capitalize">
-              top product drops
+              Sản phẩm giảm sâu
             </p>
             <div className="flex flex-row justify-between">
-              <div className="w-3/4">
-                <p>
-                  Check out these most product price drops down we are currently
-                  watching
-                </p>
-              </div>
-              <div className="flex justify-end w-1/4">
+              <p>
+                Xem các sản phẩm giảm giá sâu đang được chúng tôi theo dõi trên
+                hệ thống
+              </p>
+              <div className="flex justify-end">
                 <Link to={ROUTES.TOP_DROPS_PRODUCT}>
                   <p className="text-blue-500 hover:text-blue-600 hover:underline">
-                    View all
+                    Xem thêm
                   </p>
                 </Link>
               </div>

@@ -22,7 +22,7 @@ const EditProfile = ({ authUser, setActive }) => {
         {loading ? (
           <div className="flex flex-col items-center">
             <ClipLoader size={30} />
-            <div>Please wait...</div>
+            <div>Xin chờ...</div>
           </div>
         ) : (
           <>
@@ -59,7 +59,7 @@ const EditProfileForm = (props) => {
       email: authUser[0]?.email,
     },
     validationSchema: Yup.object({
-      fullname: Yup.string().max(70).required('This field is required'),
+      fullname: Yup.string().max(70).required('Trường này là bắt buộc'),
     }),
     onSubmit: (values) => {
       setLoading(true);
@@ -67,7 +67,7 @@ const EditProfileForm = (props) => {
         .then((res) => {
           setError(false);
           if (res.code === 200) {
-            setMessage('Update your profile success');
+            setMessage('Cập nhật profile thành công');
             setLoading(false);
           }
         })
@@ -81,7 +81,7 @@ const EditProfileForm = (props) => {
   return (
     <form onSubmit={formik.handleSubmit} className="flex flex-col w-full">
       <label htmlFor="fullname" className="flex flex-col mt-8 font-semibold">
-        Full name
+        Họ tên
         <input
           id="fullname"
           type="text"
@@ -115,14 +115,14 @@ const EditProfileForm = (props) => {
             onClick={() => setActive(0)}
             className="w-1/5 px-4 py-2 mt-8 font-medium text-gray-500 uppercase rounded-full hover:border-black hover:text-black focus:outline-none"
           >
-            Cancel
+            Thoát
           </button>
         </Link>
         <button
           type="submit"
           className="px-4 py-2 mt-8 font-medium text-gray-500 uppercase bg-green-400 rounded-full hover:text-black min:w-1/5 focus:outline-none"
         >
-          Edit Profile
+          Cập nhật
         </button>
       </div>
     </form>

@@ -54,7 +54,7 @@ const ProductDetail = (props) => {
           } else {
             setMessage(
               <div className="text-red-500 text-">
-                Something went wrong, please contact with the admin
+                Có lỗi hệ thống, liên hệ với admin ngay!
               </div>
             );
           }
@@ -73,7 +73,7 @@ const ProductDetail = (props) => {
           } else {
             setMessage(
               <div className="text-red-500 text-">
-                Something went wrong, please contact with the admin
+                Có lỗi hệ thống, liên hệ với admin ngay!
               </div>
             );
           }
@@ -86,7 +86,7 @@ const ProductDetail = (props) => {
       {loading ? (
         <div className="flex flex-col items-center justify-center w-full h-full">
           <ClipLoader size={50} />
-          <div>Please wait...</div>
+          <div>Xin chờ...</div>
         </div>
       ) : (
         <>
@@ -103,7 +103,7 @@ const ProductDetail = (props) => {
                   </div>
                   <div className="w-11/12 col-span-2 px-4 py-4 mt-5 bg-white md:ml-2 overview md:mt-0 md:w-full">
                     <div className="flex text-sm text-gray-600">
-                      Brand:{' '}
+                      Nhãn hiệu:{' '}
                       <p className="ml-1 text-blue-500">{` ${productData.brand?.name}`}</p>
                     </div>
                     <p className="text-xl font-light">{productData?.name}</p>
@@ -133,7 +133,7 @@ const ProductDetail = (props) => {
                         }
                         className="px-8 py-2 text-lg font-semibold bg-yellow-300 rounded-lg hover:bg-yellow-400"
                       >
-                        View at Tiki
+                        Xem tại Tiki
                       </button>
                       {authUser[0] ? (
                         <div
@@ -179,7 +179,7 @@ const ProductDetail = (props) => {
 export const ShowDescription = ({ showAll, setShowAll, description }) => {
   return (
     <>
-      <p className="mb-4 text-lg text-black uppercase">Product description</p>
+      <p className="mb-4 text-lg text-black uppercase">Mô tả sản phẩm</p>
       <div className="px-8 py-4 bg-white">
         {showAll ? (
           <>
@@ -190,7 +190,7 @@ export const ShowDescription = ({ showAll, setShowAll, description }) => {
                 onClick={() => setShowAll(false)}
                 className="px-8 py-2 text-blue-500 border border-blue-500 rounded-lg hover:text-white hover:bg-blue-500 focus:outline-none"
               >
-                Show less
+                Thu gọn
               </button>
             </div>
           </>
@@ -205,7 +205,7 @@ export const ShowDescription = ({ showAll, setShowAll, description }) => {
                 onClick={() => setShowAll(true)}
                 className="px-8 py-2 text-blue-500 border border-blue-500 rounded-lg hover:text-white hover:bg-blue-500 focus:outline-none"
               >
-                Watch more content
+                Xem thêm
               </button>
             </div>
           </>

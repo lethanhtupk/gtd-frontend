@@ -31,9 +31,7 @@ const ProductList = ({ pageName, search, page }) => {
           setError(true);
           setLoading(false);
           if (error.code === 4000) {
-            setMessage(
-              'There is an error in the system. Please contact with the admin'
-            );
+            setMessage('Có lỗi hệ thống, liên hệ với admin ngay!');
           } else {
             setMessage(error.errors.detail);
           }
@@ -53,9 +51,7 @@ const ProductList = ({ pageName, search, page }) => {
           setError(true);
           setLoading(false);
           if (error.code === 4000) {
-            setMessage(
-              'There is an error in the system. Please contact with the admin'
-            );
+            setMessage('Có lỗi hệ thống, liên hệ với admin ngay!');
           } else {
             setMessage(error.errors.detail);
           }
@@ -76,9 +72,7 @@ const ProductList = ({ pageName, search, page }) => {
           setError(true);
           setLoading(false);
           if (error.code === 4000) {
-            setMessage(
-              'There is an error in the system. Please contact with the admin'
-            );
+            setMessage('Có lỗi hệ thống, liên hệ với admin ngay!');
           } else {
             setMessage(error.errors.detail);
           }
@@ -99,11 +93,9 @@ const ProductList = ({ pageName, search, page }) => {
           setError(true);
           setLoading(false);
           if (error.code === 4000) {
-            setMessage(
-              'There is an error in the system. Please contact with the admin'
-            );
+            setMessage('Có lỗi hệ thống, liên hệ với admin ngay!');
           } else {
-            setMessage('Something went wrong, please contact with the admin');
+            setMessage('Có lỗi hệ thống, liên hệ với admin ngay!');
           }
         });
     }
@@ -115,7 +107,7 @@ const ProductList = ({ pageName, search, page }) => {
         <>
           <div className="flex flex-col items-center justify-center h-screen">
             <ClipLoader size={50} />
-            <div>Please wait...</div>
+            <div>Xin chờ...</div>
           </div>
         </>
       ) : (
@@ -130,7 +122,7 @@ const ProductList = ({ pageName, search, page }) => {
                     to={ROUTES.HOME}
                     className="text-blue-500 hover:underline"
                   >
-                    home page
+                    Trang chủ
                   </Link>
                 </div>
               </div>
@@ -142,12 +134,12 @@ const ProductList = ({ pageName, search, page }) => {
                   {pageName === 'popular' ? (
                     <>
                       <p className="text-2xl font-bold text-blue-600 capitalize">
-                        Popular Products
+                        Sản phẩm phổ biến
                       </p>
                       <div className="flex flex-row justify-between">
                         <p>
-                          Check out these recently popular deals on our site.
-                          See what our user recently watching
+                          Các sản phẩm được quan tâm và theo dõi nhiều trên hệ
+                          thống của chúng tôi
                         </p>
                       </div>
                     </>
@@ -160,8 +152,8 @@ const ProductList = ({ pageName, search, page }) => {
                           </p>
                           <div className="flex flex-row justify-between">
                             <p>
-                              Check out these most drops products on Tiki to get
-                              the biggest benefit
+                              Các sản phẩm giảm giá sâu đang được chúng tôi theo
+                              dõi
                             </p>
                           </div>
                         </>
@@ -170,21 +162,22 @@ const ProductList = ({ pageName, search, page }) => {
                           {pageName === 'shop-products' ? (
                             <>
                               <p className="text-2xl font-bold text-blue-600 capitalize">
-                                Products in your shop
+                                Các sản phẩm thuộc cửa hàng của bạn
                               </p>
                               <div className="flex flex-row justify-between">
-                                Check out your products and desire price of your
-                                customers to get the most values.
+                                Kiểm tra các sản phẩm của bạn đang được quan tâm
+                                và theo dõi thế nào. Bạn có thể cân đối lại giá
+                                bán để tối ưu hóa lợi nhuận
                               </div>
                             </>
                           ) : (
                             <>
                               <p className="text-2xl font-bold text-blue-600 capitalize">
-                                Result from Tiki
+                                Kết quả từ Tiki
                               </p>
                               <div className="flex flex-row justify-between">
-                                Check out these products that we get directly
-                                from Tiki, easily to searching and watching
+                                Các sản phẩm được tìm thấy trên Tiki, hãy chọn
+                                sản phẩm yêu thích và theo dõi nó ngay nào!
                               </div>
                             </>
                           )}

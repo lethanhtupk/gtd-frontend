@@ -51,7 +51,7 @@ const EditWatchModal = ({
           {loading ? (
             <div className="flex flex-col items-center justify-center">
               <ClipLoader size={30} />
-              <div>Please wait...</div>
+              <div>Xin chờ...</div>
             </div>
           ) : (
             <>
@@ -86,11 +86,11 @@ export const EditWatchForm = (props) => {
   const validate = (values) => {
     const errors = {};
     if (values.expected_price === '') {
-      errors.expected_price = 'This field is required';
+      errors.expected_price = 'Trường này là bắt buộc';
     } else {
       const expectedPrice = convertToNumber(values.expected_price);
       if (isNaN(expectedPrice) || expectedPrice < 0) {
-        errors.expected_price = 'Invalid expected price';
+        errors.expected_price = 'Giá mong muốn không hợp lệ.';
       }
     }
     return errors;
@@ -104,9 +104,9 @@ export const EditWatchForm = (props) => {
     validate,
     validationSchema: Yup.object({
       status: Yup.number()
-        .oneOf([1, 2], 'Invalid Status')
-        .required('This field is required'),
-      expected_price: Yup.string().required('This field is required'),
+        .oneOf([1, 2], 'Trạng thái không hợp lệ')
+        .required('Trường này là bắt buộc'),
+      expected_price: Yup.string().required('Trường này là bắt buộc'),
     }),
     onSubmit: (values) => {
       const data = {
@@ -119,7 +119,7 @@ export const EditWatchForm = (props) => {
           if (res.code === 200) {
             setError(false);
             setLoading(false);
-            setMessage('Update your watch success!');
+            setMessage('Cập nhật thành công!');
           }
           delete res.code;
           setWatchData(res);
@@ -128,9 +128,9 @@ export const EditWatchForm = (props) => {
           setError(true);
           setLoading(false);
           if (error.errors?.expected_price) {
-            setMessage('The price must smaller than current price');
+            setMessage('Giá mong muốn phải nhỏ hơn mức giá hiện tại.');
           } else {
-            setMessage('Failed to update watch, please try later');
+            setMessage('Cập nhật thất bại, vui lòng thử lại');
           }
         });
     },
@@ -140,7 +140,7 @@ export const EditWatchForm = (props) => {
     <form onSubmit={formik.handleSubmit} className="flex flex-col px-4 py-4">
       <div className="form-content">
         <label htmlFor="link_to_product" className="flex flex-col">
-          Expect price
+          Giá mong muốn
           <div className="relative flex flex-row items-center">
             <input
               id="link_to_product"
@@ -168,7 +168,7 @@ export const EditWatchForm = (props) => {
           ) : null}
         </label>
         <label htmlFor="status" className="flex flex-col mt-2">
-          Status
+          Trạng thái
           {watchData.status === 1 ? (
             <select
               name="status"
@@ -198,7 +198,7 @@ export const EditWatchForm = (props) => {
           type="submit"
           className="px-4 py-3 mt-8 font-semibold text-white uppercase bg-gray-700 rounded-lg hover:bg-gray-500 hover:border-4 focus:outline-none"
         >
-          Update watch
+          Cập nhật
         </button>
       </div>
     </form>

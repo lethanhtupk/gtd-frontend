@@ -10,9 +10,10 @@ const Footer = () => {
               get the deal
             </p>
             <p className="mt-8 text-gray-300">
-              This is a personal project and I will try my best to bring it as
-              much as helpful feature. Stick with me to tracking your favorite
-              product. If you have any feedback, please contact with me.
+              Website giúp bạn theo dõi giá sản phẩm mong muốn. Bạn chỉ cần tạo
+              sản phẩm cần theo dõi và mức giá mong muốn. Hệ thống sẽ tự động
+              cập nhật giá và thông báo tới bạn qua email khi mức giá sản phẩm
+              bằng hoặc nhỏ hơn mức giá mong muốn của bạn.
             </p>
           </div>
         </div>

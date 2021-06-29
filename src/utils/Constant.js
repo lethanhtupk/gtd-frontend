@@ -28,8 +28,8 @@ export const LOCAL_STORAGE = {
 };
 
 export const WATCH_STATUS = {
-  1: 'Active',
-  2: 'Deactivate',
+  1: 'Đang theo dõi',
+  2: 'Bỏ theo dõi',
 };
 
 export const CONFETTI_TYPE = {
@@ -54,21 +54,21 @@ export const sideBarData = [
   {
     key: 0,
     path: '/account/overview',
-    name: 'Account Overview',
+    name: 'Tổng quan tài khoản',
     title: 'Account Overview - GTD',
     icon: <HomeIcon />,
   },
   {
     key: 1,
     path: '/account/edit/',
-    name: 'Edit Profile',
+    name: 'Chỉnh sửa profile',
     title: 'Edit Profile - GTD',
     icon: <PenIcon />,
   },
   {
     key: 2,
     path: '/account/change-password',
-    name: 'Change password',
+    name: 'Đổi mật khẩu',
     title: 'Change your password - GTD',
     icon: <LockIcon />,
   },

@@ -41,7 +41,7 @@ const WatchDetail = ({ match }) => {
         } else {
           setMessage(
             <div className="text-sm text-red-500">
-              Something went wrong, please contact to the admin
+              Có lỗi hệ thống, liên hệ admin ngay!
             </div>
           );
         }
@@ -53,7 +53,7 @@ const WatchDetail = ({ match }) => {
       {loading ? (
         <div className="flex flex-col items-center justify-center w-full h-full">
           <ClipLoader size={50} />
-          <div>Please wait...</div>
+          <div>Xin chờ...</div>
         </div>
       ) : (
         <>
@@ -85,7 +85,7 @@ const WatchDetail = ({ match }) => {
                     ) : null}
                     <div className="flex flex-row justify-between">
                       <div className="flex text-sm text-gray-600">
-                        Brand:{' '}
+                        Nhãn hiệu:{' '}
                         <p className="ml-1 text-blue-500 cursor-pointer hover:underline">{` ${
                           productData.brand?.name ?? 'Unknown'
                         }`}</p>
@@ -124,13 +124,13 @@ const WatchDetail = ({ match }) => {
                     </div>
                     <div className="mt-4 watch-section">
                       <div className="flex flex-row">
-                        <p>Expected price:&nbsp;</p>
+                        <p>Giá mong muốn:&nbsp;</p>
                         <p className="">
                           {numberWithCommas(watchData.expected_price)} đ
                         </p>
                       </div>
                       <div className="flex flex-row mt-2">
-                        <p>Lowest price:&nbsp;</p>
+                        <p>Giá thấp nhất:&nbsp;</p>
                         <p className="">
                           {numberWithCommas(watchData.lowest_price)} đ
                         </p>
@@ -165,7 +165,7 @@ const WatchDetail = ({ match }) => {
                         }
                         className="px-8 py-2 text-lg font-semibold bg-yellow-300 rounded-lg hover:bg-yellow-400"
                       >
-                        View at Tiki
+                        Xem tại Tiki
                       </button>
                     </div>
                   </div>

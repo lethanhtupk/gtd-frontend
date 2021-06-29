@@ -26,12 +26,12 @@ const LoginPage = (props) => {
         <title>Login an account - GTD</title>
       </header>
       <div className="flex flex-col items-center mt-24">
-        <div className="mb-4 text-2xl font-semibold uppercase">Login</div>
+        <div className="mb-4 text-2xl font-semibold uppercase">Đăng nhập</div>
 
         {loading ? (
           <div className="flex flex-col items-center">
             <ClipLoader size={30} />
-            <div>Please wait...</div>
+            <div>Xin chờ...</div>
           </div>
         ) : (
           <>
@@ -72,10 +72,10 @@ const LoginFormBase = (props) => {
       password: '',
     },
     validationSchema: Yup.object({
-      password: Yup.string().required('This field is required'),
+      password: Yup.string().required('Trường này là bắt buộc.'),
       email: Yup.string()
-        .email('Invalid email address')
-        .required('This field is required'),
+        .email('Email không hợp lệ')
+        .required('Trường này là bắt buộc.'),
     }),
     onSubmit: (values) => {
       setLoading(true);
@@ -91,7 +91,7 @@ const LoginFormBase = (props) => {
           if (e.code < 4000 && e.errors.detail) {
             setMessage(e.errors.detail);
           } else {
-            setMessage('Something went wrong, please try later');
+            setMessage('Có lỗi xảy ra, liên hệ admin ngay!');
           }
           setLoading(false);
         });
@@ -122,7 +122,7 @@ const LoginFormBase = (props) => {
         htmlFor="password"
         className="flex flex-col mt-2 font-semibold uppercase"
       >
-        Password*
+        Mật khẩu*
         <input
           id="password"
           type="password"
@@ -140,18 +140,18 @@ const LoginFormBase = (props) => {
         type="submit"
         className="py-4 mt-2 font-semibold text-white uppercase bg-black rounded-sm hover:bg-white hover:text-black hover:border-black hover:border-4"
       >
-        Login
+        Đăng nhập
       </button>
       <div className="flex flex-col justify-center mt-2 text-sm uppercase">
         <div className="flex flex-col justify-between w-full md:flex-row">
           <Link to={ROUTES.REGISTER} className="underline hover:text-blue-500">
-            Register now
+            Đăng ký ngay
           </Link>
           <Link
             to={ROUTES.FORGET_PASSWORD}
             className="underline hover:text-blue-500"
           >
-            Forgot password
+            Quên mật khẩu?
           </Link>
         </div>
       </div>

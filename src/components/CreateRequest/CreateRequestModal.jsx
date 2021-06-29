@@ -30,14 +30,14 @@ const CreateRequestModal = ({ setShowModal }) => {
         </div>
 
         <div className="flex flex-row justify-center font-bold text-green-500 uppercase">
-          Connect to your shop
+          Liên kết cửa hàng
         </div>
 
         <div className="flex flex-row items-center justify-center w-full">
           {loading ? (
             <div className="flex flex-col items-center justify-center">
               <ClipLoader size={30} />
-              <div>Please wait...</div>
+              <div>Xin chờ...</div>
             </div>
           ) : (
             <>
@@ -103,7 +103,7 @@ export const CreateRequestForm = (props) => {
     setLoading(true);
     SellerService.createRequest({ seller: selectedValue.id })
       .then((res) => {
-        setMessage('Your request has been created successfully');
+        setMessage('Tạo yêu cầu thành công.');
         setLoading(false);
       })
       .catch((error) => {
@@ -114,10 +114,10 @@ export const CreateRequestForm = (props) => {
             error.errors.detail ===
             'A user cannot request to connect more than 1 seller'
           ) {
-            setMessage('You can only create one request at a time.');
+            setMessage('Bạn chỉ có thể tạo một yêu cầu trong một thời điểm.');
           }
         } else {
-          setMessage('Something went wrong, please contact with the admin');
+          setMessage('Có lỗi xảy ra, liên hệ với admin ngay!');
         }
       });
 

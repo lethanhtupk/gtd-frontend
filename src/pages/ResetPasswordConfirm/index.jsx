@@ -22,13 +22,13 @@ const ResetPasswordConfirm = (props) => {
     <>
       <div className="flex flex-col items-center mt-24">
         <div className="mb-4 text-2xl font-medium uppercase">
-          Set your new password
+          Đặt lại mật khẩu
         </div>
 
         {loading ? (
           <div className="flex flex-col items-center">
             <ClipLoader size={30} />
-            <div>Please wait...</div>
+            <div>Xin chờ...</div>
           </div>
         ) : (
           <>
